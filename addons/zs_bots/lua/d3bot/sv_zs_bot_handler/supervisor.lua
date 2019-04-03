@@ -5,13 +5,10 @@ function D3bot.GetDesiredBotCount()
 	local wave = math.max(1, GAMEMODE:GetWave())
 	local minutes = (CurTime() - roundStartTime) / 60
 	local allowedTotal = game.MaxPlayers() - 2
-	local allowedBots = allowedTotal - #player.GetHumans()
+	local allowedBots = 8 --allowedTotal - #player.GetHumans()
 	local mapParams = D3bot.MapNavMesh.Params
-	local zombieFormula = ((mapParams.ZPP or D3bot.ZombiesPerPlayer) + (mapParams.ZPPW or D3bot.ZombiesPerPlayerWave) * wave) * #player.GetHumans() + (mapParams.ZPM or D3bot.ZombiesPerMinute) * minutes + (mapParams.ZPW or D3bot.ZombiesPerWave) * wave
-	
-	local numplayers = #player.GetAllActive()
-    local zombiesCount = math.Clamp(math.ceil(numplayers * GAMEMODE.WaveOneZombies), 1, numplayers - 1)
-	
+	local zombiesCount = #GAMEMODE.ZombieVolunteers + D3bot.ZombiesCountAddition
+
 	local survivorFormula = (mapParams.SPP or D3bot.SurvivorsPerPlayer) * #player.GetHumans()
 	local survivorsCount = math.Clamp(
 		math.ceil(survivorFormula + D3bot.SurvivorCountAddition + (mapParams.SCA or 0)),
@@ -33,9 +30,12 @@ end)
 
 function D3bot.MaintainBotRoles()
 	if #player.GetHumans() == 0 then return end
+
 	local desiredCountByTeam = {}
 	local allowedTotal
+
 	desiredCountByTeam[TEAM_UNDEAD], desiredCountByTeam[TEAM_SURVIVOR], allowedTotal = D3bot.GetDesiredBotCount()
+
 	local bots = player.GetBots()
 	local botsByTeam = {}
 	for k, v in ipairs(bots) do
@@ -43,6 +43,7 @@ function D3bot.MaintainBotRoles()
 		botsByTeam[team] = botsByTeam[team] or {}
 		table.insert(botsByTeam[team], v)
 	end
+
 	local players = player.GetAll()
 	local playersByTeam = {}
 	for k, v in ipairs(players) do
@@ -50,25 +51,26 @@ function D3bot.MaintainBotRoles()
 		playersByTeam[team] = playersByTeam[team] or {}
 		table.insert(playersByTeam[team], v)
 	end
-	
+
 	-- Sort by frags and being boss zombie
 	if botsByTeam[TEAM_UNDEAD] then
 		table.sort(botsByTeam[TEAM_UNDEAD], function(a, b) return (a:GetZombieClassTable().Boss and 1 or 0) > (b:GetZombieClassTable().Boss and 1 or 0) end)
 	end
+
 	for team, botByTeam in pairs(botsByTeam) do
 		table.sort(botByTeam, function(a, b) return a:Frags() < b:Frags() end)
 	end
-	
+
 	-- Stop managing survivor bots, after round started. Except on ZE or obj maps, where survivors are managed to be 0
 	if GAMEMODE:GetWave() > 0 and not GAMEMODE.ZombieEscape and not GAMEMODE.ObjectiveMap then
 		desiredCountByTeam[TEAM_SURVIVOR] = nil
 	end
-	
+
 	-- Manage survivor bot count to 0, if they are disabled
 	if not D3bot.SurvivorsEnabled then
 		desiredCountByTeam[TEAM_SURVIVOR] = 0
 	end
-	
+
 	-- Move (kill) survivors to undead if possible
 	if desiredCountByTeam[TEAM_SURVIVOR] and desiredCountByTeam[TEAM_UNDEAD] then
 		if #(playersByTeam[TEAM_SURVIVOR] or {}) > desiredCountByTeam[TEAM_SURVIVOR] and #(playersByTeam[TEAM_UNDEAD] or {}) < desiredCountByTeam[TEAM_UNDEAD] and botsByTeam[TEAM_SURVIVOR] then
@@ -95,13 +97,13 @@ function D3bot.MaintainBotRoles()
 		end
 	end
 	-- Remove bots out of managed teams to maintain desired counts
-	-- for team, desiredCount in pairs(desiredCountByTeam) do
-		-- if #(playersByTeam[team] or {}) > desiredCount and botsByTeam[team] then
-			-- local randomBot = table.remove(botsByTeam[team], 1)
-			-- randomBot:StripWeapons()
-			-- return randomBot and randomBot:Kick(D3bot.BotKickReason)
-		-- end
-	-- end
+		for team, desiredCount in pairs(desiredCountByTeam) do
+			if #(playersByTeam[team] or {}) > desiredCount and botsByTeam[team] then
+				local randomBot = table.remove(botsByTeam[team], 1)
+				randomBot:StripWeapons()
+			 	return randomBot and randomBot:Kick(D3bot.BotKickReason)
+			end
+		end
 	-- Remove bots out of non managed teams if the server is getting too full
 	if player.GetCount() > allowedTotal then
 		for team, desiredCount in pairs(desiredCountByTeam) do
@@ -143,6 +145,5 @@ function D3bot.DoNodeTrigger()
 		end
 	end
 end
-
 -- TODO: Detect situations and coordinate bots accordingly (Attacking cades, hunt down runners, spawncamping prevention)
 -- TODO: If needed force one bot to flesh creeper and let him build a nest at a good place
