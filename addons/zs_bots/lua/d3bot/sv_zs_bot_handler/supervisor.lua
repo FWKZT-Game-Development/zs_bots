@@ -2,8 +2,22 @@ local roundStartTime = CurTime()
 hook.Add("PreRestartRound", D3bot.BotHooksId.."PreRestartRoundSupervisor", function() roundStartTime, D3bot.NodeZombiesCountAddition = CurTime(), nil end)
 
 function D3bot.GetDesiredBotCount()
+	local wave = math.max(1, GAMEMODE:GetWave())
+	local minutes = (CurTime() - roundStartTime) / 60
+	local allowedTotal = game.MaxPlayers() - 2
+	local allowedBots = allowedTotal - #player.GetHumans()
+	local mapParams = D3bot.MapNavMesh.Params
+	local zombieFormula = ((mapParams.ZPP or D3bot.ZombiesPerPlayer) + (mapParams.ZPPW or D3bot.ZombiesPerPlayerWave) * wave) * #player.GetHumans() + (mapParams.ZPM or D3bot.ZombiesPerMinute) * minutes + (mapParams.ZPW or D3bot.ZombiesPerWave) * wave
+	
 	local numplayers = #player.GetAllActive()
-    return math.Clamp(math.ceil(numplayers * GAMEMODE.WaveOneZombies), 1, numplayers - 1)
+    local zombiesCount = math.Clamp(math.ceil(numplayers * GAMEMODE.WaveOneZombies), 1, numplayers - 1)
+	
+	local survivorFormula = (mapParams.SPP or D3bot.SurvivorsPerPlayer) * #player.GetHumans()
+	local survivorsCount = math.Clamp(
+		math.ceil(survivorFormula + D3bot.SurvivorCountAddition + (mapParams.SCA or 0)),
+		0,
+		math.max(allowedBots - zombiesCount, 0))
+	return zombiesCount, (GAMEMODE.ZombieEscape or GAMEMODE.ObjectiveMap) and 0 or survivorsCount, allowedTotal
 end
 
 local spawnAsTeam
@@ -129,10 +143,6 @@ function D3bot.DoNodeTrigger()
 		end
 	end
 end
-
-hook.Add("PlayerDisconnected", "D3.BOT.DISCONNECT", function()
-	
-end )
 
 -- TODO: Detect situations and coordinate bots accordingly (Attacking cades, hunt down runners, spawncamping prevention)
 -- TODO: If needed force one bot to flesh creeper and let him build a nest at a good place
