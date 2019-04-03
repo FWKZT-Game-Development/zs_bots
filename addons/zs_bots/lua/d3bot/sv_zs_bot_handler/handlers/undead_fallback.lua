@@ -4,8 +4,12 @@ local HANDLER = D3bot.Handlers.Undead_Fallback
 HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 250
 HANDLER.BotClasses = {
-	"Zombie", "Fresh Dead", "Bloated Zombie", "Skeletal Walker",
-	"Poison Zombie"
+	"Zombie", "Zombie", "Zombie",
+	"Ghoul",
+	"Wraith", "Wraith", "Wraith",
+	"Bloated Zombie", "Bloated Zombie", "Bloated Zombie",
+	"Fast Zombie", "Fast Zombie", "Fast Zombie", "Fast Zombie",
+	"Poison Zombie", "Poison Zombie", "Poison Zombie"
 }
 -- HANDLER.BotMiniBosses = {
 	-- "Nightmare", "Butcher", "Tar Zombie", "Fast Zombie", "Fast Zombie"
