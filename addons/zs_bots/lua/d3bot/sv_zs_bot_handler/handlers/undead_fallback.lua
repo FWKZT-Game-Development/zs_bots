@@ -5,11 +5,11 @@ HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 250
 HANDLER.BotClasses = {
 	"Zombie", "Fresh Dead", "Bloated Zombie", "Skeletal Walker",
-	"Poison Zombie", "hunterbot"
+	"Poison Zombie"
 }
-HANDLER.BotMiniBosses = {
-	"Nightmare", "Butcher", "Tar Zombie", "Fast Zombie", "Fast Zombie"
-}
+-- HANDLER.BotMiniBosses = {
+	-- "Nightmare", "Butcher", "Tar Zombie", "Fast Zombie", "Fast Zombie"
+-- }
 
 HANDLER.Fallback = true
 function HANDLER.SelectorFunction(zombieClassName, team)
@@ -119,7 +119,7 @@ function HANDLER.OnDeathFunction(bot)
 	--bot:Say("rip me!")
 	bot:D3bot_RerollClass(HANDLER.BotClasses)
 
-	bot:D3bot_RerollMiniboss(HANDLER.BotMiniBosses)
+	--bot:D3bot_RerollMiniboss(HANDLER.BotMiniBosses)
 
 	HANDLER.RerollTarget(bot)
 end

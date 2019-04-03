@@ -99,25 +99,25 @@ function meta:D3bot_RerollClass(classes)
 	end
 	local zombieClass = table.Random(zombieClasses)
 	if not zombieClass then zombieClass = GAMEMODE.ZombieClasses[GAMEMODE.DefaultZombieClass] end
-	--self:SetZombieClass(zombieClass.Index)
-	self:SetSelectedZombieClass(zombieClass.Index)
+	self:SetZombieClass(zombieClass.Index)
+	--self:SetSelectedZombieClass(zombieClass.Index)
 end
 
-function meta:D3bot_RerollMiniboss(classes)
-	local zombieClasses = {}
-	for _, class in ipairs(classes) do
-		local zombieClass = GAMEMODE.ZombieClasses[class]
-		if zombieClass then
-			if not zombieClass.Locked and (zombieClass.Unlocked or zombieClass.Wave <= GAMEMODE:GetWave()) then
-				table.insert(zombieClasses, zombieClass)
-			end
-		end
-	end
-	local zombieClass = table.Random(zombieClasses)
-	if not zombieClass then zombieClass = GAMEMODE.ZombieClasses[GAMEMODE.DefaultZombieClass] end
+-- function meta:D3bot_RerollMiniboss(classes)
+	-- local zombieClasses = {}
+	-- for _, class in ipairs(classes) do
+		-- local zombieClass = GAMEMODE.ZombieClasses[class]
+		-- if zombieClass then
+			-- if not zombieClass.Locked and (zombieClass.Unlocked or zombieClass.Wave <= GAMEMODE:GetWave()) then
+				-- table.insert(zombieClasses, zombieClass)
+			-- end
+		-- end
+	-- end
+	-- local zombieClass = table.Random(zombieClasses)
+	-- if not zombieClass then zombieClass = GAMEMODE.ZombieClasses[GAMEMODE.DefaultZombieClass] end
 	--self:SetZombieClass(zombieClass.Index)
-	self:SetSelectedMiniBossClass(zombieClass.Index)
-end
+	---- self:SetSelectedMiniBossClass(zombieClass.Index)
+-- end
 
 function meta:D3bot_ResetTgt() -- Reset all kind of targets
 	local mem = self.D3bot_Mem
