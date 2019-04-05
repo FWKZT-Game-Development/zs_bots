@@ -7,7 +7,7 @@ function D3bot.GetDesiredBotCount()
 	local allowedTotal = game.MaxPlayers() - 2
 	local allowedBots = 8 --allowedTotal - #player.GetHumans()
 	local mapParams = D3bot.MapNavMesh.Params
-	local zombiesCount = math.Clamp( #GAMEMODE.ZombieVolunteers + D3bot.ZombiesCountAddition, 0, allowedBots )
+	local zombiesCount = #GAMEMODE.ZombieVolunteers + D3bot.ZombiesCountAddition
 
 	local survivorFormula = (mapParams.SPP or D3bot.SurvivorsPerPlayer) * #player.GetHumans()
 	local survivorsCount = math.Clamp(
