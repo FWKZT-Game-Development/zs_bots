@@ -13,7 +13,7 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 	cmd:ClearMovement()
 	
 	-- Fix knocked down bots from sliding around. (Workaround for the NoxiousNet codebase, as ply:Freeze() got removed from status_knockdown, status_revive, ...)
-	if bot.KnockedDown and IsValid(bot.KnockedDown) or bot.Revive and IsValid(bot.Revive) then
+	if bot.KnockedDown and IsValid(bot.KnockedDown) or bot.Revive and IsValid(bot.Revive) or GAMEMODE:GetWave() == 0 then
 		return
 	end
 	
