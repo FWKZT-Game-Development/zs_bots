@@ -9,7 +9,7 @@ local table_sort = table.sort
 
 function D3bot.GetDesiredBotCount()
 	local allowedTotal = game.MaxPlayers() - 2
-	local zombiesCount = math_Clamp( D3bot.ZombiesCountAddition, #GAMEMODE.ZombieVolunteers, allowedTotal )
+	local zombiesCount = D3bot.ZombiesCountAddition
 	
 	return zombiesCount, allowedTotal
 end
