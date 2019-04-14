@@ -70,7 +70,7 @@ function HANDLER.ThinkFunction(bot)
 		if not mem.TgtOrNil or IsValid(mem.TgtOrNil) and mem.TgtOrNil:GetPos():Distance(botPos) > HANDLER.BotTgtFixationDistMin then
 			mem.nextUpdateSurroundingPlayers = CurTime() + 1
 			local targets = player.GetAll() -- TODO: Filter targets before sorting
-			table.sort(targets, function(a, b) return botPos:Distance(a:GetPos()) < botPos:Distance(b:GetPos()) end)
+			table.sort(targets, function(a, b) return botPos:Distance(a:GetPos()) < botPos:Distance(b:GetPos()) and a:Health() < b:Health() end)
 			for k, v in ipairs(targets) do
 				if IsValid(v) and botPos:Distance(v:GetPos()) < 500 and HANDLER.CanBeTgt(bot, v) and bot:D3bot_CanSeeTarget(nil, v) then
 					bot:D3bot_SetTgtOrNil(v, false, nil)
@@ -132,7 +132,7 @@ end
 -- Custom functions and settings --
 -----------------------------------
 
-local potTargetEntClasses = {"prop_*turret", "prop_arsenalcrate", "prop_manhack*"}
+local potTargetEntClasses = {"prop_zapper*", "prop_remantler", "prop_obj_sigil", "prop_*turret", "prop_arsenalcrate", "prop_manhack*"}
 local potEntTargets = nil
 function HANDLER.CanBeTgt(bot, target)
 	if not target or not IsValid(target) then return end
