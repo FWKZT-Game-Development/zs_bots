@@ -23,23 +23,10 @@ function findHandler(zombieClass, team)
 	end
 end
 local findHandler = findHandler
-
-local function shouldCancelSoftControl(pl, cmd)
-	--if the real human at the computer moves their mouse, pressed WASD, or one of
-	--a few other buttons they should get uncontrolled
-	return (cmd:GetMouseX() ~= 0 or cmd:GetMouseY() ~= 0
-		or cmd:GetSideMove() ~= 0 or cmd:GetForwardMove() ~= 0
-		or cmd:GetButtons() ~= 0)
-end
-
 hook.Add("StartCommand", D3bot.BotHooksId, function(pl, cmd)
 	if D3bot.IsEnabled and pl.D3bot_Mem then
-		if pl.D3bot_Mem.SoftControl and shouldCancelSoftControl(pl, cmd) then
-			pl:D3bot_Deinitialize()
-		else
-			local handler = findHandler(pl:GetZombieClass(), pl:Team())
-			handler.UpdateBotCmdFunction(pl, cmd)
-		end
+		local handler = findHandler(pl:GetZombieClass(), pl:Team())
+		handler.UpdateBotCmdFunction(pl, cmd)
 	end
 end)
 
@@ -121,14 +108,7 @@ hook.Add("PlayerDeath", D3bot.BotHooksId.."PlayerDeath", function(pl)
 	end
 end)
 
-local hadBonusByPl = {}
 hook.Add("PlayerSpawn", D3bot.BotHooksId.."PlayerSpawn", function(pl)
 	if not D3bot.IsEnabled then return end
 	if pl.D3bot_Mem then pl:D3bot_InitializeOrReset() end
-	if D3bot.IsEnabled and D3bot.StartBonus and D3bot.StartBonus > 0 and pl:Team() == TEAM_SURVIVOR then
-		local hadBonus = hadBonusByPl[pl]
-		hadBonusByPl[pl] = true
-		pl:SetPoints(hadBonus and 0 or D3bot.StartBonus)
-	end
 end)
-hook.Add("PreRestartRound", D3bot.BotHooksId.."PreRestartRound", function() hadBonusByPl = {} end)

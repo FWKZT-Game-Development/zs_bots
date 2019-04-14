@@ -150,13 +150,12 @@ function meta:D3bot_SetNodeTgtOrNil(targetNode) -- Set the node as target, bot w
 	mem.NodeTgtOrNil = targetNode
 end
 
-function meta:D3bot_InitializeOrReset(softControl)
+function meta:D3bot_InitializeOrReset()
 	self.D3bot_Mem = self.D3bot_Mem or {}
 	local mem = self.D3bot_Mem
 
 	local considerPathLethality = math.random(1, D3bot.BotConsideringDeathCostAntichance) == 1
 
-	mem.SoftControl = softControl					-- Target will get uncontrolled if the actul player comes back from AFK
 	mem.TgtOrNil = nil										-- Target entity to walk to and attack
 	mem.PosTgtOrNil = nil									-- Target position to walk to
 	mem.NodeTgtOrNil = nil									-- Target node
