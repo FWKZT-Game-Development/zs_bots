@@ -132,12 +132,14 @@ end
 -- Custom functions and settings --
 -----------------------------------
 
-local potTargetEntClasses = {"prop_zapper*", "prop_remantler", "prop_obj_sigil", "prop_*turret", "prop_arsenalcrate", "prop_manhack*"}
+local potTargetEntClasses = {"prop_zapper*", "prop_remantler", "prop_*turret", "prop_arsenalcrate", "prop_manhack*"}
 local potEntTargets = nil
+
 function HANDLER.CanBeTgt(bot, target)
 	if not target or not IsValid(target) then return end
 	if IsValid(target) and target:IsPlayer() and target ~= bot and target:Team() ~= TEAM_UNDEAD and target:GetObserverMode() == OBS_MODE_NONE and target:Alive() then return true end
 	if potEntTargets and table.HasValue(potEntTargets, target) then return true end
+	if target and target:IsValid() and target:GetClass() == "prop_obj_sigil" and target.GetSigilHealthBase and target:GetSigilHealthBase() ~= 0 and not target:GetSigilCorrupted() then return true end
 end
 
 function HANDLER.RerollTarget(bot)
@@ -151,6 +153,7 @@ function HANDLER.RerollTarget(bot)
 		players = D3bot.RemoveObsDeadTgts(player.GetAll())
 	end
 	potEntTargets = D3bot.GetEntsOfClss(potTargetEntClasses)
+	
 	local potTargets = table.Add(players, potEntTargets)
 	bot:D3bot_SetTgtOrNil(table.Random(potTargets), false, nil)
 end
