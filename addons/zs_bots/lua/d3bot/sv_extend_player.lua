@@ -153,7 +153,9 @@ end
 function meta:D3bot_InitializeOrReset()
 	self.D3bot_Mem = self.D3bot_Mem or {}
 	local mem = self.D3bot_Mem
-
+	if not self:IsBot() then
+		self:SetNWBool( "AFKControlled", true )
+	end
 	local considerPathLethality = math.random(1, D3bot.BotConsideringDeathCostAntichance) == 1
 
 	mem.TgtOrNil = nil										-- Target entity to walk to and attack
@@ -179,6 +181,9 @@ function meta:D3bot_Deinitialize()
 		--remove roll from the player's eyeangles
 		local angles = self:EyeAngles()
 		self:SetEyeAngles(Angle(angles.p,angles.y,0))
+		if not self:IsBot() then
+			self:SetNWBool( "AFKControlled", false )
+		end
 	end
 	self.D3bot_Mem = nil
 end
