@@ -11,6 +11,14 @@ HANDLER.BotClasses = {
 	"Fast Zombie", "Fast Zombie", "Fast Zombie", "Fast Zombie",
 	"Poison Zombie", "Poison Zombie", "Poison Zombie"
 }
+HANDLER.HvH_BotClasses = {
+	"The Butcher", "The Butcher", "The Butcher",
+	"Angry Hobo", "Nightmare", 
+	"The Reaper", "The Reaper", "The Butcher",
+	"Bastardzine", "Bastardzine", "Bastardzine",
+	"Bastardzine", "The Reaper", "Angry Hobo", "The Butcher",
+	"The Butcher", "The Butcher", "The Butcher"
+}
 -- HANDLER.BotMiniBosses = {
 	-- "Nightmare", "Butcher", "Tar Zombie", "Fast Zombie", "Fast Zombie"
 -- }
@@ -121,8 +129,11 @@ end
 
 function HANDLER.OnDeathFunction(bot)
 	--bot:Say("rip me!")
-	bot:D3bot_RerollClass(HANDLER.BotClasses)
-
+	if GAMEMODE.HvH then
+		bot:D3bot_RerollClass(HANDLER.HvH_BotClasses)
+	else
+		bot:D3bot_RerollClass(HANDLER.BotClasses)
+	end
 	--bot:D3bot_RerollMiniboss(HANDLER.BotMiniBosses)
 
 	HANDLER.RerollTarget(bot)
