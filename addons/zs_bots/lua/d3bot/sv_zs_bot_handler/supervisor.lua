@@ -7,9 +7,57 @@ local math_ceil = math.ceil
 local table_insert = table.insert
 local table_sort = table.sort
 
+local added_zombies = 0
+local added_percentage = 0.11
+local function GetPropZombieCount()
+	local wave = GAMEMODE:GetWave()
+	local numhumans = #team.GetPlayers( TEAM_HUMAN )
+	local allowedTotal = game.MaxPlayers() - 2
+	
+	if numhumans < 10 then
+		if wave == 2 then
+			added_percentage = 1
+		elseif wave == 3 then
+			added_percentage = 2
+		elseif wave == 4 then
+			added_percentage = 3
+		elseif wave == 5 then
+			added_percentage = 4
+		end
+	else
+		if wave == 2 then
+			added_percentage = 0.05
+		elseif wave == 3 then
+			added_percentage = 0.15
+		elseif wave == 4 then
+			added_percentage = 0.25
+		elseif wave == 5 then
+			added_percentage = 0.35
+		end
+	end
+
+	if numhumans < 10 then
+		added_zombies = math_Clamp( added_percentage, 1, allowedTotal )
+	else
+		added_zombies = math_Clamp( math_ceil( numhumans * added_percentage ), 1, allowedTotal )
+	end
+	
+	return added_zombies
+end
+
 function D3bot.GetDesiredBotCount()
 	local allowedTotal = game.MaxPlayers() - 2
-	local zombiesCount = D3bot.ZombiesCountAddition
+	local zombiesCount = D3bot.ZombiesCountAddition 
+	
+	if GAMEMODE:GetWave() == 0 then
+		D3bot.ZombiesCountAddition = #GAMEMODE.ZombieVolunteers
+	elseif GAMEMODE:GetWave() >= 2 and GAMEMODE:GetWave() < 6 then
+		zombiesCount = D3bot.ZombiesCountAddition + GetPropZombieCount()
+	elseif GAMEMODE:GetWave() == 6 and #team.GetPlayers( TEAM_HUMAN ) > 10 then
+		zombiesCount = #team.GetPlayers( TEAM_HUMAN )
+	elseif GAMEMODE:GetWave() == 6 and #team.GetPlayers( TEAM_HUMAN ) < 10 then
+		zombiesCount = 6
+	end
 	
 	return zombiesCount, allowedTotal
 end
