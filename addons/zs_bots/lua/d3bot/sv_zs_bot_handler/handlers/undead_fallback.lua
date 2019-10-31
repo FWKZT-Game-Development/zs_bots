@@ -143,7 +143,7 @@ end
 -- Custom functions and settings --
 -----------------------------------
 
-local potTargetEntClasses = {"prop_zapper*", "prop_remantler", "prop_*turret", "prop_arsenalcrate", "prop_manhack*"}
+local potTargetEntClasses = {"prop_barbedwire", "prop_zapper*", "prop_remantler", "prop_*turret", "prop_arsenalcrate", "prop_manhack*"}
 local potEntTargets = nil
 
 function HANDLER.CanBeTgt(bot, target)
