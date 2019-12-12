@@ -6,7 +6,7 @@ HANDLER.BotTgtFixationDistMin = 250
 HANDLER.BotClasses = {
 	"Zombie", "Fresh Infected", "Zombie",
 	"Ghoul",
-	"Wraith", "Wraith", "Wraith",
+	"Wraith", "Wraith", "Fast Zombie", "Fast Zombie",
 	"Bloated Zombie", "Bloated Zombie", "Bloated Zombie",
 	"Poison Zombie", "Poison Zombie", "Poison Zombie",
 	"Zombine", "Crawler", "Zombine"
