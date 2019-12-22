@@ -56,7 +56,7 @@ function D3bot.GetDesiredBotCount()
 	elseif GAMEMODE:GetWave() >= 2 and GAMEMODE:GetWave() < 6 then
 		zombiesCount = D3bot.ZombiesCountAddition + GetPropZombieCount()
 	elseif GAMEMODE:GetWave() == 6 and #team.GetPlayers( TEAM_HUMAN ) > lowpop_val then
-		zombiesCount = #team.GetPlayers( TEAM_HUMAN )
+		zombiesCount = #team.GetPlayers( TEAM_HUMAN ) + 5
 	elseif GAMEMODE:GetWave() == 6 and #team.GetPlayers( TEAM_HUMAN ) < lowpop_val then
 		zombiesCount = 6
 	end
