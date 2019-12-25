@@ -23,13 +23,10 @@ D3bot.BotAimPosVelocityOffshoot = 0.4
 D3bot.BotJumpAntichance = 25
 D3bot.BotDuckAntichance = 25
 
---D3bot.ZombiesPerPlayerMax = 0			-- Limits amount of zombies to this zombie/player ratio. (ZombiesCountAddition is not calculated in)
-D3bot.ZombiesPerPlayerWave = 0.20
-D3bot.ZombiesPerMinute = 0
-D3bot.ZombiesPerWave = 0.4
-D3bot.ZombiesCountAddition = 0			-- BotMod
+-- BotMod, do NOT change this! Must remain 0.
+D3bot.ZombiesCountAddition = 0
 
 -- Uncomment the name file you want to use. If you comment out all of the name files, standard names will be used (Bot, Bot(2), Bot(3), ...)
-D3bot.BotNameFile = "bottish"
+D3bot.BotNameFile = "fwkzt"
 
 D3bot.BotKickReason = "Team Balance"
