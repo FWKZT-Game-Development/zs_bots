@@ -1,10 +1,10 @@
 --Todo: Create a FWKZT json api that controls what random words we'd want.
-http.Fetch( "http://names.drycodes.com/10?nameOptions=objects&combine=1",
+http.Fetch( "http://names.drycodes.com/109?nameOptions=starwarsLastNames&combine=1",
 	function( body, len, headers, code )
 		D3bot.Names = util.JSONToTable(body)
 	end,
 	function( error )
-		print("unable to fetch payload")
+		print("unable to fetch payload (bot names)")
 		D3bot.Names = {
 			"Bottina",
 			"Botty",
