@@ -43,6 +43,11 @@ end )]]
 --local ObjectiveModifiers = {}
 
 function D3bot.GetDesiredStartingZombies(wave)
+	
+	if GAMEMODE.ObjectiveMap or GAMEMODE.ZombieEscape then
+		return math.Clamp( math.ceil( numplayers * 0.14, 1, maxplayers ) )
+	end
+	
 	--create our table and populate it with our percentages.
 	if table.IsEmpty( WaveModifiers ) then
 		for i = 1, GAMEMODE:GetNumberOfWaves() do
@@ -63,11 +68,7 @@ function D3bot.GetDesiredStartingZombies(wave)
 	local numplayers = #player.GetAllActive()
 	local maxplayers = game.MaxPlayers() - #player.GetHumans()
 	
-	if GAMEMODE.ObjectiveMap or GAMEMODE.ZombieEscape then
-		return math.Clamp( math.ceil( numplayers * ( WaveZombieMultiplier * GAMEMODE.WaveOneZombies ) ), 1, maxplayers )
-	else
-		return math.Clamp( math.ceil( numplayers * WaveModifiers[wave] ), 1, maxplayers )
-	end
+	return math.Clamp( math.ceil( numplayers * WaveModifiers[wave] ), 1, maxplayers )
 end
 
 local function GetPropZombieCount()
