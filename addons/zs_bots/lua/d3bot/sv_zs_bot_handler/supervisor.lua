@@ -43,6 +43,9 @@ end )]]
 --local ObjectiveModifiers = {}
 
 function D3bot.GetDesiredStartingZombies(wave)
+
+	local numplayers = #player.GetAllActive()
+	local maxplayers = game.MaxPlayers() - #player.GetHumans()
 	
 	if GAMEMODE.ObjectiveMap or GAMEMODE.ZombieEscape then
 		return math.Clamp( math.ceil( numplayers * 0.14, 1, maxplayers ) )
@@ -64,9 +67,6 @@ function D3bot.GetDesiredStartingZombies(wave)
 			ObjectiveModifiers[i] = ObjectiveZombieMultiplier * i
 		end
 	end]]
-	
-	local numplayers = #player.GetAllActive()
-	local maxplayers = game.MaxPlayers() - #player.GetHumans()
 	
 	return math.Clamp( math.ceil( numplayers * WaveModifiers[wave] ), 1, maxplayers )
 end
