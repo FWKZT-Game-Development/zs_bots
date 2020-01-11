@@ -85,6 +85,10 @@ function D3bot.GetDesiredBotCount()
 	local wave = GAMEMODE:GetWave()
 	local max_wave = GAMEMODE:GetNumberOfWaves()
 	
+	if #player.GetAllActive() >= 40 then
+		return 0, allowedTotal
+	end
+	
 	if wave < 2 then
 		zombiesCount = zombiesCount + #GAMEMODE.ZombieVolunteers
 	else
