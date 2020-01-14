@@ -10,7 +10,7 @@ local table_sort = table.sort
 
 local WaveModifiers = {}
 local WaveZombieMultiplier = 0.10
-local WaveZStackAllowed = 2
+local WaveZStackAllowed = 5
 
 hook.Add( "OnPlayerChangedTeam", "D3Bot.OnPlayerChangedTeam.483", function(pl, oldteam, newteam)
 	if newteam == TEAM_UNDEAD then
@@ -46,10 +46,6 @@ function D3bot.GetDesiredStartingZombies(wave)
 	local numplayers = #player.GetAllActive()
 	local maxplayers = game.MaxPlayers() - #player.GetHumans()
 	
-	--[[if numplayers > 30 then
-		WaveZombieMultiplier = 0.06
-	end]]
-	
 	if GAMEMODE.ObjectiveMap or GAMEMODE.ZombieEscape then
 		return math.Clamp( math.ceil( numplayers * 0.14, 1, maxplayers ) )
 	end
@@ -71,6 +67,10 @@ function D3bot.GetDesiredStartingZombies(wave)
 		end
 	end]]
 	
+	--[[if #team.GetPlayers(TEAM_HUMAN) < #team.GetPlayers(TEAM_UNDEAD ) and not GAMEMODE.RoundEnded then
+		return math.ceil( #team.GetPlayers(TEAM_HUMAN) - #team.GetPlayers(TEAM_UNDEAD) )
+	end]]
+	
 	return math.Clamp( math.ceil( numplayers * WaveModifiers[wave] ), 1, maxplayers )
 end
 
@@ -82,7 +82,7 @@ local function GetPropZombieCount()
 end
 
 function D3bot.GetDesiredBotCount()
-	local allowedTotal = game.MaxPlayers() - 50
+	local allowedTotal = game.MaxPlayers() - 2 --50
 	local zombiesCount = D3bot.ZombiesCountAddition 
 	local human_team = team.GetPlayers( TEAM_HUMAN )
 	local wave = GAMEMODE:GetWave()
