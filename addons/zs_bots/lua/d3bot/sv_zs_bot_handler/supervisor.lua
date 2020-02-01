@@ -39,9 +39,6 @@ hook.Add( "OnPlayerChangedTeam", "D3Bot.OnPlayerChangedTeam.483", function(pl, o
 end )
 
 --Todo: Setup a system for objective maps to add bots over time at certain intervals.
---local ObjectiveZombieMultiplier = 0.09
---local ObjectiveModifiers = {}
-
 function D3bot.GetDesiredStartingZombies(wave)
 	local numplayers = #player.GetAllActive()
 	local maxplayers = game.MaxPlayers() - #player.GetHumans()
@@ -65,17 +62,6 @@ function D3bot.GetDesiredStartingZombies(wave)
 			end
 		end
 	end
-	--PrintTable( WaveModifiers )
---[[elseif GAMEMODE.Objective then
-	if table.IsEmpty( ObjectiveModifiers ) then
-		for i = 1, GAMEMODE:GetNumberOfWaves() do
-			ObjectiveModifiers[i] = ObjectiveZombieMultiplier * i
-		end
-	end]]
-	
-	--[[if #team.GetPlayers(TEAM_HUMAN) < #team.GetPlayers(TEAM_UNDEAD ) and not GAMEMODE.RoundEnded then
-		return math.ceil( #team.GetPlayers(TEAM_HUMAN) - #team.GetPlayers(TEAM_UNDEAD) )
-	end]]
 	
 	if humans < 10 then
 		if GAMEMODE:GetWave() == 6 then
