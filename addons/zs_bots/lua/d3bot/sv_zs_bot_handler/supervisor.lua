@@ -45,6 +45,7 @@ end )
 function D3bot.GetDesiredStartingZombies(wave)
 	local numplayers = #player.GetAllActive()
 	local maxplayers = game.MaxPlayers() - #player.GetHumans()
+	local humans = #player.GetHumans()
 	
 	if GAMEMODE.ObjectiveMap or GAMEMODE.ZombieEscape then
 		return math.Clamp( math.ceil( numplayers * 0.14, 1, maxplayers ) )
@@ -56,10 +57,15 @@ function D3bot.GetDesiredStartingZombies(wave)
 			if i == 1 then
 				WaveModifiers[i] = WaveZombieMultiplier * GAMEMODE.WaveOneZombies
 			else
-				WaveModifiers[i] = WaveZombieMultiplier * i
+				if humans < 10 then
+					WaveModifiers[i] = i + 1
+				else
+					WaveModifiers[i] = WaveZombieMultiplier * i
+				end
 			end
 		end
 	end
+	--PrintTable( WaveModifiers )
 --[[elseif GAMEMODE.Objective then
 	if table.IsEmpty( ObjectiveModifiers ) then
 		for i = 1, GAMEMODE:GetNumberOfWaves() do
@@ -71,13 +77,21 @@ function D3bot.GetDesiredStartingZombies(wave)
 		return math.ceil( #team.GetPlayers(TEAM_HUMAN) - #team.GetPlayers(TEAM_UNDEAD) )
 	end]]
 	
+	if humans < 10 then
+		if GAMEMODE:GetWave() == 6 then
+			return math.Clamp( math.ceil( WaveModifiers[wave] + 3 ), 1, maxplayers )
+		end
+		return math.Clamp( math.ceil( WaveModifiers[wave] ), 1, maxplayers )
+	end
+	
 	return math.Clamp( math.ceil( numplayers * WaveModifiers[wave] ), 1, maxplayers )
 end
 
 local function GetPropZombieCount()
-	if #player.GetAllActive() <= 1 then return 0 end
+	if #player.GetAllActive() == 0 then return 0 end
 	--if #player.GetHumans() > 50 then return 0 end
 	
+	--print( D3bot.GetDesiredStartingZombies( GAMEMODE:GetWave() ) )
 	return D3bot.GetDesiredStartingZombies( GAMEMODE:GetWave() )
 end
 
