@@ -9,7 +9,7 @@ HANDLER.BotClasses = {
 	"Wraith", "Wraith", "Fast Zombie", "Fast Zombie",
 	"Bloated Zombie", "Bloated Zombie", "Bloated Zombie",
 	"Poison Zombie", "Poison Zombie", "Poison Zombie",
-	"Zombine", "Zombine"
+	"Lacerator", "Lacerator"
 }
 HANDLER.HvH_BotClasses = {
 	"The Butcher", "The Butcher", "The Butcher",
