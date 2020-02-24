@@ -52,7 +52,7 @@ function D3bot.GetDesiredStartingZombies(wave)
 	if table.IsEmpty( WaveModifiers ) then
 		for i = 1, GAMEMODE:GetNumberOfWaves() do
 			if i == 1 then
-				WaveModifiers[i] = WaveZombieMultiplier * GAMEMODE.WaveOneZombies
+				WaveModifiers[i] = WaveZombieMultiplier * GAMEMODE.WaveOneZombies 
 			else
 				--if humans < 10 then
 					--WaveModifiers[i] = i + 1
@@ -92,10 +92,11 @@ function D3bot.GetDesiredBotCount()
 	end]]
 	
 	--if wave < 2 then
+	if #player.GetAllActive() < 10 then return GAMEMODE:GetWave(), allowedTotal end
 	if wave <= 1 then
 		zombiesCount = zombiesCount + #GAMEMODE.ZombieVolunteers
 	else
-		zombiesCount = zombiesCount + GetPropZombieCount()
+		zombiesCount = zombiesCount + GetPropZombieCount()	
 	end
 	
 	return zombiesCount, allowedTotal
