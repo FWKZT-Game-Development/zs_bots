@@ -196,7 +196,7 @@ function D3bot.SupervisorThinkFunction()
 		NextMaintainBotRoles = CurTime() + 1
 		D3bot.MaintainBotRoles()
 	end
-	if not GAMEMODE.HvH then
+	if not GAMEMODE:IsHvH() then
 		if (NextNodeDamage or 0) < CurTime() then
 			NextNodeDamage = CurTime() + 2
 			D3bot.DoNodeTrigger()

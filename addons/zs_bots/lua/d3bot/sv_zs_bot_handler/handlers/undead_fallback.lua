@@ -128,7 +128,7 @@ end
 
 function HANDLER.OnDeathFunction(bot)
 	--bot:Say("rip me!")
-	if GAMEMODE.HvH then
+	if GAMEMODE:IsHvH() then
 		bot:D3bot_RerollClass(HANDLER.HvH_BotClasses)
 	else
 		bot:D3bot_RerollClass(HANDLER.BotClasses)
