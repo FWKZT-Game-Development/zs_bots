@@ -4,7 +4,6 @@ hook.Add("PreRestartRound", D3bot.BotHooksId.."ResetHumanZombieCount", function(
 
 local player_GetCount = player.GetCount
 local player_GetHumans = player.GetHumans
-local player_GetAllActive = player.GetAllActive
 local game_MaxPlayers = game.MaxPlayers
 local M_Player = FindMetaTable("Player")
 local P_Team = M_Player.Team
@@ -38,7 +37,7 @@ end )
 
 --Todo: Setup a system for objective maps to add bots over time at certain intervals.
 function D3bot.GetDesiredStartingZombies(wave)
-	local numplayers = #player_GetAllActive()
+	local numplayers = #player.GetAllActive()
 	local maxplayers = game_MaxPlayers() - #player_GetHumans()
 	local humans = #player_GetHumans()
 	
@@ -72,7 +71,7 @@ function D3bot.GetDesiredStartingZombies(wave)
 end
 
 local function GetPropZombieCount()
-	if #player_GetAllActive() == 0 then return 0 end
+	if #player.GetAllActive() == 0 then return 0 end
 	--if #player_GetHumans() > 50 then return 0 end
 
 	return D3bot.GetDesiredStartingZombies( GAMEMODE:GetWave() )
@@ -90,7 +89,7 @@ function D3bot.GetDesiredBotCount()
 		return 0, allowedTotal
 	end]]
 	
-	if #player_GetAllActive() < 10 and wave > 1 then return wave+zombiesCount, allowedTotal end
+	if #player.GetAllActive() < 10 and wave > 1 then return wave+zombiesCount, allowedTotal end
 	
 	if wave <= 1 then
 		zombiesCount = zombiesCount + zvols
