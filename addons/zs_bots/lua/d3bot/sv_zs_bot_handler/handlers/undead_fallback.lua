@@ -27,6 +27,10 @@ HANDLER.HvH_BotClasses = {
 -- HANDLER.BotMiniBosses = {
 	-- "Nightmare", "Butcher", "Tar Zombie", "Fast Zombie", "Fast Zombie"
 -- }
+HANDLER.RandomSecondaryAttack = {
+	Ghoul = {MinTime = 5, MaxTime = 7}
+	--["Poison Zombie"] = {MinTime = 5, MaxTime = 7} -- Slows them too much
+}
 
 HANDLER.Fallback = true
 function HANDLER.SelectorFunction(zombieClassName, team)
