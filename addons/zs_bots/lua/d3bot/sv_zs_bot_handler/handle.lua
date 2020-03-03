@@ -1,5 +1,7 @@
 D3bot.Handlers = {}
 
+local player_GetAll = player.GetAll
+
 -- TODO: Make search path relative
 for i, filename in pairs(file.Find("d3bot/sv_zs_bot_handler/handlers/*.lua", "LUA")) do
 	include("handlers/"..filename)
@@ -70,7 +72,7 @@ hook.Add("Think", D3bot.BotHooksId.."🤔", function()
 	-- Store history of all players (For behaviour classification, stuck checking)
 	if NextStorePos < CurTime() then
 		NextStorePos = CurTime() + 1
-		for _, ply in ipairs(player.GetAll()) do
+		for _, ply in ipairs(player_GetAll()) do
 			ply:D3bot_StorePos()
 		end
 	end

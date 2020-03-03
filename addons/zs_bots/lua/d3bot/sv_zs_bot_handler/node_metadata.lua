@@ -14,6 +14,8 @@ D3bot.LinkMetadata = D3bot.LinkMetadata or {}
 local nodeMetadata = D3bot.NodeMetadata
 local linkMetadata = D3bot.LinkMetadata
 
+local player_GetAll = player.GetAll
+
 hook.Add("PreRestartRound", D3bot.BotHooksId.."MetadataReset", function()
 	D3bot.NodeMetadata = {}
 	D3bot.LinkMetadata = {}
@@ -47,7 +49,7 @@ hook.Add("Think", D3bot.BotHooksId.."NodeMetadataThink", function()
 	local mapNavMesh = D3bot.MapNavMesh
 	if nextNodeMetadataIncrease < CurTime() then
 		nextNodeMetadataIncrease = CurTime() + 1
-		local players = D3bot.RemoveObsDeadTgts(player.GetAll())
+		local players = D3bot.RemoveObsDeadTgts( player_GetAll() )
 		for _, player in pairs(players) do
 			if player:Alive() then
 				local team = player:Team()

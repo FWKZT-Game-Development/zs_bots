@@ -1,5 +1,7 @@
 local meta = FindMetaTable("Player")
 
+local player_GetAll = player.GetAll
+
 function meta:D3bot_GetAttackPosOrNil(fraction, target)
 	local mem = self.D3bot_Mem
 	local tgt = target or mem.TgtOrNil
@@ -51,7 +53,7 @@ function meta:D3bot_CanPounceToPos(pos)
 		local hit = false
 		for _, point in ipairs(trajectory.points) do
 			if lastPoint then
-				local tr = util.TraceEntity({start = point, endpos = lastPoint, filter = player.GetAll()}, self)
+				local tr = util.TraceEntity({start = point, endpos = lastPoint, filter = player_GetAll()}, self)
 				if tr.Hit then
 					hit = true
 					break
@@ -75,7 +77,7 @@ function meta:D3bot_CanSeeTarget(fraction, target)
 	local tr = D3bot.BotSeeTr
 	tr.start = self:D3bot_GetViewCenter()
 	tr.endpos = attackPos
-	tr.filter = player.GetAll()
+	tr.filter = player_GetAll()
 	return attackPos and not util.TraceHull(tr).Hit
 end
 

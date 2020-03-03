@@ -1,5 +1,7 @@
 D3bot.Basics = {}
 
+local player_GetAll = player.GetAll
+
 function D3bot.Basics.SuicideOrRetarget(bot)
 	local mem = bot.D3bot_Mem
 
@@ -363,7 +365,7 @@ function D3bot.Basics.AimAndShoot(bot, target, maxDistance)
 	local tr = util.TraceLine({
 		start = origin,
 		endpos = targetPos,
-		filter = player.GetAll(),
+		filter = player_GetAll(),
 		mask = MASK_SHOT_HULL
 	})
 	local canShootTarget = not tr.Hit
@@ -384,7 +386,7 @@ function D3bot.Basics.LookAround(bot)
 	local mem = bot.D3bot_Mem
 	if not mem then return end
 
-	if math.random(200) == 1 then mem.LookTarget = table.Random(player.GetAll()) end
+	if math.random(200) == 1 then mem.LookTarget = table.Random(player_GetAll()) end
 
 	if not IsValid(mem.LookTarget) then return end
 
