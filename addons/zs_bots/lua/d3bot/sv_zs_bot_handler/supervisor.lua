@@ -18,7 +18,7 @@ hook.Add( "OnPlayerChangedTeam", "D3Bot.OnPlayerChangedTeam.483", function(pl, o
 			local allowedTotal = game.MaxPlayers() - 2
 			if not pl:IsBot() then
 				if not GAMEMODE.RoundEnded then
-					if GAMEMODE:GetWave() > WaveZStackAllowed then
+					if GAMEMODE:GetWave() > ( not GAMEMODE:IsHvH() and WaveZStackAllowed or 0 ) then
 						D3bot.ZombiesCountAddition = math.Clamp( D3bot.ZombiesCountAddition + 1, 0, allowedTotal )
 					end
 				end
@@ -29,7 +29,7 @@ hook.Add( "OnPlayerChangedTeam", "D3Bot.OnPlayerChangedTeam.483", function(pl, o
 			local allowedTotal = game.MaxPlayers() - 2
 			if not pl:IsBot() then
 				if not GAMEMODE.RoundEnded then
-					if GAMEMODE:GetWave() > WaveZStackAllowed then
+					if GAMEMODE:GetWave() > ( not GAMEMODE:IsHvH() and WaveZStackAllowed or 0 ) then
 						D3bot.ZombiesCountAddition = math.Clamp( D3bot.ZombiesCountAddition - 1, 0, allowedTotal )
 					end
 				end
@@ -196,7 +196,7 @@ function D3bot.SupervisorThinkFunction()
 		NextMaintainBotRoles = CurTime() + 1
 		D3bot.MaintainBotRoles()
 	end
-	if not GAMEMODE:IsHvH() then
+	if not GAMEMODE:IsHvH() --[[and not game.GetMap() == "gm_construct"]] then
 		if (NextNodeDamage or 0) < CurTime() then
 			NextNodeDamage = CurTime() + 2
 			D3bot.DoNodeTrigger()
