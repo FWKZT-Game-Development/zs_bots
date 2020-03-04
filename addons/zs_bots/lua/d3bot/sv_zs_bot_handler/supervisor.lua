@@ -23,7 +23,7 @@ hook.Add( "OnPlayerChangedTeam", "D3Bot.OnPlayerChangedTeam.483", function(pl, o
 	if D3bot and D3bot.IsEnabled then
 		if not pl:IsBot() then
 			if not GAMEMODE.RoundEnded then
-				if GAMEMODE:GetWave() > ( not GAMEMODE:IsHvH() and WaveZStackAllowed or 0 ) then
+				if GAMEMODE:GetWave() > ( not GAMEMODE:IsHvH() and WaveZStackAllowed or 5 ) then
 					if newteam == TEAM_HUMAN then
 						D3bot.ZombiesCountAddition = math.Clamp( D3bot.ZombiesCountAddition - 1, 0, allowedTotal )
 					else
