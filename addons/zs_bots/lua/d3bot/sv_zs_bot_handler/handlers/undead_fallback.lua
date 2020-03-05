@@ -18,7 +18,6 @@ HANDLER.BotClasses = {
 	"Lacerator", "Lacerator"
 }
 HANDLER.HvH_BotClasses = {
-	"The Butcher", "The Butcher", "The Butcher",
 	"Nightmare", "Nightmare", 
 	"Bastardzine", "Bastardzine", "Bastardzine",
 	"Bastardzine", "The Butcher", "The Butcher",
