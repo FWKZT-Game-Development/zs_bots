@@ -19,9 +19,10 @@ HANDLER.BotClasses = {
 }
 HANDLER.HvH_BotClasses = {
 	"Nightmare", "Nightmare", 
-	"Bastardzine", "Bastardzine", "Bastardzine",
-	"Bastardzine", "The Butcher", "The Butcher",
-	"The Butcher", "The Butcher", "The Butcher"
+	"The Reaper", "The Reaper", "The Reaper",
+	"The Reaper", "The Reaper", "The Reaper",
+	"Angry Hobo", "Angry Hobo", "Angry Hobo",
+	"The Butcher", "The Butcher", "The Butcher", "Tank"
 }
 -- HANDLER.BotMiniBosses = {
 	-- "Nightmare", "Butcher", "Tar Zombie", "Fast Zombie", "Fast Zombie"
