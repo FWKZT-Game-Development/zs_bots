@@ -27,6 +27,6 @@ D3bot.BotDuckAntichance = 25
 D3bot.ZombiesCountAddition = 0
 
 -- Uncomment the name file you want to use. If you comment out all of the name files, standard names will be used (Bot, Bot(2), Bot(3), ...)
-D3bot.BotNameFile = "fwkzt"
+D3bot.BotNameFile = "bottish"
 
 D3bot.BotKickReason = "Team Balance"
