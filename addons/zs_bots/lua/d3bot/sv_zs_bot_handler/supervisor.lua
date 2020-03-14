@@ -1,6 +1,14 @@
 local roundStartTime = CurTime()
-hook.Add("PreRestartRound", D3bot.BotHooksId.."PreRestartRoundSupervisor", function() roundStartTime, D3bot.NodeZombiesCountAddition = CurTime(), nil end)
-hook.Add("PreRestartRound", D3bot.BotHooksId.."ResetHumanZombieCount", function() D3bot.ZombiesCountAddition = 0 end)
+hook.Add("PreRestartRound", D3bot.BotHooksId.."PreRestartRoundSupervisor", function()
+	roundStartTime, D3bot.NodeZombiesCountAddition = CurTime(), nil 
+	D3bot.ZombiesCountAddition = 0
+	
+	--Clean up for various entities that get dropped by the bots.
+	--[[for _, ent in ipairs( ents.FindByClass('prop_weapon') ) do 
+		if ent:GetWeaponType() == 'weapon_zs_crow' then ent:Remove() end 
+		if ent:GetWeaponType() == 'weapon_fists' then ent:Remove() end 
+	end]]
+end)
 
 local player_GetCount = player.GetCount
 local player_GetHumans = player.GetHumans
@@ -54,7 +62,7 @@ function D3bot.GetDesiredStartingZombies(wave)
 				--if humans < 10 then
 					--WaveModifiers[i] = i + 1
 				--else
-					WaveModifiers[i] = WaveZombieMultiplier * i
+					WaveModifiers[i] = math.Clamp( WaveZombieMultiplier * i, 0, 0.5 )
 				--end
 			end
 		end
@@ -92,7 +100,7 @@ function D3bot.GetDesiredBotCount()
 	if #player.GetAllActive() < 10 and wave > 1 then return wave+zombiesCount, allowedTotal end
 	
 	if wave <= 1 then
-		zombiesCount = zombiesCount + zvols
+		zombiesCount = zombiesCount + ( GAMEMODE:IsHvH() and zvols + 2 or zvols )
 	else
 		zombiesCount = zombiesCount + GetPropZombieCount()	
 	end
