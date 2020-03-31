@@ -100,7 +100,7 @@ function D3bot.GetDesiredBotCount()
 	if #player.GetAllActive() < 10 and wave > 1 then return wave+zombiesCount, allowedTotal end
 	
 	if wave <= 1 then
-		zombiesCount = zombiesCount + ( GAMEMODE:IsHvH() and zvols + 2 or zvols )
+		zombiesCount = zombiesCount + zvols
 	else
 		zombiesCount = zombiesCount + GetPropZombieCount()	
 	end
