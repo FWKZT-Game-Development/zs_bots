@@ -246,7 +246,7 @@ return function(lib)
 		pl:SendLua(lib.GlobalK .. ".SetShownMapNavMeshPath{}")
 	end
 	
-	hook.Add("KeyPress", tostring({}), function(pl, key)
+	hook.Add("KeyPress", "D3Bot.KeyPress.UI", function(pl, key)
 		if subscriptionTypeOrNilByPl[pl] ~= "edit" then return end
 		if key == IN_RELOAD then
 			if hasSelection(pl) then
