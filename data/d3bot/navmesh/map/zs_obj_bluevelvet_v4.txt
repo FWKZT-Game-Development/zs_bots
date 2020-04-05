@@ -221,7 +221,7 @@
 187-186:
 188:AreaXMax=-764.3,AreaXMin=-924,AreaYMax=620.1,AreaYMin=416.6,X=-840.4,Y=544,Z=-8
 188-187:
-189:AreaXMax=-924,AreaXMin=-1052,AreaYMax=620.2,AreaYMin=416,X=-1017.7,Y=542.3,Z=0
+189:AreaXMax=-924,AreaXMin=-1052,AreaYMax=620.2,AreaYMin=416,X=-979.8,Y=550.9,Z=0
 189-188:
 190:AreaXMax=-764.5,AreaXMin=-924,AreaYMax=416.7,AreaYMin=128.2,X=-845.2,Y=299.3,Z=-8
 190-176:

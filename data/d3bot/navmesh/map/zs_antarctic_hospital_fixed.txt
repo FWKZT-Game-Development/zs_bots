@@ -22,7 +22,7 @@
 19:AreaXMax=-218.1,AreaXMin=-623.3,AreaYMax=-394.5,AreaYMin=-750.2,X=-427.6,Y=-598.6,Z=34
 19-18:
 19-20:
-2:X=-280.6,Y=249,Z=34
+2:AreaXMax=-232,AreaXMin=-328,AreaYMax=256,AreaYMin=240,X=-280.6,Y=249,Z=34
 2-1:
 20:X=-379.6,Y=-381.2,Z=68
 21:X=-524.9,Y=-379.6,Z=68
@@ -46,7 +46,7 @@
 29:AreaXMax=70.7,AreaXMin=-294.5,AreaYMax=-149.4,AreaYMin=-365.2,X=-91.2,Y=-256.7,Z=34
 29-26:
 29-30:
-3:X=-167.6,Y=252.8,Z=66
+3:AreaXMax=-136,AreaXMin=-200,AreaYMax=256,AreaYMin=240,X=-167.6,Y=252.8,Z=66
 3-25:
 3-5:
 30:X=82.9,Y=-261.7,Z=34
