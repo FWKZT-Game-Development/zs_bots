@@ -102,7 +102,11 @@ function D3bot.GetDesiredBotCount()
 	if wave <= 1 then
 		zombiesCount = zombiesCount + zvols
 	else
-		zombiesCount = zombiesCount + GetPropZombieCount()	
+		if GAMEMODE.ObjectiveMap or GAMEMODE.ZombieEscape then
+			zombiesCount = zvols + zombiesCount
+		else
+			zombiesCount = zombiesCount + GetPropZombieCount()
+		end
 	end
 	
 	return zombiesCount, allowedTotal
