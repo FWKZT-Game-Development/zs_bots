@@ -10,13 +10,14 @@ local P_Team = M_Player.Team
 HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 250
 HANDLER.BotClasses = {
-	"Zombie", "Zombie", "Zombie",
-	"Ghoul",
-	"Wraith", "Wraith", "Fast Zombie", "Fast Zombie",
+	"Zombie", "Fresh Infected", "Ghoul",
+	"Zombie", "Ghoul", "Wraith",
+	"Wraith", "Wraith", "Fast Zombie", "Fast Zombie", "Bloated Zombie",
 	"Bloated Zombie", "Bloated Zombie", "Bloated Zombie",
 	"Poison Zombie", "Poison Zombie", "Poison Zombie",
-	"Lacerator", "Lacerator"
+	"Lacerator", "Bloated Zombie", "Poison Zombie", "Wraith", "Wraith"
 }
+
 HANDLER.HvH_BotClasses = {
 	"Nightmare", "Nightmare", 
 	"The Reaper", "The Reaper", "The Reaper",
