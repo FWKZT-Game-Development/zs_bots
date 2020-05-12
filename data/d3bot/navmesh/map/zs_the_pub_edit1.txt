@@ -22,7 +22,6 @@
 106-236:
 107:AreaXMax=269.6,AreaXMin=-383.4,AreaYMax=647.5,AreaYMin=168,X=-57.3,Y=481.8,Z=0
 107-112:
-107-280:
 108:AreaXMax=-29,AreaXMin=-115,AreaYMax=880,AreaYMin=841.4,X=-72.5,Y=877.1,Z=-8
 108-258:
 11:AreaXMax=-1069.4,AreaXMin=-1133,AreaYMax=1000,AreaYMin=647.8,X=-1104.2,Y=836.2,Z=-8
@@ -39,7 +38,8 @@
 112-118:
 115:AreaXMax=-34,AreaXMin=-373,AreaYMax=1748,AreaYMin=1648,X=-339.8,Y=1714.7,Z=-6
 115-149:
-118:AreaXMax=-412.6,AreaXMin=-655.5,AreaYMax=962.2,AreaYMin=647,X=-542.9,Y=763.7,Z=-8
+118:AreaXMax=-424.5,AreaXMin=-655.5,AreaYMax=962.2,AreaYMin=647,X=-542.9,Y=763.7,Z=-8
+118-279:
 118-280:
 118-84:
 119:AreaXMax=-857.6,AreaXMin=-1199.4,AreaYMax=3200,AreaYMin=2754.3,X=-1004.4,Y=3037.9,Z=-8
@@ -104,10 +104,11 @@
 144-145:
 145:AreaXMax=572,AreaXMin=444.6,AreaYMax=1446.8,AreaYMin=871.9,X=508.8,Y=1146.5,Z=-6
 145-143:
-146:AreaXMax=572,AreaXMin=281.3,AreaYMax=1812,AreaYMin=1648,X=499.6,Y=1777.2,Z=-6
+146:AreaXMax=572,AreaXMin=281.3,AreaYMax=1812,AreaYMin=1660,X=499.6,Y=1777.2,Z=-6
 146-144:
 147:AreaXMax=280.7,AreaXMin=71.4,AreaYMax=1812.5,AreaYMin=1694.4,X=255.3,Y=1789.9,Z=-6
 147-146:
+147-238:
 148:AreaXMax=70,AreaXMin=-34,AreaYMax=1812,AreaYMin=1748.5,X=6.7,Y=1785.9,Z=-6
 148-147:
 149:AreaXMax=-34,AreaXMin=-373,AreaYMax=1812,AreaYMin=1747.9,X=-349.3,Y=1782.7,Z=-6
@@ -268,7 +269,7 @@
 231-232:
 232:AreaXMax=-384,AreaXMin=-496,AreaYMax=1256,AreaYMin=1186,X=-445.8,Y=1219.3,Z=-8
 232-230:
-233:AimTo=Straight,AreaXMax=-226,AreaXMin=-276,AreaYMax=880,AreaYMin=872,Jump=Always,X=-251,Y=875.7,Z=39
+233:AimTo=Straight,AreaXMax=-226,AreaXMin=-276,AreaYMax=880,AreaYMin=872,Condition=Unblocked,Jump=Always,X=-251,Y=875.7,Z=39
 235:AimTo=Straight,AreaXMax=316,AreaXMin=266,AreaYMax=880,AreaYMin=872,Jump=Always,X=290.9,Y=875.8,Z=38.9
 236:AreaXMax=316,AreaXMin=266,AreaYMax=872,AreaYMin=841.2,Jump=Always,X=292.4,Y=857.1,Z=-3.8
 236-143:
@@ -367,7 +368,7 @@
 277:AreaXMax=390,AreaXMin=284,AreaYMax=1640,AreaYMin=1420,X=309.4,Y=1465.4,Z=128
 277-278:
 278:AreaXMax=284,AreaXMin=12,AreaYMax=1640,AreaYMin=1420,X=115.8,Y=1537.2,Z=128
-279:AreaXMax=316,AreaXMin=-384,AreaYMax=841.2,AreaYMin=648.1,X=-73.9,Y=752.5,Z=-6
+279:AreaXMax=316,AreaXMin=-424.2,AreaYMax=841.2,AreaYMin=648.1,X=-73.9,Y=752.5,Z=-6
 279-107:
 279-108:
 279-236:
