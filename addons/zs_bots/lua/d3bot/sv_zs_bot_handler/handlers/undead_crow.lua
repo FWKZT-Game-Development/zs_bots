@@ -9,11 +9,13 @@ function HANDLER.SelectorFunction(zombieClassName, team)
 end
 
 function HANDLER.UpdateBotCmdFunction(bot, cmd)
+	if D3bot.DisableBotCrows then return end
+
 	cmd:ClearButtons()
 	cmd:ClearMovement()
-	
+
 	-- Fix knocked down bots from sliding around. (Workaround for the NoxiousNet codebase, as ply:Freeze() got removed from status_knockdown, status_revive, ...)
-	if bot.KnockedDown and IsValid(bot.KnockedDown) or bot.Revive and IsValid(bot.Revive) or GAMEMODE:GetWave() == 0 then
+	if bot.KnockedDown and IsValid(bot.KnockedDown) or bot.Revive and IsValid(bot.Revive) then
 		return
 	end
 	
@@ -29,8 +31,11 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 	local nextNodeOrNil = mem.NextNodeOrNil
 	
 	local result, actions, forwardSpeed, sideSpeed, upSpeed, aimAngle = nil, nil, 0, nil
-	if nextNodeOrNil then
-		result, actions, forwardSpeed, sideSpeed, upSpeed, aimAngle, minorStuck, majorStuck, facesHindrance = D3bot.Basics.Walk(bot, nextNodeOrNil.Pos + Vector(0, 0, 64))
+
+	if nextNodeOrNil and D3bot.UsingValveNav then
+		result, actions, forwardSpeed, sideSpeed, upSpeed, aimAngle, minorStuck, majorStuck, facesHindrance = D3bot.Basics.Walk( bot, nextNodeOrNil:GetCenter() + Vector(0, 0, 64) )
+	elseif nextNodeOrNil then
+		result, actions, forwardSpeed, sideSpeed, upSpeed, aimAngle, minorStuck, majorStuck, facesHindrance = D3bot.Basics.Walk( bot, nextNodeOrNil.Pos + Vector(0, 0, 64) )
 	end
 	
 	local buttons = 0
@@ -47,8 +52,10 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 end
 
 function HANDLER.ThinkFunction(bot)
+	if D3bot.DisableBotCrows then return end
+
 	local mem = bot.D3bot_Mem
-	
+
 	if mem.nextCheckTarget and mem.nextCheckTarget < CurTime() or not mem.nextCheckTarget then
 		mem.nextCheckTarget = CurTime() + 1
 		if not HANDLER.CanBeTgt(bot, mem.TgtOrNil) or math.random(60) == 1 then

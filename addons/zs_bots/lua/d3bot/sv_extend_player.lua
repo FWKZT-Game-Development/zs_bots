@@ -1,7 +1,5 @@
 local meta = FindMetaTable("Player")
 
-local player_GetAll = player.GetAll
-
 function meta:D3bot_GetAttackPosOrNil(fraction, target)
 	local mem = self.D3bot_Mem
 	local tgt = target or mem.TgtOrNil
@@ -37,14 +35,14 @@ end
 
 function meta:D3bot_CanPounceToPos(pos)
 	if not pos then return end
-
+	
 	local initVel
-	if self:GetActiveWeapon() and self:GetActiveWeapon().PounceAttack then
-		initVel = (1 - 0.5 * (self:GetLegDamage() / GAMEMODE.MaxLegDamage)) * self:GetActiveWeapon().PounceAttack.LeapSpeed
+	if self:GetActiveWeapon() and self:GetActiveWeapon().PounceVelocity then
+		initVel = (1 - 0.5 * (self:GetLegDamage() / GAMEMODE.MaxLegDamage)) * self:GetActiveWeapon().PounceVelocity
 	else
 		return
 	end
-
+	
 	local selfPos = self:GetPos()--LerpVector(0.75, self:GetPos(), self:EyePos())
 	local trajectories = D3bot.GetTrajectories(initVel, selfPos, pos, 8)
 	local resultTrajectories = {}
@@ -53,7 +51,7 @@ function meta:D3bot_CanPounceToPos(pos)
 		local hit = false
 		for _, point in ipairs(trajectory.points) do
 			if lastPoint then
-				local tr = util.TraceEntity({start = point, endpos = lastPoint, filter = player_GetAll()}, self)
+				local tr = util.TraceEntity({start = point, endpos = lastPoint, filter = player.GetAll()}, self)
 				if tr.Hit then
 					hit = true
 					break
@@ -69,6 +67,17 @@ function meta:D3bot_CanPounceToPos(pos)
 	return resultTrajectories
 end
 
+function meta:D3bot_CanSeeTargetCached(fraction, target)
+	local mem = self.D3bot_Mem
+	if not mem then return end
+	if not mem.CanSeeTargetCache or mem.CanSeeTargetCache.ValidUntil < CurTime() then
+		mem.CanSeeTargetCache = {}
+		mem.CanSeeTargetCache.ValidUntil = CurTime() + 0.9 + math.random() * 0.2 -- Invalidate after a second (With some jitter)
+		mem.CanSeeTargetCache.Result = self:D3bot_CanSeeTarget(fraction, target)
+	end
+	return mem.CanSeeTargetCache.Result
+end
+
 function meta:D3bot_CanSeeTarget(fraction, target)
 	local attackPos = self:D3bot_GetAttackPosOrNil(fraction, target)
 	if not attackPos then return false end
@@ -77,7 +86,7 @@ function meta:D3bot_CanSeeTarget(fraction, target)
 	local tr = D3bot.BotSeeTr
 	tr.start = self:D3bot_GetViewCenter()
 	tr.endpos = attackPos
-	tr.filter = player_GetAll()
+	tr.filter = player.GetAll()
 	return attackPos and not util.TraceHull(tr).Hit
 end
 
@@ -101,25 +110,9 @@ function meta:D3bot_RerollClass(classes)
 	end
 	local zombieClass = table.Random(zombieClasses)
 	if not zombieClass then zombieClass = GAMEMODE.ZombieClasses[GAMEMODE.DefaultZombieClass] end
-	self:SetZombieClass(zombieClass.Index)
-	--self:SetSelectedZombieClass(zombieClass.Index)
-end
-
--- function meta:D3bot_RerollMiniboss(classes)
-	-- local zombieClasses = {}
-	-- for _, class in ipairs(classes) do
-		-- local zombieClass = GAMEMODE.ZombieClasses[class]
-		-- if zombieClass then
-			-- if not zombieClass.Locked and (zombieClass.Unlocked or zombieClass.Wave <= GAMEMODE:GetWave()) then
-				-- table.insert(zombieClasses, zombieClass)
-			-- end
-		-- end
-	-- end
-	-- local zombieClass = table.Random(zombieClasses)
-	-- if not zombieClass then zombieClass = GAMEMODE.ZombieClasses[GAMEMODE.DefaultZombieClass] end
 	--self:SetZombieClass(zombieClass.Index)
-	---- self:SetSelectedMiniBossClass(zombieClass.Index)
--- end
+	self.DeathClass = zombieClass.Index
+end
 
 function meta:D3bot_ResetTgt() -- Reset all kind of targets
 	local mem = self.D3bot_Mem
@@ -155,11 +148,9 @@ end
 function meta:D3bot_InitializeOrReset()
 	self.D3bot_Mem = self.D3bot_Mem or {}
 	local mem = self.D3bot_Mem
-	if not self:IsBot() then
-		self:SetNWBool( "AFKControlled", true )
-	end
+	
 	local considerPathLethality = math.random(1, D3bot.BotConsideringDeathCostAntichance) == 1
-
+	
 	mem.TgtOrNil = nil										-- Target entity to walk to and attack
 	mem.PosTgtOrNil = nil									-- Target position to walk to
 	mem.NodeTgtOrNil = nil									-- Target node
@@ -170,23 +161,15 @@ function meta:D3bot_InitializeOrReset()
 	mem.ConsidersPathLethality = considerPathLethality		-- If true, the bot will consider lethality of the paths
 	mem.Angs = Angle()										-- Current angle, used to smooth out movement
 	mem.AngsOffshoot = Angle()								-- Offshoot angle, to make bots movement more random
-
-	mem.DontAttackTgt = nil									--
-	mem.TgtProximity = nil									--
-	mem.PosTgtProximity = nil								--
-	mem.NextCheckStuck = nil								--
-	mem.MajorStuckCounter = nil								--
+	
+	mem.DontAttackTgt = nil									-- 
+	mem.TgtProximity = nil									-- 
+	mem.PosTgtProximity = nil								-- 
+	mem.NextCheckStuck = nil								-- 
+	mem.MajorStuckCounter = nil								-- 
 end
 
 function meta:D3bot_Deinitialize()
-	if self and self.D3bot_Mem then
-		--remove roll from the player's eyeangles
-		local angles = self:EyeAngles()
-		self:SetEyeAngles(Angle(angles.p,angles.y,0))
-		if not self:IsBot() then
-			self:SetNWBool( "AFKControlled", false )
-		end
-	end
 	self.D3bot_Mem = nil
 end
 
@@ -219,8 +202,8 @@ function meta:D3bot_UpdatePath(pathCostFunction, heuristicCostFunction)
 	if not node or not mem.TgtNodeOrNil then return end
 	local abilities = {Walk = true}
 	if self:GetActiveWeapon() then
-		if self:GetActiveWeapon().PounceAttack then abilities.Pounce = true end
-		if self:GetActiveWeapon().CanClimb then abilities.Climb = true end
+		if self:GetActiveWeapon().PounceVelocity then abilities.Pounce = true end
+		if self:GetActiveWeapon().GetClimbing then abilities.Climb = true end
 	end
 	local path = D3bot.GetBestMeshPathOrNil(node, mem.TgtNodeOrNil, pathCostFunction, heuristicCostFunction, abilities)
 	if not path then
@@ -260,16 +243,16 @@ function meta:D3bot_CheckStuck()
 	else
 		return
 	end
-
+	
 	local posList = self.D3bot_PosList
 	if not posList then return end
-
+	
 	local pos_1, pos_2, pos_10 = posList[1], posList[2], posList[10]
-
-	local minorStuck = pos_1 and pos_2 and pos_1:Distance(pos_2) < 1		-- Stuck on ladder
-	local preMajorStuck = pos_1 and pos_10 and pos_1:Distance(pos_10) < 300	-- Running circles, some obstacles in the way, ...
+	
+	local minorStuck = pos_1 and pos_2 and pos_1:DistToSqr(pos_2) < 1*1				-- Stuck on ladder
+	local preMajorStuck = pos_1 and pos_10 and pos_1:DistToSqr(pos_10) < 300*300	-- Running circles, some obstacles in the way, ...
 	local majorStuck
-
+	
 	if preMajorStuck and (not self.D3bot_LastDamage or self.D3bot_LastDamage < CurTime() - 5) then
 		mem.MajorStuckCounter = mem.MajorStuckCounter and mem.MajorStuckCounter + 1 or 1
 		if mem.MajorStuckCounter > 15 then
@@ -278,6 +261,66 @@ function meta:D3bot_CheckStuck()
 	else
 		mem.MajorStuckCounter = nil
 	end
-
+	
 	return minorStuck, majorStuck
+end
+
+if not D3bot.UsingValveNav then return end
+
+function meta:D3bot_CanSeeTarget( fraction, target )
+	local attackPos = self:D3bot_GetAttackPosOrNil( fraction, target )
+	if not attackPos then return false end
+	local mem = self.D3bot_Mem
+	if mem and mem.TgtNodeOrNil and mem.NodeOrNil ~= mem.TgtNodeOrNil and mem.TgtNodeOrNil:GetMetaData().Params.See == "Disabled" then return false end
+	local tr = D3bot.BotSeeTr
+	tr.start = self:D3bot_GetViewCenter()
+	tr.endpos = attackPos
+	tr.filter = player.GetAll()
+	return attackPos and not util.TraceHull( tr ).Hit
+end
+
+function meta:D3bot_UpdateAngsOffshoot( angOffshoot )
+	local mem = self.D3bot_Mem
+	local nodeOrNil = mem.NodeOrNil
+	local nextNodeOrNil = mem.NextNodeOrNil
+	if ( nodeOrNil and nodeOrNil:GetMetaData().Params.Aim == "Straight" ) or ( nextNodeOrNil and nextNodeOrNil:GetMetaData().Params.AimTo == "Straight" ) then
+		mem.AngsOffshoot = Angle()
+		return
+	end
+	mem.AngsOffshoot = Angle(math.random( -angOffshoot, angOffshoot ), math.random( -angOffshoot, angOffshoot ), 0 )
+end
+
+function meta:D3bot_UpdatePath( pathCostFunction, heuristicCostFunction )
+	local mem = self.D3bot_Mem
+	if not IsValid( mem.TgtOrNil ) and not mem.PosTgtOrNil and not mem.NodeTgtOrNil then return end
+
+	local area = navmesh.GetNearestNavArea( self:GetPos() )
+
+	mem.TgtNodeOrNil = mem.NodeTgtOrNil or navmesh.GetNearestNavArea( mem.TgtOrNil and mem.TgtOrNil:GetPos() or mem.PosTgtOrNil )
+	
+	if not area or not mem.TgtNodeOrNil then return end
+	local abilities = { Walk = true }
+	if self:GetActiveWeapon() then
+		if self:GetActiveWeapon().PounceVelocity then abilities.Pounce = true end
+		if self:GetActiveWeapon().GetClimbing then abilities.Climb = true end
+	end
+	local path = D3bot.GetBestValveMeshPathOrNil( area, mem.TgtNodeOrNil, pathCostFunction, heuristicCostFunction, abilities )
+	if not path then
+		local handler = findHandler( self:GetZombieClass(), self:Team() )
+		if handler and handler.RerollTarget then handler.RerollTarget( self ) end
+		return
+	end
+	self:D3bot_SetPath( path, true )
+end
+
+function meta:D3bot_UpdatePathProgress()
+	local mem = self.D3bot_Mem
+	while mem.NextNodeOrNil do
+		if mem.NextNodeOrNil == navmesh.GetNavArea( self:GetPos(), 100 ) then
+			mem.NodeOrNil = mem.NextNodeOrNil
+			mem.NextNodeOrNil = table.remove( mem.RemainingNodes, 1 )
+		else
+			break
+		end
+	end
 end

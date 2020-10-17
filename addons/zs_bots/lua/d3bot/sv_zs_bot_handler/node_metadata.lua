@@ -14,8 +14,6 @@ D3bot.LinkMetadata = D3bot.LinkMetadata or {}
 local nodeMetadata = D3bot.NodeMetadata
 local linkMetadata = D3bot.LinkMetadata
 
-local player_GetAll = player.GetAll
-
 hook.Add("PreRestartRound", D3bot.BotHooksId.."MetadataReset", function()
 	D3bot.NodeMetadata = {}
 	D3bot.LinkMetadata = {}
@@ -26,6 +24,9 @@ end)
 local nextNodeMetadataReduce = CurTime()
 local nextNodeMetadataIncrease = CurTime()
 hook.Add("Think", D3bot.BotHooksId.."NodeMetadataThink", function()
+	-- If survivor bots are disabled, ignore capturing team metadata
+	if not D3bot.SurvivorsEnabled then return end
+
 	-- Reduce values over time
 	if nextNodeMetadataReduce < CurTime() then
 		nextNodeMetadataReduce = CurTime() + 5
@@ -49,7 +50,7 @@ hook.Add("Think", D3bot.BotHooksId.."NodeMetadataThink", function()
 	local mapNavMesh = D3bot.MapNavMesh
 	if nextNodeMetadataIncrease < CurTime() then
 		nextNodeMetadataIncrease = CurTime() + 1
-		local players = D3bot.RemoveObsDeadTgts( player_GetAll() )
+		local players = D3bot.RemoveObsDeadTgts(player.GetAll())
 		for _, player in pairs(players) do
 			if player:Alive() then
 				local team = player:Team()
@@ -77,4 +78,16 @@ function D3bot.NodeMetadata_ZombieDeath(node) -- TODO: Call it from the death ha
 	if not nodeMetadata[node] then nodeMetadata[node] = {} end
 	local metadata = nodeMetadata[node]
 	metadata.ZombieDeathFactor = math.Clamp((metadata.ZombieDeathFactor or 0) + 0.1, 0, 1)
+end
+
+if not D3bot.UsingValveNav then return end
+
+function D3bot.LinkMetadata_ZombieDeath( link, raiseCost ) -- TODO: Combine it with the ZombieDeathFactor and make it node based, not link based
+	local metadata = link:GetMetaData()
+	metadata.ZombieDeathCost = ( metadata.ZombieDeathCost or 0 ) + raiseCost
+end
+
+function D3bot.NodeMetadata_ZombieDeath( node ) -- TODO: Call it from the death handler
+	local metadata = node:GetMetaData()
+	metadata.ZombieDeathFactor = math.Clamp( ( metadata.ZombieDeathFactor or 0 ) + 0.1, 0, 1 )
 end
