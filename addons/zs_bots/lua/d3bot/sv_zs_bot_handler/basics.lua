@@ -1,5 +1,13 @@
 D3bot.Basics = {}
 
+local math_AngleDifference = math.AngleDifference
+local math_Clamp = math.Clamp
+local math_Rand = math.Rand
+local math_random = math.random
+local math_abs = math.abs
+local math_pow = math.pow
+local math_deg = math.deg
+
 function D3bot.Basics.SuicideOrRetarget(bot)
 	local mem = bot.D3bot_Mem
 	
@@ -7,17 +15,7 @@ function D3bot.Basics.SuicideOrRetarget(bot)
 	local nextNodeOrNil = mem.NextNodeOrNil
 	
 	if D3bot.UsingValveNav then
-		if nodeOrNil and nextNodeOrNil and nextNodeOrNil:GetCenter().z > nodeOrNil:GetCenter().z + 55 then
-			local suicide = math.random( 0, 1 )
-			if suicide then
-				bot:Kill()
-				return
-			else
-				local handler = findHandler(bot:GetZombieClass(), bot:Team())
-				if handler and handler.RerollTarget then handler.RerollTarget(bot) end
-				return
-			end
-		end
+		return
 	else
 		if nodeOrNil and nextNodeOrNil and nextNodeOrNil.Pos.z > nodeOrNil.Pos.z + 55 then
 			local wallParam = nextNodeOrNil.Params.Wall
@@ -91,7 +89,7 @@ function D3bot.Basics.Walk(bot, pos, slowdown, proximity) -- 'pos' should be ins
 	
 	-- Slow down bot when close to target (2D distance)
 	local tempPos = Vector(pos.x, pos.y, origin.z)
-	local invProximity = math.Clamp((origin:Distance(tempPos) - (proximity or 10))/60, 0, 1)
+	local invProximity = math_Clamp((origin:Distance(tempPos) - (proximity or 10))/60, 0, 1)
 	local speed = bot:GetMaxSpeed() * (slowdown and invProximity or 1)
 	
 	-- Antistuck when bot is possibly stuck crouching below something
@@ -123,10 +121,10 @@ function D3bot.Basics.Walk(bot, pos, slowdown, proximity) -- 'pos' should be ins
 				actions.Jump = true
 			end
 			if facesHindrance then
-				if math.random(D3bot.BotJumpAntichance) == 1 then
+				if math_random(D3bot.BotJumpAntichance) == 1 then
 					actions.Jump = true
 				end
-				if math.random(D3bot.BotDuckAntichance) == 1 then
+				if math_random(D3bot.BotDuckAntichance) == 1 then
 					actions.Duck = true
 				end
 				-- Check if bot is possibly stuck below something
@@ -143,9 +141,9 @@ function D3bot.Basics.Walk(bot, pos, slowdown, proximity) -- 'pos' should be ins
 				if bot:GetActiveWeapon() and bot:GetActiveWeapon().GetClimbing and bot:GetActiveWeapon():GetClimbing() then
 					local yaw1 = bot:GetForward():Angle().Yaw
 					local yaw2 = (Vector(pos.x, pos.y, origin.z) - origin):Angle().Yaw
-					sideSpeed = math.AngleDifference(yaw1, yaw2)
+					sideSpeed = math_AngleDifference(yaw1, yaw2)
 					speed = (pos.z - origin.z + 20) * 10
-					if (math.abs(speed) < 20 or bot:GetVelocity():Length() < 10) and math.abs(sideSpeed) > 1 then speed = 0 end
+					if (math_abs(speed) < 20 or bot:GetVelocity():Length() < 10) and math_abs(sideSpeed) > 1 then speed = 0 end
 				end
 			end
 		end
@@ -159,7 +157,7 @@ function D3bot.Basics.Walk(bot, pos, slowdown, proximity) -- 'pos' should be ins
 	if duckParam == "Disabled" or duckToParam == "Disabled" then
 		actions.Duck = false
 	end
-	if math.random(1, 2) == 1 or jumpParam == "Disabled" or jumpToParam == "Disabled" or (not actions.Duck and bot:Crouching()) then
+	if math_random(1, 2) == 1 or jumpParam == "Disabled" or jumpToParam == "Disabled" or (not actions.Duck and bot:Crouching()) then
 		actions.Jump = false
 	end
 	
@@ -202,9 +200,9 @@ function D3bot.Basics.WalkAttackAuto(bot)
 			return D3bot.Basics.Walk(bot, nextNodeOrNil.Pos)
 		end
 	elseif mem.TgtOrNil and not mem.DontAttackTgt and (bot:D3bot_CanSeeTargetCached() or not nextNodeOrNil) then
-		aimPos = bot:D3bot_GetAttackPosOrNilFuture(nil, math.Rand(0, D3bot.BotAimPosVelocityOffshoot))
+		aimPos = bot:D3bot_GetAttackPosOrNilFuture(nil, math_Rand(0, D3bot.BotAimPosVelocityOffshoot))
 		origin = bot:D3bot_GetViewCenter()
-		if aimPos and aimPos:DistToSqr(origin) < math.pow(D3bot.BotAttackDistMin, 2) then
+		if aimPos and aimPos:DistToSqr(origin) < math_pow(D3bot.BotAttackDistMin, 2) then
 			if weapon and weapon.MeleeReach then
 				local tr = util.TraceLine({
 					start = origin,
@@ -287,10 +285,10 @@ function D3bot.Basics.WalkAttackAuto(bot)
 				actions.Jump = true
 			end
 			if facesHindrance then
-				if math.random(D3bot.BotJumpAntichance) == 1 then
+				if math_random(D3bot.BotJumpAntichance) == 1 then
 					actions.Jump = true
 				end
-				if math.random(D3bot.BotDuckAntichance) == 1 then
+				if math_random(D3bot.BotDuckAntichance) == 1 then
 					actions.Duck = true
 				end
 				-- Check if bot is possibly stuck below something
@@ -311,7 +309,7 @@ function D3bot.Basics.WalkAttackAuto(bot)
 	if duckParam == "Disabled" or duckToParam == "Disabled" then
 		actions.Duck = false
 	end
-	if math.random(1, 2) == 1 or jumpParam == "Disabled" or jumpToParam == "Disabled" or (not actions.Duck and bot:Crouching()) then
+	if math_random(1, 2) == 1 or jumpParam == "Disabled" or jumpToParam == "Disabled" or (not actions.Duck and bot:Crouching()) then
 		actions.Jump = false
 	end
 	
@@ -393,8 +391,8 @@ function D3bot.Basics.PounceAuto(bot)
 	
 	if (trajectory and CurTime() >= weapon:GetNextPrimaryFire() and CurTime() >= weapon:GetNextSecondaryFire() and CurTime() >= weapon.NextAllowPounce) or mem.pouncing then
 		if trajectory then
-			mem.Angs = Angle(-math.deg(trajectory.pitch), math.deg(trajectory.yaw), 0)
-			mem.pounceFlightTime = math.Clamp(trajectory.t1 + (mem.pouncingStartTime or CurTime()) - CurTime(), 0, 1) -- Store flight time, and use it to iteratively get close to the correct intersection point.
+			mem.Angs = Angle(-math_deg(trajectory.pitch), math_deg(trajectory.yaw), 0)
+			mem.pounceFlightTime = math_Clamp(trajectory.t1 + (mem.pouncingStartTime or CurTime()) - CurTime(), 0, 1) -- Store flight time, and use it to iteratively get close to the correct intersection point.
 		end
 		if not mem.pouncing then
 			-- Started pouncing
@@ -429,12 +427,12 @@ function D3bot.Basics.AimAndShoot(bot, target, maxDistance)
 	if (weapon.GetNextReload and weapon:GetNextReload() or 0) > CurTime() - 0.5 then -- Subtract half a second, so it will re-trigger reloading if possible
 		reloading = true
 	end
-	actions.Reload = reloading and math.random(5) == 1
+	actions.Reload = reloading and math_random(5) == 1
 	
 	local origin = bot:D3bot_GetViewCenter()
 	local targetPos = LerpVector(mem.AimHeightFactor or 1, target:GetPos(), target:EyePos())
 	
-	if maxDistance and origin:DistToSqr(targetPos) > math.pow(maxDistance, 2) then return end
+	if maxDistance and origin:DistToSqr(targetPos) > math_pow(maxDistance, 2) then return end
 	
 	-- TODO: Use fewer traces, cache result for a few frames.
 	local tr = util.TraceLine({
@@ -445,7 +443,7 @@ function D3bot.Basics.AimAndShoot(bot, target, maxDistance)
 	})
 	local canShootTarget = not tr.Hit
 	
-	if not canShootTarget then mem.AimHeightFactor = math.Rand(0.5, 1) end
+	if not canShootTarget then mem.AimHeightFactor = math_Rand(0.5, 1) end
 	
 	actions.Attack = not reloading and bot:D3bot_IsLookingAt(targetPos, 0.8) and canShootTarget and not mem.WasPressingAttack
 	mem.WasPressingAttack = actions.Attack
@@ -461,7 +459,7 @@ function D3bot.Basics.LookAround(bot)
 	local mem = bot.D3bot_Mem
 	if not mem then return end
 
-	if math.random(200) == 1 then mem.LookTarget = table.Random(player.GetAll()) end
+	if math_random(200) == 1 then mem.LookTarget = table.Random(player.GetAll()) end
 	
 	if not IsValid(mem.LookTarget) then return end
 	

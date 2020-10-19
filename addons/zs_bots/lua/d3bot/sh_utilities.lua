@@ -1,14 +1,21 @@
+local math_atan = math.atan
+local math_atan2 = math.atan2
+local math_sqrt = math.sqrt
+local math_cos = math.cos
+local math_sin = math.sin
+local math_deg = math.deg
+
 function D3bot.GetTrajectories2DParams(g, initVel, distZ, distRad)
 	local trajectories = {}
 	local radix = initVel^4 - g*(g*distRad^2 + 2*distZ*initVel^2)
 	
 	if radix < 0 then return trajectories end
-	local pitch = math.atan((initVel^2 - math.sqrt(radix)) / (g*distRad))
-	local t1 = distRad / (initVel * math.cos(pitch))
+	local pitch = math_atan((initVel^2 - math_sqrt(radix)) / (g*distRad))
+	local t1 = distRad / (initVel * math_cos(pitch))
 	table.insert(trajectories, {g = g, initVel = initVel, pitch = pitch, t1 = t1})
 	if radix > 0 then
-		local pitch = math.atan((initVel^2 + math.sqrt(radix)) / (g*distRad))
-		local t1 = distRad / (initVel * math.cos(pitch))
+		local pitch = math_atan((initVel^2 + math_sqrt(radix)) / (g*distRad))
+		local t1 = distRad / (initVel * math_cos(pitch))
 		table.insert(trajectories, {g = g, initVel = initVel, pitch = pitch, t1 = t1})
 	end
 	
@@ -19,7 +26,7 @@ function D3bot.GetTrajectory2DPoints(trajectory, segments)
 	trajectory.points = {}
 	for i = 0, segments, 1 do
 		local t = Lerp(i/segments, 0, trajectory.t1)
-		local r = Vector(math.cos(trajectory.pitch)*trajectory.initVel*t, 0, math.sin(trajectory.pitch)*trajectory.initVel*t - trajectory.g/2*t^2)
+		local r = Vector(math_cos(trajectory.pitch)*trajectory.initVel*t, 0, math_sin(trajectory.pitch)*trajectory.initVel*t - trajectory.g/2*t^2)
 		table.insert(trajectory.points, r)
 	end
 	
@@ -30,8 +37,8 @@ function D3bot.GetTrajectories(initVel, r0, r1, segments)
 	local g = 600 -- Hard coded acceleration, should be read from gmod later
 	
 	local distZ = r1.z - r0.z
-	local distRad = math.sqrt((r1.x - r0.x)^2 + (r1.y - r0.y)^2)
-	local yaw = math.atan2(r1.y - r0.y, r1.x - r0.x)
+	local distRad = math_sqrt((r1.x - r0.x)^2 + (r1.y - r0.y)^2)
+	local yaw = math_atan2(r1.y - r0.y, r1.x - r0.x)
 	
 	local trajectories = D3bot.GetTrajectories2DParams(g, initVel, distZ, distRad)
 	for i, trajectory in ipairs(trajectories) do
@@ -40,7 +47,7 @@ function D3bot.GetTrajectories(initVel, r0, r1, segments)
 		trajectories[i] = D3bot.GetTrajectory2DPoints(trajectory, segments)
 		-- Rotate and move trajectory into 3D space
 		for k, _ in ipairs(trajectory.points) do
-			trajectory.points[k]:Rotate(Angle(0, math.deg(yaw), 0))
+			trajectory.points[k]:Rotate(Angle(0, math_deg(yaw), 0))
 			trajectory.points[k]:Add(r0)
 		end
 	end

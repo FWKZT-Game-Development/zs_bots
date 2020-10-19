@@ -13,10 +13,9 @@ D3bot.NodeBlocking = {
 
 D3bot.NodeDamageEnts = {"prop_zapper*", "prop_arsenalcrate", "prop_resupply", "prop_remantler", "prop_*turret"}
 
-
 D3bot.ValveNav = true							-- Enable the auto-genernated nav-mesh ( Created with "nav_generate" )
 D3bot.ValveNavOverride = false					-- Enable overriding the manually created nav-mesh with the auto-generated
-
+D3bot.NavSearchDist = 50						-- To prevent lag caused bu infinite searching we add this limit - can be anything > 0
 
 D3bot.BotAttackDistMin = 100
 D3bot.LinkDeathCostRaise = 300

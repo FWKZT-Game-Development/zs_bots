@@ -20,10 +20,6 @@ function CNavLink:GetLinkedAreas()
 	return self.area_1, self.area_2
 end
 
-function CNavLink:GetPositions()
-	return self.area_1:GetCenter(), self.area_2:GetCenter()
-end
-
 setmetatable( CNavLink, { __call = CNavLink.new } )
 
 D3bot.CNavLink = CNavLink
@@ -63,17 +59,13 @@ function CNavArea:SharesLink( area )
 	return false
 end
 
-function CNavArea:GetAllLinks()
-	return NavAreaLinks
-end
-
 hook.Add( "InitPostEntity", "D3bot.SetupNavLinks", function()
 	if not D3bot.ValveNav then return end
 
 	timer.Simple( 0.1, function()
 		for _, area in pairs( navmesh.GetAllNavAreas() ) do
 			for _, neighbor in pairs( area:GetAdjacentAreas() ) do
-				if not area:SharesLink( neighbor ) then
+				if not area:SharesLink( neighbor ) and area:IsConnected( neighbor ) then
 					local link = area:CreateLink( neighbor )
 					local linkData = link:GetMetaData()
 					linkData.Params = linkData.Params or {}

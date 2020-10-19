@@ -1,6 +1,9 @@
 D3bot.Handlers.Undead_Fallback = D3bot.Handlers.Undead_Fallback or {}
 local HANDLER = D3bot.Handlers.Undead_Fallback
 
+local math_random = math.random
+local math_pow = math.pow
+
 HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 250
 HANDLER.BotClasses = {
@@ -61,7 +64,7 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 	if secAttack then
 		local mem = bot.D3bot_Mem
 		if not mem.NextThrowPoisonTime or mem.NextThrowPoisonTime <= CurTime() then
-			mem.NextThrowPoisonTime = CurTime() + secAttack.MinTime + math.random() * (secAttack.MaxTime - secAttack.MinTime)
+			mem.NextThrowPoisonTime = CurTime() + secAttack.MinTime + math_random() * (secAttack.MaxTime - secAttack.MinTime)
 			actions = actions or {}
 			actions.Attack2 = true
 		end
@@ -127,7 +130,7 @@ function HANDLER.ThinkFunction(bot)
 	end
 	
 	if mem.nextUpdateOffshoot and mem.nextUpdateOffshoot < CurTime() or not mem.nextUpdateOffshoot then
-		mem.nextUpdateOffshoot = CurTime() + 0.4 + math.random() * 0.2
+		mem.nextUpdateOffshoot = CurTime() + 0.4 + math_random() * 0.2
 		bot:D3bot_UpdateAngsOffshoot(HANDLER.AngOffshoot)
 	end
 
@@ -152,7 +155,7 @@ function HANDLER.ThinkFunction(bot)
 	end
 
 	if mem.nextUpdatePath and mem.nextUpdatePath < CurTime() or not mem.nextUpdatePath then
-		mem.nextUpdatePath = CurTime() + 0.9 + math.random() * 0.2
+		mem.nextUpdatePath = CurTime() + 0.9 + math_random() * 0.2
 		bot:D3bot_UpdatePath( pathCostFunction, nil )
 	end
 end
@@ -161,7 +164,7 @@ function HANDLER.OnTakeDamageFunction(bot, dmg)
 	local attacker = dmg:GetAttacker()
 	if not HANDLER.CanBeTgt(bot, attacker) then return end
 	local mem = bot.D3bot_Mem
-	if IsValid(mem.TgtOrNil) and mem.TgtOrNil:GetPos():DistToSqr(bot:GetPos()) <= math.pow(HANDLER.BotTgtFixationDistMin, 2) then return end
+	if IsValid(mem.TgtOrNil) and mem.TgtOrNil:GetPos():DistToSqr(bot:GetPos()) <= math_pow(HANDLER.BotTgtFixationDistMin, 2) then return end
 	mem.TgtOrNil = attacker
 	--bot:Say("Ouch! Fuck you "..attacker:GetName().."! I'm gonna kill you!")
 end

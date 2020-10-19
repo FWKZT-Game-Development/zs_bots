@@ -1,5 +1,7 @@
 local meta = FindMetaTable("Player")
 
+local math_random = math.random
+
 function meta:D3bot_GetAttackPosOrNil(fraction, target)
 	local mem = self.D3bot_Mem
 	local tgt = target or mem.TgtOrNil
@@ -72,7 +74,7 @@ function meta:D3bot_CanSeeTargetCached(fraction, target)
 	if not mem then return end
 	if not mem.CanSeeTargetCache or mem.CanSeeTargetCache.ValidUntil < CurTime() then
 		mem.CanSeeTargetCache = {}
-		mem.CanSeeTargetCache.ValidUntil = CurTime() + 0.9 + math.random() * 0.2 -- Invalidate after a second (With some jitter)
+		mem.CanSeeTargetCache.ValidUntil = CurTime() + 0.9 + math_random() * 0.2 -- Invalidate after a second (With some jitter)
 		mem.CanSeeTargetCache.Result = self:D3bot_CanSeeTarget(fraction, target)
 	end
 	return mem.CanSeeTargetCache.Result
@@ -149,7 +151,7 @@ function meta:D3bot_InitializeOrReset()
 	self.D3bot_Mem = self.D3bot_Mem or {}
 	local mem = self.D3bot_Mem
 	
-	local considerPathLethality = math.random(1, D3bot.BotConsideringDeathCostAntichance) == 1
+	local considerPathLethality = math_random(1, D3bot.BotConsideringDeathCostAntichance) == 1
 	
 	mem.TgtOrNil = nil										-- Target entity to walk to and attack
 	mem.PosTgtOrNil = nil									-- Target position to walk to
@@ -181,7 +183,7 @@ function meta:D3bot_UpdateAngsOffshoot(angOffshoot)
 		mem.AngsOffshoot = Angle()
 		return
 	end
-	mem.AngsOffshoot = Angle(math.random(-angOffshoot, angOffshoot), math.random(-angOffshoot, angOffshoot), 0)
+	mem.AngsOffshoot = Angle(math_random(-angOffshoot, angOffshoot), math_random(-angOffshoot, angOffshoot), 0)
 end
 
 function meta:D3bot_SetPath(path, noReset)
@@ -287,7 +289,7 @@ function meta:D3bot_UpdateAngsOffshoot( angOffshoot )
 		mem.AngsOffshoot = Angle()
 		return
 	end
-	mem.AngsOffshoot = Angle(math.random( -angOffshoot, angOffshoot ), math.random( -angOffshoot, angOffshoot ), 0 )
+	mem.AngsOffshoot = Angle(math_random( -angOffshoot, angOffshoot ), math_random( -angOffshoot, angOffshoot ), 0 )
 end
 
 function meta:D3bot_UpdatePath( pathCostFunction, heuristicCostFunction )
@@ -310,6 +312,7 @@ function meta:D3bot_UpdatePath( pathCostFunction, heuristicCostFunction )
 		if handler and handler.RerollTarget then handler.RerollTarget( self ) end
 		return
 	end
+
 	self:D3bot_SetPath( path, true )
 end
 

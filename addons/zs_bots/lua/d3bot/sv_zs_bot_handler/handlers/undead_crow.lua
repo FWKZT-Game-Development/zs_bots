@@ -1,6 +1,8 @@
 D3bot.Handlers.Undead_Crow = D3bot.Handlers.Undead_Crow or {}
 local HANDLER = D3bot.Handlers.Undead_Crow
 
+local math_random = math.random
+
 HANDLER.angOffshoot = 40
 
 HANDLER.Fallback = false
@@ -19,7 +21,7 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 		return
 	end
 	
-	if not bot:Alive() and math.random(1, 50) == 1 then
+	if not bot:Alive() and math_random(1, 50) == 1 then
 		-- Get back into the game
 		cmd:SetButtons(IN_ATTACK)
 		return
@@ -44,7 +46,7 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 	end
 	
 	buttons = bit.band(buttons, bit.bnot(IN_USE)) -- Prevent crow bots from pressing USE
-	buttons = bit.bor(buttons or 0, (math.random(1, 2) == 1) and result and IN_JUMP or 0)
+	buttons = bit.bor(buttons or 0, (math_random(1, 2) == 1) and result and IN_JUMP or 0)
 	
 	if aimAngle then bot:SetEyeAngles(aimAngle) cmd:SetViewAngles(aimAngle) end
 	if forwardSpeed then cmd:SetForwardMove(forwardSpeed) end
@@ -58,18 +60,18 @@ function HANDLER.ThinkFunction(bot)
 
 	if mem.nextCheckTarget and mem.nextCheckTarget < CurTime() or not mem.nextCheckTarget then
 		mem.nextCheckTarget = CurTime() + 1
-		if not HANDLER.CanBeTgt(bot, mem.TgtOrNil) or math.random(60) == 1 then
+		if not HANDLER.CanBeTgt(bot, mem.TgtOrNil) or math_random(60) == 1 then
 			HANDLER.RerollTarget(bot)
 		end
 	end
 	
 	if mem.nextUpdateOffshoot and mem.nextUpdateOffshoot < CurTime() or not mem.nextUpdateOffshoot then
-		mem.nextUpdateOffshoot = CurTime() + 0.4 + math.random() * 0.2
+		mem.nextUpdateOffshoot = CurTime() + 0.4 + math_random() * 0.2
 		bot:D3bot_UpdateAngsOffshoot(HANDLER.angOffshoot)
 	end
 	
 	if mem.nextUpdatePath and mem.nextUpdatePath < CurTime() or not mem.nextUpdatePath then
-		mem.nextUpdatePath = CurTime() + 0.9 + math.random() * 0.2
+		mem.nextUpdatePath = CurTime() + 0.9 + math_random() * 0.2
 		bot:D3bot_UpdatePath(nil, nil)
 	end
 end
