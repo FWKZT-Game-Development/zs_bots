@@ -2,6 +2,10 @@ local meta = FindMetaTable("Player")
 
 local math_random = math.random
 
+local table_Random = table.Random
+local table_insert = table.insert
+local table_remove = table.remove
+
 function meta:D3bot_GetAttackPosOrNil(fraction, target)
 	local mem = self.D3bot_Mem
 	local tgt = target or mem.TgtOrNil
@@ -62,7 +66,7 @@ function meta:D3bot_CanPounceToPos(pos)
 			lastPoint = point
 		end
 		if not hit then
-			table.insert(resultTrajectories, trajectory)
+			table_insert(resultTrajectories, trajectory)
 		end
 	end
 	if #resultTrajectories == 0 then resultTrajectories = nil end
@@ -106,11 +110,11 @@ function meta:D3bot_RerollClass(classes)
 		local zombieClass = GAMEMODE.ZombieClasses[class]
 		if zombieClass then
 			if not zombieClass.Locked and (zombieClass.Unlocked or zombieClass.Wave <= GAMEMODE:GetWave()) then
-				table.insert(zombieClasses, zombieClass)
+				table_insert(zombieClasses, zombieClass)
 			end
 		end
 	end
-	local zombieClass = table.Random(zombieClasses)
+	local zombieClass = table_Random(zombieClasses)
 	if not zombieClass then zombieClass = GAMEMODE.ZombieClasses[GAMEMODE.DefaultZombieClass] end
 	--self:SetZombieClass(zombieClass.Index)
 	self.DeathClass = zombieClass.Index
@@ -200,9 +204,9 @@ end
 function meta:D3bot_SetPath(path, noReset)
 	if not noReset then self:D3bot_ResetTgt() end
 	local mem = self.D3bot_Mem
-	if mem.NextNodeOrNil and mem.NextNodeOrNil == path[1] then table.insert(path, 1, mem.NodeOrNil) end -- Preserve current node if the path starts with the next node
-	mem.NodeOrNil = table.remove(path, 1)
-	mem.NextNodeOrNil = table.remove(path, 1)
+	if mem.NextNodeOrNil and mem.NextNodeOrNil == path[1] then table_insert(path, 1, mem.NodeOrNil) end -- Preserve current node if the path starts with the next node
+	mem.NodeOrNil = table_remove(path, 1)
+	mem.NextNodeOrNil = table_remove(path, 1)
 	mem.RemainingNodes = path
 end
 
@@ -232,7 +236,7 @@ function meta:D3bot_UpdatePathProgress()
 	while mem.NextNodeOrNil do
 		if mem.NextNodeOrNil:GetContains(self:GetPos(), 100) then
 			mem.NodeOrNil = mem.NextNodeOrNil
-			mem.NextNodeOrNil = table.remove(mem.RemainingNodes, 1)
+			mem.NextNodeOrNil = table_remove(mem.RemainingNodes, 1)
 		else
 			break
 		end
@@ -243,9 +247,9 @@ end
 function meta:D3bot_StorePos()
 	self.D3bot_PosList = self.D3bot_PosList or {}
 	local posList = self.D3bot_PosList
-	table.insert(posList, 1, self:GetPos())
+	table_insert(posList, 1, self:GetPos())
 	while #posList > 30 do
-		table.remove(posList)
+		table_remove(posList)
 	end
 end
 
@@ -280,6 +284,9 @@ end
 
 if not D3bot.UsingValveNav then return end
 
+local navmesh_GetNearestNavArea = navmesh.GetNearestNavArea
+local navmesh_GetNavArea = navmesh.GetNavArea
+
 function meta:D3bot_CanSeeTarget( fraction, target )
 	local attackPos = self:D3bot_GetAttackPosOrNil( fraction, target )
 	if not attackPos then return false end
@@ -307,9 +314,9 @@ function meta:D3bot_UpdatePath( pathCostFunction, heuristicCostFunction )
 	local mem = self.D3bot_Mem
 	if not IsValid( mem.TgtOrNil ) and not mem.PosTgtOrNil and not mem.NodeTgtOrNil then return end
 
-	local area = navmesh.GetNearestNavArea( self:GetPos() )
+	local area = navmesh_GetNearestNavArea( self:GetPos() )
 
-	mem.TgtNodeOrNil = mem.NodeTgtOrNil or navmesh.GetNearestNavArea( mem.TgtOrNil and mem.TgtOrNil:GetPos() or mem.PosTgtOrNil )
+	mem.TgtNodeOrNil = mem.NodeTgtOrNil or navmesh_GetNearestNavArea( mem.TgtOrNil and mem.TgtOrNil:GetPos() or mem.PosTgtOrNil )
 	
 	if not area or not mem.TgtNodeOrNil then return end
 	local abilities = { Walk = true }
@@ -330,9 +337,9 @@ end
 function meta:D3bot_UpdatePathProgress()
 	local mem = self.D3bot_Mem
 	while mem.NextNodeOrNil do
-		if mem.NextNodeOrNil == navmesh.GetNavArea( self:GetPos(), 100 ) then
+		if mem.NextNodeOrNil == navmesh_GetNavArea( self:GetPos(), 100 ) then
 			mem.NodeOrNil = mem.NextNodeOrNil
-			mem.NextNodeOrNil = table.remove( mem.RemainingNodes, 1 )
+			mem.NextNodeOrNil = table_remove( mem.RemainingNodes, 1 )
 		else
 			break
 		end

@@ -5,6 +5,8 @@ local math_cos = math.cos
 local math_sin = math.sin
 local math_deg = math.deg
 
+local table_insert = table.insert
+
 function D3bot.GetTrajectories2DParams(g, initVel, distZ, distRad)
 	local trajectories = {}
 	local radix = initVel^4 - g*(g*distRad^2 + 2*distZ*initVel^2)
@@ -12,11 +14,11 @@ function D3bot.GetTrajectories2DParams(g, initVel, distZ, distRad)
 	if radix < 0 then return trajectories end
 	local pitch = math_atan((initVel^2 - math_sqrt(radix)) / (g*distRad))
 	local t1 = distRad / (initVel * math_cos(pitch))
-	table.insert(trajectories, {g = g, initVel = initVel, pitch = pitch, t1 = t1})
+	table_insert(trajectories, {g = g, initVel = initVel, pitch = pitch, t1 = t1})
 	if radix > 0 then
 		local pitch = math_atan((initVel^2 + math_sqrt(radix)) / (g*distRad))
 		local t1 = distRad / (initVel * math_cos(pitch))
-		table.insert(trajectories, {g = g, initVel = initVel, pitch = pitch, t1 = t1})
+		table_insert(trajectories, {g = g, initVel = initVel, pitch = pitch, t1 = t1})
 	end
 	
 	return trajectories
@@ -27,7 +29,7 @@ function D3bot.GetTrajectory2DPoints(trajectory, segments)
 	for i = 0, segments, 1 do
 		local t = Lerp(i/segments, 0, trajectory.t1)
 		local r = Vector(math_cos(trajectory.pitch)*trajectory.initVel*t, 0, math_sin(trajectory.pitch)*trajectory.initVel*t - trajectory.g/2*t^2)
-		table.insert(trajectory.points, r)
+		table_insert(trajectory.points, r)
 	end
 	
 	return trajectory
@@ -70,7 +72,7 @@ function D3bot.NeighbourNodeFalloff(startNode, iterations, startValue, falloff, 
 		iterations = iterations - 1
 		for linkedNode, link in pairs(node.LinkByLinkedNode) do
 			nodes[linkedNode] = nodes[node] * falloff
-			table.insert(queue, linkedNode)
+			table_insert(queue, linkedNode)
 		end
 	end
 	return nodes
@@ -80,7 +82,7 @@ function D3bot.GetBots() -- Return all players controlled by this script (Can al
 	local bots = {}
 	for _, v in pairs(player.GetAll()) do
 		if v.D3bot_Mem then
-			table.insert(bots, v)
+			table_insert(bots, v)
 		end
 	end
 	return bots

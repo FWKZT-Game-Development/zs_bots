@@ -8,6 +8,10 @@ local math_abs = math.abs
 local math_pow = math.pow
 local math_deg = math.deg
 
+local table_Random = table.Random
+local table_Reverse = table.Reverse
+local table_insert = table.insert
+
 function D3bot.Basics.SuicideOrRetarget(bot)
 	local mem = bot.D3bot_Mem
 	
@@ -337,14 +341,14 @@ function D3bot.Basics.PounceAuto(bot)
 	if nextNodeOrNil and D3bot.UsingValveNav then
 		tempDist = tempDist + tempPos:Distance(nextNodeOrNil:GetCenter())
 		tempPos = nextNodeOrNil:GetCenter()
-		table.insert(pounceTargetPositions, {Pos = nextNodeOrNil:GetCenter() + Vector(0, 0, 1),
+		table_insert(pounceTargetPositions, {Pos = nextNodeOrNil:GetCenter() + Vector(0, 0, 1),
 											 Dist = tempDist,
 											 TimeFactor = 1.1,
 											 ForcePounce = (nextNodeOrNil:SharesLink( nodeOrNil ) and nextNodeOrNil:SharesLink( nodeOrNil ):GetMetaData().Params.Pouncing == "Needed")})
 	elseif nextNodeOrNil then
 		tempDist = tempDist + tempPos:Distance(nextNodeOrNil.Pos)
 		tempPos = nextNodeOrNil.Pos
-		table.insert(pounceTargetPositions, {Pos = nextNodeOrNil.Pos + Vector(0, 0, 1),
+		table_insert(pounceTargetPositions, {Pos = nextNodeOrNil.Pos + Vector(0, 0, 1),
 											 Dist = tempDist,
 											 TimeFactor = 1.1,
 											 ForcePounce = (nextNodeOrNil.LinkByLinkedNode[nodeOrNil] and nextNodeOrNil.LinkByLinkedNode[nodeOrNil].Params.Pouncing == "Needed")})
@@ -354,7 +358,7 @@ function D3bot.Basics.PounceAuto(bot)
 		for k, v in ipairs(mem.RemainingNodes) do -- TODO: Check if it behaves as expected
 			tempDist = tempDist + tempPos:Distance(v:GetCenter())
 			tempPos = v:GetCenter()
-			table.insert(pounceTargetPositions, {Pos = v:GetCenter() + Vector(0, 0, 1), Dist = tempDist, TimeFactor = 1.1})
+			table_insert(pounceTargetPositions, {Pos = v:GetCenter() + Vector(0, 0, 1), Dist = tempDist, TimeFactor = 1.1})
 			i = i + 1
 			if i == 2 then break end
 		end
@@ -362,7 +366,7 @@ function D3bot.Basics.PounceAuto(bot)
 		for k, v in ipairs(mem.RemainingNodes) do -- TODO: Check if it behaves as expected
 			tempDist = tempDist + tempPos:Distance(v.Pos)
 			tempPos = v.Pos
-			table.insert(pounceTargetPositions, {Pos = v.Pos + Vector(0, 0, 1), Dist = tempDist, TimeFactor = 1.1})
+			table_insert(pounceTargetPositions, {Pos = v.Pos + Vector(0, 0, 1), Dist = tempDist, TimeFactor = 1.1})
 			i = i + 1
 			if i == 2 then break end
 		end
@@ -370,15 +374,15 @@ function D3bot.Basics.PounceAuto(bot)
 	local tempAttackPosOrNil = bot:D3bot_GetAttackPosOrNilFuturePlatforms(0, mem.pounceFlightTime or 0)
 	if tempAttackPosOrNil then
 		tempDist = tempDist + bot:GetPos():Distance(tempAttackPosOrNil)
-		table.insert(pounceTargetPositions, {Pos = tempAttackPosOrNil + Vector(0, 0, 1), Dist = tempDist, TimeFactor = 0.8, HeightDiff = 100}) -- TODO: Global bot 'IQ' level influences TimeFactor, the lower the more likely they will cut off the players path
+		table_insert(pounceTargetPositions, {Pos = tempAttackPosOrNil + Vector(0, 0, 1), Dist = tempDist, TimeFactor = 0.8, HeightDiff = 100}) -- TODO: Global bot 'IQ' level influences TimeFactor, the lower the more likely they will cut off the players path
 	elseif mem.PosTgtOrNil then
 		tempDist = tempDist + bot:GetPos():Distance(mem.PosTgtOrNil)
-		table.insert(pounceTargetPositions, {Pos = mem.PosTgtOrNil + Vector(0, 0, 1), Dist = tempDist, TimeFactor = 0.8, HeightDiff = 100})
+		table_insert(pounceTargetPositions, {Pos = mem.PosTgtOrNil + Vector(0, 0, 1), Dist = tempDist, TimeFactor = 0.8, HeightDiff = 100})
 	end
 	
 	-- Find best trajectory
 	local trajectory
-	for _, pounceTargetPos in ipairs(table.Reverse(pounceTargetPositions)) do
+	for _, pounceTargetPos in ipairs(table_Reverse(pounceTargetPositions)) do
 		local trajectories = bot:D3bot_CanPounceToPos(pounceTargetPos.Pos)
 		local timeToTarget = pounceTargetPos.Dist / bot:GetMaxSpeed()
 		if trajectories and (pounceTargetPos.ForcePounce or (pounceTargetPos.HeightDiff and pounceTargetPos.Pos.z - bot:GetPos().z > pounceTargetPos.HeightDiff) or timeToTarget > (trajectories[1].t1 + weapon.PounceStartDelay)*pounceTargetPos.TimeFactor) then
@@ -459,7 +463,7 @@ function D3bot.Basics.LookAround(bot)
 	local mem = bot.D3bot_Mem
 	if not mem then return end
 
-	if math_random(200) == 1 then mem.LookTarget = table.Random(player.GetAll()) end
+	if math_random(200) == 1 then mem.LookTarget = table_Random(player.GetAll()) end
 	
 	if not IsValid(mem.LookTarget) then return end
 	

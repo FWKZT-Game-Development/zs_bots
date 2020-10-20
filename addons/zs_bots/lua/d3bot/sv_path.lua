@@ -1,5 +1,9 @@
 local math_max = math.max
 
+local table_insert = table.insert
+
+local ents_FindInBox = ents.FindInBox
+
 function D3bot.GetBestMeshPathOrNil(startNode, endNode, pathCostFunction, heuristicCostFunction, abilities)
 	-- See https://en.wikipedia.org/wiki/A*_search_algorithm
 	
@@ -20,7 +24,7 @@ function D3bot.GetBestMeshPathOrNil(startNode, endNode, pathCostFunction, heuris
 			while true do
 				node = entranceByNode[node]
 				if not node then break end
-				table.insert(path, 1, node)
+				table_insert(path, 1, node)
 			end
 			return path
 		end
@@ -29,7 +33,7 @@ function D3bot.GetBestMeshPathOrNil(startNode, endNode, pathCostFunction, heuris
 			
 			local blocked = false
 			if linkedNode.Params.Condition == "Unblocked" or linkedNode.Params.Condition == "Blocked" then
-				local ents = ents.FindInBox(linkedNode.Pos + D3bot.NodeBlocking.mins, linkedNode.Pos + D3bot.NodeBlocking.maxs)
+				local ents = ents_FindInBox(linkedNode.Pos + D3bot.NodeBlocking.mins, linkedNode.Pos + D3bot.NodeBlocking.maxs)
 				for _, ent in ipairs(ents) do
 					if D3bot.NodeBlocking.classes[ent:GetClass()] then blocked = true; break end
 				end
@@ -86,7 +90,7 @@ function D3bot.GetEscapeMeshPathOrNil(startNode, iterations, pathCostFunction, h
 			while true do
 				node = entranceByNode[node]
 				if not node then break end
-				table.insert(path, 1, node)
+				table_insert(path, 1, node)
 			end
 			return path
 		end
@@ -95,7 +99,7 @@ function D3bot.GetEscapeMeshPathOrNil(startNode, iterations, pathCostFunction, h
 			
 			local blocked = false
 			if linkedNode.Params.Condition == "Unblocked" or linkedNode.Params.Condition == "Blocked" then
-				local ents = ents.FindInBox(linkedNode.Pos + D3bot.NodeBlocking.mins, linkedNode.Pos + D3bot.NodeBlocking.maxs)
+				local ents = ents_FindInBox(linkedNode.Pos + D3bot.NodeBlocking.mins, linkedNode.Pos + D3bot.NodeBlocking.maxs)
 				for _, ent in ipairs(ents) do
 					if D3bot.NodeBlocking.classes[ent:GetClass()] then blocked = true; break end
 				end
@@ -159,6 +163,8 @@ else
 end
 D3bot.UsingValveNav = true
 
+local navmesh_GetNAvAreaByID = navmesh.GetNavAreaByID
+
 function D3bot.GetBestMeshPathOrNil( startArea, endArea, pathCostFunction, heuristicCostFunction, abilities )
 	if not IsValid( startArea ) or not IsValid( endArea ) then return nil end
 	
@@ -181,7 +187,7 @@ function D3bot.GetBestMeshPathOrNil( startArea, endArea, pathCostFunction, heuri
 			while cameFrom[ current ] do
 				current = cameFrom[ current ]
 				if not current then break end
-				table.insert( path, 1, navmesh.GetNavAreaByID( current ) )
+				table_insert( path, 1, navmesh_GetNAvAreaByID( current ) )
 			end
 			return path
 		end
@@ -196,7 +202,7 @@ function D3bot.GetBestMeshPathOrNil( startArea, endArea, pathCostFunction, heuri
 			
 			local blocked = false
 			if linkedAreaData.Params.Condition == "Unblocked" or linkedAreaData.Params.Condition == "Blocked" then
-				local entities = ents.FindInBox( linkedArea:GetCenter() + D3bot.NodeBlocking.mins, linkedArea:GetCenter() + D3bot.NodeBlocking.maxs )
+				local entities = ents_FindInBox( linkedArea:GetCenter() + D3bot.NodeBlocking.mins, linkedArea:GetCenter() + D3bot.NodeBlocking.maxs )
 				for _, ent in ipairs( entities ) do
 					if D3bot.NodeBlocking.classes[ ent:GetClass() ] then
 						blocked = true
@@ -256,7 +262,7 @@ function D3bot.GetEscapeMeshPathOrNil( startArea, iterations, pathCostFunction, 
 			while cameFrom[ current ] do
 				current = cameFrom[ current ]
 				if not current then break end
-				table.insert( path, 1, navmesh.GetNavAreaByID( current ) )
+				table_insert( path, 1, navmesh_GetNAvAreaByID( current ) )
 			end
 			return path
 		end
@@ -269,7 +275,7 @@ function D3bot.GetEscapeMeshPathOrNil( startArea, iterations, pathCostFunction, 
 
 			local blocked = false
 			if linkedAreaData.Params.Condition == "Unblocked" or linkedAreaData.Params.Condition == "Blocked" then
-				local entities = ents.FindInBox( linkedArea:GetCenter() + D3bot.NodeBlocking.mins, linkedArea:GetCenter() + D3bot.NodeBlocking.maxs )
+				local entities = ents_FindInBox( linkedArea:GetCenter() + D3bot.NodeBlocking.mins, linkedArea:GetCenter() + D3bot.NodeBlocking.maxs )
 				for _, ent in ipairs( entities ) do
 					if D3bot.NodeBlocking.classes[ ent:GetClass() ] then
 						blocked = true
