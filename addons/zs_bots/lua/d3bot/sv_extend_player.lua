@@ -324,7 +324,7 @@ function meta:D3bot_UpdatePath( pathCostFunction, heuristicCostFunction )
 		if self:GetActiveWeapon().PounceVelocity then abilities.Pounce = true end
 		if self:GetActiveWeapon().GetClimbing then abilities.Climb = true end
 	end
-	local path = D3bot.GetBestValveMeshPathOrNil( area, mem.TgtNodeOrNil, pathCostFunction, heuristicCostFunction, abilities )
+	local path = D3bot.GetBestMeshPathOrNil( area, mem.TgtNodeOrNil, pathCostFunction, heuristicCostFunction, abilities )
 	if not path then
 		local handler = findHandler( self:GetZombieClass(), self:Team() )
 		if handler and handler.RerollTarget then handler.RerollTarget( self ) end
