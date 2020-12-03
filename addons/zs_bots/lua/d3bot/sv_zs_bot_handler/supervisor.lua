@@ -75,7 +75,7 @@ function D3bot.GetDesiredStartingZombies(wave)
 		return math_Clamp( math_ceil( WaveModifiers[wave] ), 1, maxplayers )
 	end]]
 	
-	return math_Clamp( math_ceil( numplayers * WaveModifiers[wave] ), 1, maxplayers )
+	return math_Clamp( math_ceil( numplayers * WaveModifiers[wave] ), 1, 32 )
 end
 
 local function GetPropZombieCount()
