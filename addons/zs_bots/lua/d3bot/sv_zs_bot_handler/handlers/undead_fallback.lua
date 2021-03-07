@@ -7,7 +7,7 @@ local math_pow = math.pow
 HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 250
 HANDLER.BotClasses = {
-	"Zombie", "Fresh Infected", "Ghoul",
+	"Zombie", "Ghoul",
 	"Zombie", "Ghoul", "Wraith",
 	"Wraith", "Wraith", "Fast Zombie", "Fast Zombie", "Bloated Zombie",
 	"Bloated Zombie", "Bloated Zombie", "Bloated Zombie",
