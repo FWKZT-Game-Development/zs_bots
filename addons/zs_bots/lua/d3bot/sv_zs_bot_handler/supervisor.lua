@@ -84,7 +84,7 @@ end
 
 local function GetPropZombieCount()
 	if #player.GetAllActive() == 0 then return 0 end
-	--if #player_GetHumans() > 50 then return 0 end
+	if #player_GetHumans() > 50 then return 0 end
 
 	return D3bot.GetDesiredStartingZombies( GAMEMODE:GetWave() )
 end
