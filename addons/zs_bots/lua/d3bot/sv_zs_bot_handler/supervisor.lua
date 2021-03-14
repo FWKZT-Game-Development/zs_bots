@@ -84,13 +84,13 @@ end
 
 local function GetPropZombieCount()
 	if #player.GetAllActive() == 0 then return 0 end
-	if #player_GetHumans() > 50 then return 0 end
+	--if #player_GetHumans() > 40 then return 0 end
 
 	return D3bot.GetDesiredStartingZombies( GAMEMODE:GetWave() )
 end
 
 function D3bot.GetDesiredBotCount()
-	local allowedTotal = game_MaxPlayers() - 2 --50
+	local allowedTotal = 20 --50
 	local zombiesCount = D3bot.ZombiesCountAddition 
 	local human_team = team.GetPlayers( TEAM_HUMAN )
 	local wave = GAMEMODE:GetWave()
