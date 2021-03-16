@@ -9,9 +9,9 @@ HANDLER.BotTgtFixationDistMin = 250
 HANDLER.BotClasses = {
 	"Zombie", "Ghoul",
 	"Zombie", "Ghoul", "Stalker",
-	"Stalker", "Stalker", "Fast Zombie", "Fast Zombie", "Zombie",
-	"Zombine", "Zombine", "Zombine",
-	"Poison Zombie", "Poison Zombie", "Poison Zombie",
+	"Stalker", "Bloated Zombie", "Fast Zombie", "Fast Zombie", "Zombie",
+	"Zombine", "Zombine", "Bloated Zombie",
+	"Poison Zombie", "Bloated Zombie", "Poison Zombie",
 	"Lacerator", "Zombine", "Poison Zombie", "Stalker", "Stalker"
 }
 
