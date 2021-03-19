@@ -1,8 +1,11 @@
 D3bot.Handlers.Undead_Fallback = D3bot.Handlers.Undead_Fallback or {}
 local HANDLER = D3bot.Handlers.Undead_Fallback
 
+local math_Clamp = math.Clamp
 local math_random = math.random
 local math_pow = math.pow
+
+local CurTime = CurTime
 
 HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 250
@@ -155,7 +158,7 @@ function HANDLER.ThinkFunction(bot)
 	end
 
 	if mem.nextUpdatePath and mem.nextUpdatePath < CurTime() or not mem.nextUpdatePath then
-		mem.nextUpdatePath = CurTime() + 0.9 + math_random() * 0.2
+		mem.nextUpdatePath = CurTime() + math_Clamp( GAMEMODE:GetWave() * 0.5 , 0.9, 5) + math_random() * 0.2
 		bot:D3bot_UpdatePath( pathCostFunction, nil )
 	end
 end

@@ -1,4 +1,5 @@
-local meta = FindMetaTable("Player")
+local reg = debug.getregistry()
+local meta = reg.Player
 
 local math_random = math.random
 
