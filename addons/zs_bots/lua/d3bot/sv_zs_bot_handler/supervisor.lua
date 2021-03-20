@@ -18,6 +18,7 @@ local P_Team = M_Player.Team
 
 local math_Clamp = math.Clamp
 local math_max = math.max
+local math_min = math.min
 local math_ceil = math.ceil
 local table_insert = table.insert
 local table_sort = table.sort
@@ -27,7 +28,7 @@ local WaveZombieMultiplier = 0.10
 local WaveZStackAllowed = 5
 
 hook.Add( "OnPlayerChangedTeam", "D3Bot.OnPlayerChangedTeam.483", function(pl, oldteam, newteam)
-	local allowedTotal = game_MaxPlayers() - 2
+	local allowedTotal = 20 -- game_MaxPlayers() - 2
 	if D3bot and D3bot.IsEnabled then
 		if not pl:IsBot() then
 			if not GAMEMODE.RoundEnded then
@@ -90,7 +91,7 @@ local function GetPropZombieCount()
 end
 
 function D3bot.GetDesiredBotCount()
-	local allowedTotal = game_MaxPlayers() - 2 --50
+	local allowedTotal = 20 -- game_MaxPlayers() - 2 --50
 	local zombiesCount = D3bot.ZombiesCountAddition 
 	local human_team = team.GetPlayers( TEAM_HUMAN )
 	local wave = GAMEMODE:GetWave()
@@ -112,6 +113,10 @@ function D3bot.GetDesiredBotCount()
 			zombiesCount = zombiesCount + GetPropZombieCount()
 		end
 	end
+
+	if #player.GetAllActive() >= 50 then allowedTotal = 0 end
+
+	zombiesCount = math_min( zombiesCount, allowedTotal )
 	
 	return zombiesCount, allowedTotal
 end
@@ -124,7 +129,7 @@ hook.Add("PlayerInitialSpawn", D3bot.BotHooksId, function(pl)
 		GAMEMODE:PlayerInitialSpawn(pl)
 	elseif not pl:IsBot() and P_Team(pl) == TEAM_UNDEAD and GAMEMODE.StoredUndeadFrags[pl:UniqueID()] then
 		if D3bot and D3bot.IsEnabled then
-			local allowedTotal = game_MaxPlayers() - 2
+			local allowedTotal = 20 -- game_MaxPlayers() - 2
 			if not GAMEMODE.RoundEnded then
 				if wave > WaveZStackAllowed then
 					D3bot.ZombiesCountAddition = math_Clamp( D3bot.ZombiesCountAddition - 1, 0, allowedTotal )
