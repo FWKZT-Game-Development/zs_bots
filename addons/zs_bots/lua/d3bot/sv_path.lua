@@ -1,9 +1,6 @@
 local math_max = math.max
-
 local table_insert = table.insert
-
 local tonumber = tonumber
-
 local ents_FindInBox = ents.FindInBox
 
 function D3bot.GetBestMeshPathOrNil(startNode, endNode, pathCostFunction, heuristicCostFunction, abilities)

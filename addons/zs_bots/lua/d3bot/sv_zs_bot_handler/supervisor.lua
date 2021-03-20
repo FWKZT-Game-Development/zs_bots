@@ -10,6 +10,7 @@ hook.Add("PreRestartRound", D3bot.BotHooksId.."PreRestartRoundSupervisor", funct
 	end]]
 end)
 
+local player_GetAll = player.GetAll
 local player_GetCount = player.GetCount
 local player_GetHumans = player.GetHumans
 local game_MaxPlayers = game.MaxPlayers
@@ -28,7 +29,7 @@ local WaveZombieMultiplier = 0.10
 local WaveZStackAllowed = 5
 
 hook.Add( "OnPlayerChangedTeam", "D3Bot.OnPlayerChangedTeam.483", function(pl, oldteam, newteam)
-	local allowedTotal = 20 -- game_MaxPlayers() - 2
+	local allowedTotal = game_MaxPlayers() - 2
 	if D3bot and D3bot.IsEnabled then
 		if not pl:IsBot() then
 			if not GAMEMODE.RoundEnded then
@@ -91,8 +92,8 @@ local function GetPropZombieCount()
 end
 
 function D3bot.GetDesiredBotCount()
-	local allowedTotal = 20 -- game_MaxPlayers() - 2 --50
-	local zombiesCount = D3bot.ZombiesCountAddition 
+	local allowedTotal = game_MaxPlayers() - 2 --50
+	local zombiesCount = D3bot.ZombiesCountAddition
 	local human_team = team.GetPlayers( TEAM_HUMAN )
 	local wave = GAMEMODE:GetWave()
 	local max_wave = GAMEMODE:GetNumberOfWaves()
@@ -114,9 +115,11 @@ function D3bot.GetDesiredBotCount()
 		end
 	end
 
-	if #player.GetAllActive() >= 50 then allowedTotal = 0 end
+	if #player.GetAllActive() >= 50 then
+		zombiesCount = D3bot.ZombiesCountAddition
+	end
 
-	zombiesCount = math_min( zombiesCount, allowedTotal )
+	zombiesCount = math_Clamp( zombiesCount, 0, 20 )
 	
 	return zombiesCount, allowedTotal
 end
@@ -129,7 +132,7 @@ hook.Add("PlayerInitialSpawn", D3bot.BotHooksId, function(pl)
 		GAMEMODE:PlayerInitialSpawn(pl)
 	elseif not pl:IsBot() and P_Team(pl) == TEAM_UNDEAD and GAMEMODE.StoredUndeadFrags[pl:UniqueID()] then
 		if D3bot and D3bot.IsEnabled then
-			local allowedTotal = 20 -- game_MaxPlayers() - 2
+			local allowedTotal = game_MaxPlayers() - 2
 			if not GAMEMODE.RoundEnded then
 				if wave > WaveZStackAllowed then
 					D3bot.ZombiesCountAddition = math_Clamp( D3bot.ZombiesCountAddition - 1, 0, allowedTotal )
@@ -224,7 +227,7 @@ function D3bot.SupervisorThinkFunction()
 end
 
 function D3bot.DoNodeTrigger()
-	local players = D3bot.RemoveObsDeadTgts(player.GetAll())
+	local players = D3bot.RemoveObsDeadTgts(player_GetAll())
 	players = D3bot.From(players):Where(function(k, v) return P_Team(v) ~= TEAM_UNDEAD end).R
 	local ents = table.Add(players, D3bot.GetEntsOfClss(D3bot.NodeDamageEnts))
 	for i, ent in pairs(ents) do
