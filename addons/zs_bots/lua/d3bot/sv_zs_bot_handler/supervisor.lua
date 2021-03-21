@@ -52,14 +52,14 @@ function D3bot.GetDesiredStartingZombies(wave)
 	local humans = #player_GetHumans()
 	
 	if GAMEMODE.ObjectiveMap or GAMEMODE.ZombieEscape then
-		return math_Clamp( math_ceil( numplayers * 0.14, 1, maxplayers ) )
+		return math_Clamp( math_ceil( humans * 0.14, 1, maxplayers ) )
 	end
 	
 	--create our table and populate it with our percentages.
 	if table.IsEmpty( WaveModifiers ) then
 		for i = 1, GAMEMODE:GetNumberOfWaves() do
 			if i == 1 then
-				if numplayers == 1 then
+				if humans == 1 then
 					WaveModifiers[i] = 1
 				else
 					WaveModifiers[i] = WaveZombieMultiplier * GAMEMODE.WaveOneZombies
@@ -81,7 +81,7 @@ function D3bot.GetDesiredStartingZombies(wave)
 		return math_Clamp( math_ceil( WaveModifiers[wave] ), 1, maxplayers )
 	end]]
 	
-	return math_Clamp( math_ceil( numplayers * WaveModifiers[wave] ), 1, 32 )
+	return math_Clamp( math_ceil( humans * WaveModifiers[wave] ), 1, 32 )
 end
 
 local function GetPropZombieCount()
@@ -103,7 +103,7 @@ function D3bot.GetDesiredBotCount()
 		return 0, allowedTotal
 	end]]
 	
-	if #player.GetAllActive() < 10 and wave > 1 then return wave+zombiesCount, allowedTotal end
+	if #player_GetHumans() < 10 and wave > 1 then return wave+zombiesCount, allowedTotal end
 	
 	if wave <= 1 then
 		zombiesCount = zombiesCount + zvols
@@ -115,7 +115,7 @@ function D3bot.GetDesiredBotCount()
 		end
 	end
 
-	if #player.GetAllActive() >= 50 then
+	if #player_GetHumans() >= 50 then
 		zombiesCount = D3bot.ZombiesCountAddition
 	end
 
