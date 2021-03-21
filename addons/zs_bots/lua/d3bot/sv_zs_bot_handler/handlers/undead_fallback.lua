@@ -11,8 +11,8 @@ HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 250
 HANDLER.BotClasses = {
 	"Zombie", "Ghoul",
-	"Zombie", "Ghoul", "Stalker",
-	"Stalker", "Bloated Zombie", "Fast Zombie", "Fast Zombie", "Zombie",
+	"Zombie", "Ghoul", "Wraith",
+	"Wraith", "Bloated Zombie", "Fast Zombie", "Fast Zombie", "Zombie",
 	"Zombine", "Zombine", "Bloated Zombie",
 	"Poison Zombie", "Bloated Zombie", "Poison Zombie",
 	"Lacerator", "Zombine", "Poison Zombie", "Stalker", "Stalker"
