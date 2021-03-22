@@ -48,7 +48,6 @@ end )]]
 
 --Todo: Setup a system for objective maps to add bots over time at certain intervals.
 function D3bot.GetDesiredZombies()
-	if #player.GetAllActive() == 0 then return 0 end
 	local humans = #GAMEMODE.HumanPlayers
 	local percentage = math.Clamp( WaveZombieMultiplier * GAMEMODE:GetWave(), 0.1, 0.5 )
 	
@@ -59,7 +58,8 @@ function D3bot.GetDesiredBotCount()
 	local allowedTotal = game_MaxPlayers() - 2 --50
 
 	-- Prevent high pop from lagging the shit out of the server.
-	if GAMEMODE.ShouldPopBlock then
+	local infl = GAMEMODE:CalculateInfliction()
+	if GAMEMODE.ShouldPopBlock or infl >= 0.5 then
 		return 0, 0
 	end
 	
