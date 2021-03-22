@@ -2,6 +2,7 @@ local roundStartTime = CurTime()
 hook.Add("PreRestartRound", D3bot.BotHooksId.."PreRestartRoundSupervisor", function()
 	roundStartTime, D3bot.NodeZombiesCountAddition = CurTime(), nil 
 	D3bot.ZombiesCountAddition = 0
+	ShouldPopBlock = false
 	
 	--Clean up for various entities that get dropped by the bots.
 	--[[for _, ent in ipairs( ents.FindByClass('prop_weapon') ) do 
@@ -24,11 +25,11 @@ local math_ceil = math.ceil
 local table_insert = table.insert
 local table_sort = table.sort
 
-local WaveModifiers = {}
 local WaveZombieMultiplier = 0.10
 local WaveZStackAllowed = 5
+local ShouldPopBlock = false
 
-hook.Add( "OnPlayerChangedTeam", "D3Bot.OnPlayerChangedTeam.483", function(pl, oldteam, newteam)
+--[[hook.Add( "OnPlayerChangedTeam", "D3Bot.OnPlayerChangedTeam.483", function(pl, oldteam, newteam)
 	local allowedTotal = game_MaxPlayers() - 2
 	if D3bot and D3bot.IsEnabled then
 		if not pl:IsBot() then
@@ -43,85 +44,41 @@ hook.Add( "OnPlayerChangedTeam", "D3Bot.OnPlayerChangedTeam.483", function(pl, o
 			end
 		end
 	end
-end )
+end )]]
 
 --Todo: Setup a system for objective maps to add bots over time at certain intervals.
-function D3bot.GetDesiredStartingZombies(wave)
-	local numplayers = #player.GetAllActive()
-	local maxplayers = game_MaxPlayers() - #player_GetHumans()
-	local humans = #player_GetHumans()
-	
-	if GAMEMODE.ObjectiveMap or GAMEMODE.ZombieEscape then
-		return math_Clamp( math_ceil( humans * 0.14, 1, maxplayers ) )
-	end
-	
-	--create our table and populate it with our percentages.
-	if table.IsEmpty( WaveModifiers ) then
-		for i = 1, GAMEMODE:GetNumberOfWaves() do
-			if i == 1 then
-				if humans == 1 then
-					WaveModifiers[i] = 1
-				else
-					WaveModifiers[i] = WaveZombieMultiplier * GAMEMODE.WaveOneZombies
-				end
-			else
-				--if humans < 10 then
-					--WaveModifiers[i] = i + 1
-				--else
-					WaveModifiers[i] = math_Clamp( WaveZombieMultiplier * i, 0, 0.5 )
-				--end
-			end
-		end
-	end
-	
-	--[[if humans < 10 then
-		if GAMEMODE:GetWave() == 6 then
-			return math_Clamp( math_ceil( WaveModifiers[wave] + 3 ), 1, maxplayers )
-		end
-		return math_Clamp( math_ceil( WaveModifiers[wave] ), 1, maxplayers )
-	end]]
-	
-	return math_Clamp( math_ceil( humans * WaveModifiers[wave] ), 1, 32 )
-end
-
-local function GetPropZombieCount()
+function D3bot.GetDesiredZombies()
 	if #player.GetAllActive() == 0 then return 0 end
-	--if #player_GetHumans() > 40 then return 0 end
-
-	return D3bot.GetDesiredStartingZombies( GAMEMODE:GetWave() )
+	local humans = #GAMEMODE.HumanPlayers
+	local percentage = math.Clamp( WaveZombieMultiplier * GAMEMODE:GetWave(), 0.1, 0.5 )
+	
+	return math_ceil( humans * percentage )
 end
 
 function D3bot.GetDesiredBotCount()
 	local allowedTotal = game_MaxPlayers() - 2 --50
-	local zombiesCount = D3bot.ZombiesCountAddition
-	local human_team = team.GetPlayers( TEAM_HUMAN )
-	local wave = GAMEMODE:GetWave()
-	local max_wave = GAMEMODE:GetNumberOfWaves()
-	local zvols = #GAMEMODE.ZombieVolunteers
+
+	-- Prevent high pop from lagging the shit out of the server.
+	if GAMEMODE.ShouldPopBlock then
+		return 0, 0
+	end
 	
-	--[[if #player.GetAllActive() >= 40 then
-		return 0, allowedTotal
-	end]]
-	
-	if #player_GetHumans() < 10 and wave > 1 then return wave+zombiesCount, allowedTotal end
-	
-	if wave <= 1 then
-		zombiesCount = zombiesCount + zvols
+	-- Balance out low pop zombies.
+	if #GAMEMODE.HumanPlayers < 10 and GAMEMODE:GetWave() > 1 then 
+		return #GAMEMODE.ZombieVolunteers, allowedTotal
+	end
+
+	if GAMEMODE:GetWave() <= 1 then
+		return #GAMEMODE.ZombieVolunteers, allowedTotal
 	else
 		if GAMEMODE.ObjectiveMap or GAMEMODE.ZombieEscape then
-			zombiesCount = zvols + zombiesCount
+			return #GAMEMODE.ZombieVolunteers, allowedTotal
 		else
-			zombiesCount = zombiesCount + GetPropZombieCount()
+			return D3bot.GetDesiredZombies()+D3bot.ZombiesCountAddition, allowedTotal
 		end
 	end
-
-	if #player_GetHumans() >= 50 then
-		zombiesCount = D3bot.ZombiesCountAddition
-	end
-
-	zombiesCount = math_Clamp( zombiesCount, 0, 20 )
 	
-	return zombiesCount, allowedTotal
+	return 0, allowedTotal
 end
 
 local spawnAsTeam
@@ -130,7 +87,7 @@ hook.Add("PlayerInitialSpawn", D3bot.BotHooksId, function(pl)
 	if pl:IsBot() and spawnAsTeam == TEAM_UNDEAD then
 		GAMEMODE.PreviouslyDied[pl:UniqueID()] = CurTime()
 		GAMEMODE:PlayerInitialSpawn(pl)
-	elseif not pl:IsBot() and P_Team(pl) == TEAM_UNDEAD and GAMEMODE.StoredUndeadFrags[pl:UniqueID()] then
+	--[[elseif not pl:IsBot() and P_Team(pl) == TEAM_UNDEAD and GAMEMODE.StoredUndeadFrags[pl:UniqueID()] then
 		if D3bot and D3bot.IsEnabled then
 			local allowedTotal = game_MaxPlayers() - 2
 			if not GAMEMODE.RoundEnded then
@@ -138,12 +95,13 @@ hook.Add("PlayerInitialSpawn", D3bot.BotHooksId, function(pl)
 					D3bot.ZombiesCountAddition = math_Clamp( D3bot.ZombiesCountAddition - 1, 0, allowedTotal )
 				end
 			end
-		end
+		end]]
 	end
 end)
 
 function D3bot.MaintainBotRoles()
 	if #player_GetHumans() == 0 then return end
+	print(D3bot.GetDesiredBotCount())
 
 	local desiredCountByTeam = {}
 	local allowedTotal
