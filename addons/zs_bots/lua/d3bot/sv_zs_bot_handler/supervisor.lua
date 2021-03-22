@@ -101,7 +101,6 @@ end)
 
 function D3bot.MaintainBotRoles()
 	if #player_GetHumans() == 0 then return end
-	print(D3bot.GetDesiredBotCount())
 
 	local desiredCountByTeam = {}
 	local allowedTotal
