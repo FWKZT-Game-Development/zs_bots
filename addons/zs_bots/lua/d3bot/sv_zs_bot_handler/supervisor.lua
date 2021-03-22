@@ -58,8 +58,8 @@ function D3bot.GetDesiredBotCount()
 	local allowedTotal = game_MaxPlayers() - 2 --50
 
 	-- Prevent high pop from lagging the shit out of the server.
-	local infl = GAMEMODE:CalculateInfliction()
-	if GAMEMODE.ShouldPopBlock or infl >= 0.5 then
+	--local infl = GAMEMODE:CalculateInfliction()
+	if GAMEMODE.ShouldPopBlock --[[or infl >= 0.5]] then
 		return 0, 0
 	end
 	
