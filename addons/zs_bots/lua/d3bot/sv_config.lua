@@ -11,7 +11,7 @@ D3bot.NodeBlocking = {
 	classes = {func_breakable = true, prop_physics = true, prop_dynamic = true, prop_door_rotating = true, func_door = true, func_physbox = true, func_physbox_multiplayer = true, func_movelinear = true}
 }
 
-D3bot.NodeDamageEnts = {"prop_zapper*", "prop_arsenalcrate", "prop_resupply", "prop_remantler", "prop_*turret"}
+D3bot.NodeDamageEnts = {"prop_zapper*", "prop_turret*"}
 
 D3bot.ValveNav = true							-- Enable the auto-genernated nav-mesh ( Created with "nav_generate" )
 D3bot.ValveNavOverride = false					-- Enable overriding the manually created nav-mesh with the auto-generated
