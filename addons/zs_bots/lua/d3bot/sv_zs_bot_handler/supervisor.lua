@@ -65,14 +65,14 @@ function D3bot.GetDesiredBotCount()
 	
 	-- Balance out low pop zombies.
 	if #GAMEMODE.HumanPlayers < 10 and GAMEMODE:GetWave() > 1 then 
-		return #GAMEMODE.ZombieVolunteers, allowedTotal
+		return #GAMEMODE.ZombieVolunteers+D3bot.ZombiesCountAddition, allowedTotal
 	end
 
 	if GAMEMODE:GetWave() <= 1 then
 		return #GAMEMODE.ZombieVolunteers, allowedTotal
 	else
 		if GAMEMODE.ObjectiveMap or GAMEMODE.ZombieEscape then
-			return #GAMEMODE.ZombieVolunteers, allowedTotal
+			return #GAMEMODE.ZombieVolunteers+D3bot.ZombiesCountAddition, allowedTotal
 		else
 			return D3bot.GetDesiredZombies()+D3bot.ZombiesCountAddition, allowedTotal
 		end
