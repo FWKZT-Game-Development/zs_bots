@@ -69,7 +69,7 @@ function D3bot.GetDesiredBotCount()
 	end
 
 	if GAMEMODE:GetWave() <= 1 then
-		return #GAMEMODE.ZombieVolunteers, allowedTotal
+		return #GAMEMODE.ZombieVolunteers+D3bot.ZombiesCountAddition, allowedTotal
 	else
 		if GAMEMODE.ObjectiveMap or GAMEMODE.ZombieEscape then
 			return #GAMEMODE.ZombieVolunteers+D3bot.ZombiesCountAddition, allowedTotal
