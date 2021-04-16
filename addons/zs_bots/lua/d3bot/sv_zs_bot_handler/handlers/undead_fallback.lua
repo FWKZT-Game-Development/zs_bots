@@ -14,8 +14,8 @@ HANDLER.BotClasses = {
 	"Zombie", "Ghoul", "Wraith",
 	"Wraith", "Bloated Zombie", "Fast Zombie", "Fast Zombie", "Zombie",
 	"Zombine", "Zombine", "Bloated Zombie",
-	"Poison Zombie", "Bloated Zombie", "Poison Zombie",
-	"Lacerator", "Zombine", "Poison Zombie", "Stalker", "Stalker"
+	"Poison Zombie", "Skeletal Shambler", "Skeletal Shambler",
+	"Lacerator", "Zombine", "Poison Zombie", "Skeletal Shambler", "Skeletal Shambler"
 }
 
 HANDLER.HvH_BotClasses = {
