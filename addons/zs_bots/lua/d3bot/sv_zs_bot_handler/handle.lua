@@ -28,7 +28,9 @@ hook.Add("StartCommand", D3bot.BotHooksId, function(pl, cmd)
 	if D3bot.IsEnabled and pl.D3bot_Mem then
 		
 		local handler = findHandler(pl:GetZombieClass(), pl:Team())
-		handler.UpdateBotCmdFunction(pl, cmd)
+		if handler then
+			handler.UpdateBotCmdFunction(pl, cmd)
+		end
 		
 	end
 end)
