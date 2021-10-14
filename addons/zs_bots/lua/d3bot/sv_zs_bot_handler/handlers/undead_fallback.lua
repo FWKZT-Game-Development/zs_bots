@@ -10,12 +10,24 @@ local CurTime = CurTime
 HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 250
 HANDLER.BotClasses = {
-	"Zombie", "Ghoul",
-	"Zombie", "Ghoul", "Wraith",
-	"Wraith", "Bloated Zombie", "Fast Zombie", "Fast Zombie", "Stalker",
-	"Zombine", "Zombine", "Bloated Zombie",
-	"Poison Zombie", "Zombine", "Zombine",
-	"Zombine", "Zombine", "Poison Zombie", "Zombine", "Zombine"
+	[1] = {
+		"Zombie", "Ghoul"
+	},
+	[2] = {
+		"Stalker", "Wraith", "Zombie", "Ghoul"
+	},
+	[3] = {
+		"Fast Zombie", "Wraith", "Zombie", "Bloated Zombie"
+	},
+	[4] = {
+		"Fast Zombie", "Poison Zombie", "Poison Zombie", "Bloated Zombie"
+	},
+	[5] = {
+		"Zombine", "Lacerator", "Poison Zombie"
+	},
+	[6] = {
+		"Zombine", "Poison Zombie", "Lacerator"
+	}
 }
 
 HANDLER.HvH_BotClasses = {
@@ -179,7 +191,7 @@ end
 
 function HANDLER.OnDeathFunction(bot)
 	--bot:Say("rip me!")
-	bot:D3bot_RerollClass(HANDLER.BotClasses) -- TODO: Situation depending reroll of the zombie class
+	bot:D3bot_RerollClass( HANDLER.BotClasses[ GAMEMODE:GetWave() ] ) -- TODO: Situation depending reroll of the zombie class
 	HANDLER.RerollTarget(bot)
 end
 
