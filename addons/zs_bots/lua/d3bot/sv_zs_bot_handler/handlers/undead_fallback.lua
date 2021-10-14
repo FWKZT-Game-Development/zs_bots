@@ -26,7 +26,7 @@ HANDLER.BotClasses = {
 		"Zombine", "Lacerator", "Poison Zombie"
 	},
 	[6] = {
-		"Zombine", "Poison Zombie", "Lacerator"
+		"Zombine", "Zombine", "Zombine", "Poison Zombie", "Lacerator"
 	}
 }
 
@@ -39,8 +39,9 @@ HANDLER.HvH_BotClasses = {
 }
 
 HANDLER.RandomSecondaryAttack = {
-	["Ghoul"] = {MinTime = 5, MaxTime = 7},
-	["Poison Zombie"] = {MinTime = 5, MaxTime = 40} -- Slows them too much
+	["Zombine"] = {MinTime = 5, MaxTime = 30}, 
+	["Ghoul"] = {MinTime = 5, MaxTime = 10},
+	["Poison Zombie"] = {MinTime = 5, MaxTime = 30}
 }
 
 HANDLER.Fallback = true
