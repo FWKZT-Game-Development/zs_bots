@@ -46,6 +46,10 @@ hook.Add("PostPlayerRedeemed","D3Bot.PostPlayerRedeemed.Supervisor", function(pl
 	end
 end)
 
+hook.Add("PostEndRound", "D3Bot.ResetHumansDead.Supervisor", function(winnerteam)
+	humans_dead = 0
+end)
+
 function D3bot.GetDesiredBotCount()
 	local allowedTotal = game_MaxPlayers() - 2 --50
 
