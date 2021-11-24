@@ -36,12 +36,12 @@ end
 
 local humans_dead = 0
 hook.Add("DoPlayerDeath","D3Bot.AddHumansDied.Supervisor", function(pl, attacker, dmginfo)
-	if pl:Team() == TEAM_HUMAN and not pl:IsBot() and GAMEMODE:GetWave() > 0 then
+	if pl:Team() == TEAM_HUMAN and not pl:IsBot() and GAMEMODE:GetWave() > 2 then
 		humans_dead = humans_dead + 1
 	end
 end)
 hook.Add("PostPlayerRedeemed","D3Bot.PostPlayerRedeemed.Supervisor", function(pl, silent, noequip)
-	if GAMEMODE:GetWave() > 0 then
+	if GAMEMODE:GetWave() > 2 then
 		humans_dead = humans_dead - 1
 	end
 end)
@@ -61,7 +61,10 @@ function D3bot.GetDesiredBotCount()
 	
 	-- Balance out low pop zombies.
 	if #GAMEMODE.HumanPlayers < 10 and GAMEMODE:GetWave() > 1 then 
-		return #GAMEMODE.ZombieVolunteers+D3bot.ZombiesCountAddition+humans_dead, allowedTotal
+		if GAMEMODE:GetWave() == GAMEMODE:GetNumberOfWaves() then
+			return #GAMEMODE.HumanPlayers+D3bot.ZombiesCountAddition+humans_dead, allowedTotal
+		end
+		return math.max( GAMEMODE:GetWave()+D3bot.ZombiesCountAddition+humans_dead, #GAMEMODE.ZombieVolunteers+D3bot.ZombiesCountAddition+humans_dead ), allowedTotal
 	end
 
 	if GAMEMODE:GetWave() <= 1 then
