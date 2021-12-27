@@ -29,9 +29,8 @@ return function(lib)
 				ent:Spawn()
 			end
 		end
-		if GAMEMODE.SetupProps then gamemode.Call("SetupProps") end
 	end
-	hook.Add("InitPostEntity", "D3Bots.ReloadExtraProps", function() lib.ReloadExtraProps() end)
+	hook.Add("SetupProps", "D3Bots.ReloadExtraProps", function() lib.ReloadExtraProps() end)
 	
 	function lib.SaveExtraProps()
 		file.Write(lib.ExtraPropsPath, from(lib.ExtraPropByEnt):Sel(function(k, v)
