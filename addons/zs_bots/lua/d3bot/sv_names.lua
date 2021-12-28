@@ -21,7 +21,7 @@ function D3bot.RegisterRandomName()
 				D3bot.Names[#D3bot.Names+1] = tab['response']['players'][1].personaname
 			else
 				print("error, invalid name, retrying!")
-				D3bot.GetNameFromSteamID()
+				D3bot.RegisterRandomName()
 			end
 		end,
 		function( message )
