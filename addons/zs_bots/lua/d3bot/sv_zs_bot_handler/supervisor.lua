@@ -88,7 +88,7 @@ function D3bot.MaintainBotRoles()
 	if #player_GetHumans() == 0 or GAMEMODE.RoundEnded then return end
 
 	if team.NumPlayers(TEAM_UNDEAD) < D3bot.GetDesiredBotCount() then
-		local bot = player.CreateNextBot(D3bot.GetUsername())
+		local bot = player.CreateNextBot(D3bot.GetUsername() or "BOT")
 		spawnAsTeam = TEAM_UNDEAD
 		if IsValid(bot) then
 			bot:D3bot_InitializeOrReset()
