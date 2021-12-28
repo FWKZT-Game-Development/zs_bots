@@ -19,7 +19,6 @@ function D3bot.RegisterRandomName()
 			local tab = util.JSONToTable(body)
 			if #tab['response']['players'] > 0 then
 				D3bot.Names[#D3bot.Names+1] = tab['response']['players'][1].personaname
-				PrintTable(D3bot.Names)
 			else
 				print("error, invalid name, retrying!")
 				D3bot.GetNameFromSteamID()
@@ -35,8 +34,8 @@ function D3bot.RegisterRandomName()
 end
 
 function D3bot.GenerateFakeNames()
-	D3bot.Names = {}
-	for i=0, 100 do
+	D3bot.Names = { [1] = "Bot" }
+	for i=1, 100 do
 		D3bot.RegisterRandomName()
 	end
 end
