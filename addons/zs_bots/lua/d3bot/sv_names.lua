@@ -3,7 +3,9 @@ D3bot.Names = {}
 local function getUsernames()
 	local usernames = {}
 	for k, v in pairs(player.GetAll()) do
-		usernames[v:Nick()] = v
+		if v and v:IsValid() and v:IsPlayer() then
+			usernames[v:Nick()] = v
+		end
 	end
 	return usernames
 end
