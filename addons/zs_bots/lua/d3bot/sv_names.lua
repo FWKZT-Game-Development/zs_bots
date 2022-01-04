@@ -1,5 +1,9 @@
 D3bot.Names = {}
 
+if D3bot.BotNameFile then
+	include("names/"..D3bot.BotNameFile..".lua")
+end
+
 local function getUsernames()
 	local usernames = {}
 	for k, v in pairs(player.GetAll()) do
