@@ -45,7 +45,9 @@ function D3bot.GenerateFakeNames()
 		D3bot.RegisterRandomName()
 	end
 end
-D3bot.GenerateFakeNames()
+hook.Add("InitPostEntity","D3Bot.Init.RNGNames", function()
+	D3bot.GenerateFakeNames()
+end)
 
 local names = {}
 function D3bot.GetUsername()
