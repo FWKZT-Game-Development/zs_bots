@@ -41,12 +41,14 @@ end
 
 function D3bot.GenerateFakeNames()
 	D3bot.Names = { [1] = "Bot" }
-	for i=1, 100 do
+	for i=1, 50 do
 		D3bot.RegisterRandomName()
 	end
 end
-hook.Add("InitPostEntity","D3Bot.Init.RNGNames", function()
-	D3bot.GenerateFakeNames()
+hook.Add("PlayerConnect", "D3Bot.Init.RNGNames", function()
+    D3bot.GenerateFakeNames()
+    
+    hook.Remove("PlayerConnect", "D3Bot.Init.RNGNames")
 end)
 
 local names = {}
