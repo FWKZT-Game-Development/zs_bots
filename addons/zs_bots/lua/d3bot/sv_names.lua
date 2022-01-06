@@ -1,8 +1,8 @@
-D3bot.Names = {}
+D3bot.Names = { [1] = "Bot" }
 
-if D3bot.BotNameFile then
+--[[if D3bot.BotNameFile then
 	include("names/"..D3bot.BotNameFile..".lua")
-end
+end]]
 
 local function getUsernames()
 	local usernames = {}
@@ -40,7 +40,6 @@ function D3bot.RegisterRandomName()
 end
 
 function D3bot.GenerateFakeNames()
-	D3bot.Names = { [1] = "Bot" }
 	for i=1, 50 do
 		D3bot.RegisterRandomName()
 	end
