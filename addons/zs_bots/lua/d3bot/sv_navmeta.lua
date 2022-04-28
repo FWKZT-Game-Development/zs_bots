@@ -30,6 +30,7 @@ local NavAreaMetaData = NavAreaMetaData or {}
 local NavAreaLinks = NavAreaLinks or {}
 
 function CNavArea:GetMetaData()
+	if not self:IsValid() then return { Params = {} } end
 	NavAreaMetaData[ self:GetID() ] = NavAreaMetaData[ self:GetID() ] or {}
 	return NavAreaMetaData[ self:GetID() ]
 end
