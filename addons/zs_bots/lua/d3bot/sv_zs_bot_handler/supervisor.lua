@@ -24,12 +24,13 @@ local math_min = math.min
 local math_ceil = math.ceil
 local table_insert = table.insert
 local table_sort = table.sort
+
 local WaveZombieMultiplier = 0.10
 
 --Todo: Setup a system for objective maps to add bots over time at certain intervals.
 function D3bot.GetDesiredZombies()
 	local humans = #GAMEMODE.HumanPlayers
-	local percentage = math.Clamp( WaveZombieMultiplier * GAMEMODE:GetWave(), 0.1, 0.5 )
+	local percentage = math_Clamp( WaveZombieMultiplier * GAMEMODE:GetWave(), 0.1, 0.5 )
 	
 	return math_ceil( humans * percentage )
 end
@@ -50,6 +51,7 @@ hook.Add("PostEndRound", "D3Bot.ResetHumansDead.Supervisor", function(winnerteam
 	humans_dead = 0
 end)
 
+local finalWaveAmount = 0
 function D3bot.GetDesiredBotCount()
 	local allowedTotal = game_MaxPlayers() - 2 --50
 
@@ -59,19 +61,24 @@ function D3bot.GetDesiredBotCount()
 		return 0, 0
 	end
 	
+	local humans = #GAMEMODE.HumanPlayers
+	local volunteers = #GAMEMODE.ZombieVolunteers
+	local botmod = D3bot.ZombiesCountAddition
+
 	-- Balance out low pop zombies.
-	if #GAMEMODE.HumanPlayers < 10 and GAMEMODE:GetWave() > 1 then 
+	if humans < 10 and GAMEMODE:GetWave() > 1 then 
 		if GAMEMODE:GetWave() == GAMEMODE:GetNumberOfWaves() then
-			return #GAMEMODE.HumanPlayers+D3bot.ZombiesCountAddition+humans_dead, allowedTotal
+			return math_max(finalWaveAmount, humans + humans_dead) + botmod, allowedTotal
 		end
-		return math.max( GAMEMODE:GetWave()+D3bot.ZombiesCountAddition+humans_dead, #GAMEMODE.ZombieVolunteers+D3bot.ZombiesCountAddition+humans_dead ), allowedTotal
+		return math_max( GAMEMODE:GetWave() + botmod + humans_dead, volunteers + botmod + humans_dead ), allowedTotal
 	end
 
 	if GAMEMODE:GetWave() <= 1 then
-		return #GAMEMODE.ZombieVolunteers+D3bot.ZombiesCountAddition+humans_dead, allowedTotal
+		finalWaveAmount = volunteers + humans_dead
+		return finalWaveAmount + botmod, allowedTotal
 	end
 
-	return D3bot.GetDesiredZombies()+D3bot.ZombiesCountAddition+humans_dead, allowedTotal
+	return D3bot.GetDesiredZombies() + botmod + humans_dead, allowedTotal
 end
 
 local spawnAsTeam
@@ -92,7 +99,7 @@ function D3bot.MaintainBotRoles()
 		spawnAsTeam = TEAM_UNDEAD
 		if IsValid(bot) then
 			bot:D3bot_InitializeOrReset()
-			table.insert(D3bot.BotZombies,bot)
+			table_insert(D3bot.BotZombies,bot)
 		end
 		if GAMEMODE:GetWave() <= 1 then
 			bot:Kill()
