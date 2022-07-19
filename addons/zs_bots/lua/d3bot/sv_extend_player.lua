@@ -297,7 +297,7 @@ function meta:D3bot_CanSeeTarget( fraction, target )
 	tr.start = self:D3bot_GetViewCenter()
 	tr.endpos = attackPos
 	tr.filter = player.GetAll()]]
-	return attackPos and not self:VisibleVec(attackPos)
+	return attackPos and self:VisibleVec(attackPos) -- util.TraceHull( tr ).Hit
 end
 
 function meta:D3bot_UpdateAngsOffshoot( angOffshoot )
