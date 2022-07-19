@@ -200,7 +200,7 @@ end
 -- Custom functions and settings --
 -----------------------------------
 
-local potTargetEntClasses = {"prop_*turret", "prop_arsenalcrate", "prop_manhack*"}
+local potTargetEntClasses = {"prop_obj_sigil"}  --"prop_*turret", "prop_arsenalcrate", "prop_manhack*"
 local potEntTargets = nil
 function HANDLER.CanBeTgt(bot, target)
 	if not target or not IsValid(target) then return end
