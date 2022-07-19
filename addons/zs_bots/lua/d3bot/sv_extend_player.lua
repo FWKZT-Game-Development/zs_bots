@@ -293,11 +293,11 @@ function meta:D3bot_CanSeeTarget( fraction, target )
 	if not attackPos then return false end
 	local mem = self.D3bot_Mem
 	if mem and mem.TgtNodeOrNil and mem.NodeOrNil ~= mem.TgtNodeOrNil and mem.TgtNodeOrNil:GetMetaData().Params.See == "Disabled" then return false end
-	local tr = D3bot.BotSeeTr
+	--[[local tr = D3bot.BotSeeTr
 	tr.start = self:D3bot_GetViewCenter()
 	tr.endpos = attackPos
-	tr.filter = player.GetAll()
-	return attackPos and not util.TraceHull( tr ).Hit
+	tr.filter = player.GetAll()]]
+	return attackPos and not self:VisibleVec(attackPos)
 end
 
 function meta:D3bot_UpdateAngsOffshoot( angOffshoot )
