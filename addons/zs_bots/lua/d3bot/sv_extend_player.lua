@@ -106,6 +106,8 @@ function meta:D3bot_RerollClass(classes)
 	if not GAMEMODE:GetWaveActive() then return end
 	if self:GetZombieClassTable().Name == "Zombie Torso" then return end
 	if GAMEMODE.ZombieEscape then return end
+	if not classes then return end
+	
 	local zombieClasses = {}
 	for _, class in ipairs(classes) do
 		local zombieClass = GAMEMODE.ZombieClasses[class]

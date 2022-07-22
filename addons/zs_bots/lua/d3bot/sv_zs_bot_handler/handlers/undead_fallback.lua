@@ -27,6 +27,15 @@ HANDLER.BotClasses = {
 	},
 	[6] = {
 		"Zombine", "Zombine", "Zombine", "Poison Zombie", "Lacerator"
+	},
+	[7] = {
+		"Zombine", "Zombine", "Zombine", "Poison Zombie", "Lacerator"
+	},
+	[8] = {
+		"Zombine", "Zombine", "Zombine", "Poison Zombie", "Lacerator"
+	},
+	[9] = {
+		"Zombine", "Zombine", "Zombine", "Poison Zombie", "Lacerator"
 	}
 }
 
