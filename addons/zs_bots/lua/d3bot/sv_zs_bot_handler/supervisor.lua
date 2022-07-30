@@ -70,9 +70,9 @@ function D3bot.GetDesiredBotCount()
 		-- Balance out low pop zombies.
 		if humans <= 10 then 
 			if GAMEMODE:GetWave() == GAMEMODE:GetNumberOfWaves() then
-				return math_max( GAMEMODE:GetWave()+humans, humans + humans_dead) + botmod, allowedTotal
+				return math_max( GAMEMODE:GetWave(), humans + humans_dead) + botmod, allowedTotal
 			else
-				return math_max( botmod + humans_dead, volunteers + botmod + humans_dead ), allowedTotal
+				return math_max( botmod + humans_dead, volunteers + botmod + humans_dead, GAMEMODE:GetWave() ), allowedTotal
 			end
 		else
 			if GAMEMODE:GetWave() == GAMEMODE:GetNumberOfWaves() then
