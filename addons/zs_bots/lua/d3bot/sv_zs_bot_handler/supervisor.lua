@@ -51,7 +51,6 @@ hook.Add("PostEndRound", "D3Bot.ResetHumansDead.Supervisor", function(winnerteam
 	humans_dead = 0
 end)
 
-local finalWaveAmount = 0
 function D3bot.GetDesiredBotCount()
 	local allowedTotal = game_MaxPlayers() - 2 --50
 
@@ -65,17 +64,23 @@ function D3bot.GetDesiredBotCount()
 	local volunteers = #GAMEMODE.ZombieVolunteers
 	local botmod = D3bot.ZombiesCountAddition
 
-	-- Balance out low pop zombies.
-	if humans < 10 and GAMEMODE:GetWave() > 1 then 
-		if GAMEMODE:GetWave() == GAMEMODE:GetNumberOfWaves() then
-			return math_max(finalWaveAmount, humans + humans_dead) + botmod, allowedTotal
-		end
-		return math_max( GAMEMODE:GetWave() + botmod + humans_dead, volunteers + botmod + humans_dead ), allowedTotal
-	end
-
 	if GAMEMODE:GetWave() <= 1 then
-		finalWaveAmount = volunteers + humans_dead
-		return finalWaveAmount + botmod, allowedTotal
+		return volunteers + humans_dead + botmod, allowedTotal
+	else
+		-- Balance out low pop zombies.
+		if humans <= 10 then 
+			if GAMEMODE:GetWave() == GAMEMODE:GetNumberOfWaves() then
+				return math_max( GAMEMODE:GetWave()+humans, humans + humans_dead) + botmod, allowedTotal
+			else
+				return math_max( botmod + humans_dead, volunteers + botmod + humans_dead ), allowedTotal
+			end
+		else
+			if GAMEMODE:GetWave() == GAMEMODE:GetNumberOfWaves() then
+				return math_max(humans, humans + humans_dead) + botmod, allowedTotal
+			else
+				return math_max( botmod + humans_dead, volunteers + botmod + humans_dead ), allowedTotal
+			end
+		end
 	end
 
 	return D3bot.GetDesiredZombies() + botmod + humans_dead, allowedTotal
