@@ -7,6 +7,14 @@ local math_deg = math.deg
 
 local table_insert = table.insert
 
+local Vector = Vector
+local Angle = Angle
+local Lerp = Lerp
+
+local team_GetPlayers = team.GetPlayers
+
+local TEAM_HUMAN = TEAM_HUMAN
+
 function D3bot.GetTrajectories2DParams(g, initVel, distZ, distRad)
 	local trajectories = {}
 	local radix = initVel^4 - g*(g*distRad^2 + 2*distZ*initVel^2)
@@ -80,7 +88,7 @@ end
 
 function D3bot.GetBots() -- Return all players controlled by this script (Can also be real players)
 	local bots = {}
-	for _, v in pairs(player.GetAll()) do
+	for _, v in pairs(team_GetPlayers(TEAM_HUMAN)) do
 		if v.D3bot_Mem then
 			table_insert(bots, v)
 		end
