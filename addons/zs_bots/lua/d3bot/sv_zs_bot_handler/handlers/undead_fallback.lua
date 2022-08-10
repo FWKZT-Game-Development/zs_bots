@@ -213,7 +213,7 @@ local potTargetEntClasses = {}  --"prop_*turret", "prop_arsenalcrate", "prop_man
 local potEntTargets = nil
 function HANDLER.CanBeTgt(bot, target)
 	if not target or not IsValid(target) then return end
-	if IsValid(target) and target:IsPlayer() and target ~= bot and target:Team() ~= TEAM_UNDEAD and target:GetObserverMode() == OBS_MODE_NONE and not target:IsFlagSet(FL_NOTARGET) and target:Alive() then return true end
+	if not target:IsValidLivingHuman() then return true end
 	if potEntTargets and table.HasValue(potEntTargets, target) then return true end
 end
 
