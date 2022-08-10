@@ -88,7 +88,7 @@ end
 
 function D3bot.GetBots() -- Return all players controlled by this script (Can also be real players)
 	local bots = {}
-	for _, v in pairs(team_GetPlayers(TEAM_HUMAN)) do
+	for _, v in pairs(team_GetPlayers(TEAM_UNDEAD)) do
 		if v.D3bot_Mem then
 			table_insert(bots, v)
 		end
