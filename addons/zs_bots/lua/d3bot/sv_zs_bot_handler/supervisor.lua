@@ -25,12 +25,12 @@ local math_ceil = math.ceil
 local table_insert = table.insert
 local table_sort = table.sort
 
-local WaveZombieMultiplier = 0.10
+local WaveZombieMultiplier = 0.13
 
 --Todo: Setup a system for objective maps to add bots over time at certain intervals.
 function D3bot.GetDesiredZombies()
 	local humans = #GAMEMODE.HumanPlayers
-	local percentage = math_Clamp( WaveZombieMultiplier * GAMEMODE:GetWave(), 0.1, 0.5 )
+	local percentage = math_Clamp( WaveZombieMultiplier * GAMEMODE:GetWave(), 0.1, 1 ) + 0.05
 	
 	return math_ceil( humans * percentage )
 end
@@ -41,6 +41,7 @@ hook.Add("DoPlayerDeath","D3Bot.AddHumansDied.Supervisor", function(pl, attacker
 		humans_dead = humans_dead + 1
 	end
 end)
+
 hook.Add("PostPlayerRedeemed","D3Bot.PostPlayerRedeemed.Supervisor", function(pl, silent, noequip)
 	if GAMEMODE:GetWave() > 2 then
 		humans_dead = humans_dead - 1
@@ -57,9 +58,11 @@ function D3bot.GetDesiredBotCount()
 	-- Prevent high pop from lagging the shit out of the server.
 	--local infl = GAMEMODE:CalculateInfliction()
 	if GAMEMODE.ShouldPopBlock --[[or infl >= 0.5]] then
-		return 0, 0
+		--return 0, 0
 	end
 	
+	local wave = GAMEMODE:GetWave()
+
 	local humans = #GAMEMODE.HumanPlayers
 	local volunteers = #GAMEMODE.ZombieVolunteers
 	local botmod = D3bot.ZombiesCountAddition
