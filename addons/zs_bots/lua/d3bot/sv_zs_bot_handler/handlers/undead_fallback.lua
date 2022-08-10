@@ -4,6 +4,7 @@ local HANDLER = D3bot.Handlers.Undead_Fallback
 local math_Clamp = math.Clamp
 local math_random = math.random
 local math_pow = math.pow
+local TEAM_UNDEAD = TEAM_UNDEAD
 
 local CurTime = CurTime
 
