@@ -59,7 +59,9 @@ hook.Add("Think", D3bot.BotHooksId.."🤔", function()
 		end
 		
 		local handler = findHandler(bot:GetZombieClass(), bot:Team())
-		handler.ThinkFunction(bot)
+		if handler then
+			handler.ThinkFunction(bot)
+		end
 	end
 	
 	-- Supervisor think function
@@ -97,7 +99,9 @@ end)
 hook.Add("PlayerDeath", D3bot.BotHooksId.."PlayerDeath", function(pl)
 	if D3bot.IsEnabled and pl.D3bot_Mem then
 		local handler = findHandler(pl:GetZombieClass(), pl:Team())
-		handler.OnDeathFunction(pl)
+		if handler then
+			handler.OnDeathFunction(pl)
+		end
 		-- Add death cost to the current link
 		local mem = pl.D3bot_Mem
 		local nodeOrNil = mem.NodeOrNil
