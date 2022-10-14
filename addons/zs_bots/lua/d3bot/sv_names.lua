@@ -23,7 +23,7 @@ function D3bot.RegisterRandomName()
 	http.Fetch( frmat,
 		function( body, length, headers, code )
 			local tab = util.JSONToTable(body)
-			if #tab['response']['players'] > 0 then
+			if tab and #tab['response']['players'] > 0 then
 				D3bot.Names[#D3bot.Names+1] = tab['response']['players'][1].personaname
 			else
 				print("error, invalid name, retrying!")
