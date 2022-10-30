@@ -2,7 +2,7 @@ local roundStartTime = CurTime()
 hook.Add("PreRestartRound", D3bot.BotHooksId.."PreRestartRoundSupervisor", function()
 	roundStartTime, D3bot.NodeZombiesCountAddition = CurTime(), nil 
 	D3bot.ZombiesCountAddition = 0
-	ShouldPopBlock = false
+	GAMEMODE.ShouldPopBlock = false
 	
 	--Clean up for various entities that get dropped by the bots.
 	--[[for _, ent in ipairs( ents.FindByClass('prop_weapon') ) do 
@@ -58,7 +58,7 @@ function D3bot.GetDesiredBotCount()
 	-- Prevent high pop from lagging the shit out of the server.
 	--local infl = GAMEMODE:CalculateInfliction()
 	if GAMEMODE.ShouldPopBlock --[[or infl >= 0.5]] then
-		--return 0, 0
+		return 0, 0
 	end
 	
 	local wave = GAMEMODE:GetWave()
