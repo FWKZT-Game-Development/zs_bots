@@ -79,7 +79,7 @@ function D3bot.GetDesiredBotCount()
 			end
 		else
 			if GAMEMODE:GetWave() == GAMEMODE:GetNumberOfWaves() then
-				return math_max(humans, humans + humans_dead) + botmod, allowedTotal
+				return humans + botmod, allowedTotal
 			else
 				return math_max( botmod + humans_dead, volunteers + botmod + humans_dead, GAMEMODE:GetWave()*volunteers ), allowedTotal
 			end
