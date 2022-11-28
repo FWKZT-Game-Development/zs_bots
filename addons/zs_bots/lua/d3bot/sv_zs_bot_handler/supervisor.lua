@@ -54,18 +54,16 @@ end)
 
 function D3bot.GetDesiredBotCount()
 	local allowedTotal = game_MaxPlayers() - 2 --50
+	local wave = GAMEMODE:GetWave()
+	local humans = #GAMEMODE.HumanPlayers
+	local volunteers = #GAMEMODE.ZombieVolunteers
+	local botmod = D3bot.ZombiesCountAddition
 
 	-- Prevent high pop from lagging the shit out of the server.
 	--local infl = GAMEMODE:CalculateInfliction()
 	if GAMEMODE.ShouldPopBlock --[[or infl >= 0.5]] then
-		return 0, 0
+		return botmod, allowedTotal
 	end
-	
-	local wave = GAMEMODE:GetWave()
-
-	local humans = #GAMEMODE.HumanPlayers
-	local volunteers = #GAMEMODE.ZombieVolunteers
-	local botmod = D3bot.ZombiesCountAddition
 
 	if GAMEMODE:GetWave() <= 1 then
 		return volunteers + humans_dead + botmod, allowedTotal
