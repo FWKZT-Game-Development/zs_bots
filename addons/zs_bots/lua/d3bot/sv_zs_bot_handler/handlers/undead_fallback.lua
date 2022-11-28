@@ -1,30 +1,26 @@
 D3bot.Handlers.Undead_Fallback = D3bot.Handlers.Undead_Fallback or {}
 local HANDLER = D3bot.Handlers.Undead_Fallback
 
-local math_Clamp = math.Clamp
-local math_random = math.random
-local math_pow = math.pow
-local TEAM_UNDEAD = TEAM_UNDEAD
-
-local CurTime = CurTime
-
 HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 250
 HANDLER.BotClasses = {
 	[1] = {
-		"Zombie", "Ghoul"
+		"Zombie", "Ghoul", "Headcrab"
 	},
 	[2] = {
-		"Stalker", "Wraith", "Zombie", "Ghoul"
+		"Stalker", "Wraith", "Zombie", "Ghoul",
+		"Stalker", "Wraith", "Zombie", "Ghoul",
+		"Headcrab"
 	},
 	[3] = {
 		"Fast Zombie", "Wraith", "Zombie", "Bloated Zombie"
 	},
 	[4] = {
-		"Fast Zombie", "Poison Zombie", "Poison Zombie", "Bloated Zombie"
+		"Fast Zombie", "Poison Zombie", "Poison Zombie", "Bloated Zombie", "Wraith"
 	},
 	[5] = {
-		"Zombine", "Lacerator", "Poison Zombie"
+		"Lacerator", "Poison Zombie", "Bloated Zombie",
+		"Lacerator", "Poison Zombie", "Wraith"
 	},
 	[6] = {
 		"Zombine", "Zombine", "Zombine", "Poison Zombie", "Lacerator"
@@ -51,7 +47,7 @@ HANDLER.HvH_BotClasses = {
 HANDLER.RandomSecondaryAttack = {
 	["Zombine"] = {MinTime = 5, MaxTime = 30}, 
 	["Ghoul"] = {MinTime = 5, MaxTime = 10},
-	["Poison Zombie"] = {MinTime = 5, MaxTime = 30}
+	["Poison Zombie"] = {MinTime = 10, MaxTime = 30}
 }
 
 HANDLER.Fallback = true
@@ -90,7 +86,7 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 	if secAttack then
 		local mem = bot.D3bot_Mem
 		if not mem.NextThrowPoisonTime or mem.NextThrowPoisonTime <= CurTime() then
-			mem.NextThrowPoisonTime = CurTime() + secAttack.MinTime + math_random() * (secAttack.MaxTime - secAttack.MinTime)
+			mem.NextThrowPoisonTime = CurTime() + secAttack.MinTime + math.random() * (secAttack.MaxTime - secAttack.MinTime)
 			actions = actions or {}
 			actions.Attack2 = true
 		end
@@ -156,13 +152,13 @@ function HANDLER.ThinkFunction(bot)
 	end
 	
 	if mem.nextUpdateOffshoot and mem.nextUpdateOffshoot < CurTime() or not mem.nextUpdateOffshoot then
-		mem.nextUpdateOffshoot = CurTime() + 0.4 + math_random() * 0.2
+		mem.nextUpdateOffshoot = CurTime() + 0.4 + math.random() * 0.2
 		bot:D3bot_UpdateAngsOffshoot(HANDLER.AngOffshoot)
 	end
 
 	local pathCostFunction
 
-	if D3bot.UsingValveNav then
+	if D3bot.UsingSourceNav then
 		if not pathCostFunction then
 			pathCostFunction = function( cArea, nArea, link )
 				local linkMetaData = link:GetMetaData()
@@ -181,7 +177,7 @@ function HANDLER.ThinkFunction(bot)
 	end
 
 	if mem.nextUpdatePath and mem.nextUpdatePath < CurTime() or not mem.nextUpdatePath then
-		mem.nextUpdatePath = CurTime() + math_Clamp( GAMEMODE:GetWave() * 0.5 , 0.9, 5) + math_random() * 0.2
+		mem.nextUpdatePath = CurTime() + 0.9 + math.random() * 0.2
 		bot:D3bot_UpdatePath( pathCostFunction, nil )
 	end
 end
@@ -190,7 +186,7 @@ function HANDLER.OnTakeDamageFunction(bot, dmg)
 	local attacker = dmg:GetAttacker()
 	if not HANDLER.CanBeTgt(bot, attacker) then return end
 	local mem = bot.D3bot_Mem
-	if IsValid(mem.TgtOrNil) and mem.TgtOrNil:GetPos():DistToSqr(bot:GetPos()) <= math_pow(HANDLER.BotTgtFixationDistMin, 2) then return end
+	if IsValid(mem.TgtOrNil) and mem.TgtOrNil:GetPos():DistToSqr(bot:GetPos()) <= math.pow(HANDLER.BotTgtFixationDistMin, 2) then return end
 	mem.TgtOrNil = attacker
 	--bot:Say("Ouch! Fuck you "..attacker:GetName().."! I'm gonna kill you!")
 end
@@ -210,11 +206,12 @@ end
 -- Custom functions and settings --
 -----------------------------------
 
-local potTargetEntClasses = {}  --"prop_*turret", "prop_arsenalcrate", "prop_manhack*"
+local potTargetEntClasses = {"prop_*turret", "prop_arsenalcrate", "prop_manhack*", "prop_obj_sigil"}
 local potEntTargets = nil
 function HANDLER.CanBeTgt(bot, target)
 	if not target or not IsValid(target) then return end
-	if not target:IsValidLivingHuman() then return true end
+	if target:IsPlayer() and target ~= bot and target:Team() ~= TEAM_UNDEAD and target:GetObserverMode() == OBS_MODE_NONE and not target:IsFlagSet(FL_NOTARGET) and target:Alive() then return true end
+	if target:GetClass() == "prop_obj_sigil" and target:GetSigilCorrupted() then return end -- Special case to ignore corrupted sigils.
 	if potEntTargets and table.HasValue(potEntTargets, target) then return true end
 end
 

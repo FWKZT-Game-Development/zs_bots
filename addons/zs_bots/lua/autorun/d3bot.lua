@@ -11,7 +11,9 @@ include("d3bot/azlib.lua")("D3bot", {
 D3bot.BotHooksId = "D3bot"
 
 -- Shared files
+AddCSLuaFile("d3bot/sh_async.lua")
 AddCSLuaFile("d3bot/sh_utilities.lua")
+include("d3bot/sh_async.lua")
 include("d3bot/sh_utilities.lua")
 
 -- Client files
@@ -27,11 +29,14 @@ end
 -- Server files
 if SERVER then
 	include("d3bot/sv_config.lua")
+	include("d3bot/sv_utilities.lua")
 	include("d3bot/sv_names.lua")
 	include("d3bot/sv_path.lua")
 	include("d3bot/sv_extend_player.lua")
 	include("d3bot/sv_debug.lua")
 	include("d3bot/sv_navmeta.lua")
+	include("d3bot/sv_navmesh_generate.lua")
+	include("d3bot/sv_benchmark.lua")
 	
 	if engine.ActiveGamemode() == "zombiesurvival" then
 		include("d3bot/sv_zs_bot_handler/node_metadata.lua")

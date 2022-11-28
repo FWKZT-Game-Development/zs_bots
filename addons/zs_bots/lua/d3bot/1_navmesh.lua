@@ -1,3 +1,6 @@
+local mathMin = math.min
+local mathMax = math.max
+local mathSqrt = math.sqrt
 
 return function(lib)
 	local from = lib.From
@@ -16,7 +19,7 @@ return function(lib)
 	local nodeFallback = lib.NavMeshNodeMeta.__index
 	local linkFallback = lib.NavMeshLinkMeta.__index
 	
-	lib.BotNodeMinProximity = 40
+	lib.BotNodeMinProximitySqr = 40*40
 	
 	lib.MapNavMeshNetworkStr = "D3bot Map NavMesh"
 	
@@ -39,6 +42,8 @@ return function(lib)
 			AimTo = {"Straight"},
 			Cost = {},
 			Condition = {"Unblocked", "Blocked"},
+			BlockBeforeWave = {},
+			BlockAfterWave = {},
 			Direction = {"Forward", "Backward"},
 			Walking = {"Needed"},
 			Pouncing = {"Needed"},
@@ -143,9 +148,9 @@ return function(lib)
 		if nilOrNodeB == nil then
 			local id = idOrNodeA
 			local serializedNodeIds = id:Split(lib.NavMeshLinkNodesSeparator)
-			if #serializedNodeIds != 2 then error("Link must have exactly 2 nodes to link.", 2) end
+			if #serializedNodeIds ~= 2 then error("Link must have exactly 2 nodes to link.", 2) end
 			local nodeIds = from(serializedNodeIds):SelV(tonumber).R
-			if from(nodeIds):Len().R != 2 then error("Invalid node ID.", 2) end
+			if from(nodeIds):Len().R ~= 2 then error("Invalid node ID.", 2) end
 			nodeA, nodeB = unpack(from(nodeIds):SelV(function(nodeId) return self:ForceGetNode(nodeId) end).R)
 		else
 			nodeA = idOrNodeA
@@ -200,7 +205,7 @@ return function(lib)
 	function nodeFallback:GetContains(pos, verticalLimit)
 		local z = verticalLimit and math.Clamp(self.Pos.z, pos.z - verticalLimit, pos.z + verticalLimit) or self.Pos.z
 		local pos = Vector(pos.x, pos.y, z)
-		if not self.HasArea then return pos:Distance(self.Pos) < lib.BotNodeMinProximity end
+		if not self.HasArea then return pos:DistToSqr(self.Pos) < lib.BotNodeMinProximitySqr end
 		local params = self.Params
 		return math.abs(pos.z - self.Pos.z) <= (1) and pos.x >= params.AreaXMin and pos.x <= params.AreaXMax and pos.y >= params.AreaYMin and pos.y <= params.AreaYMax
 	end
@@ -229,40 +234,86 @@ return function(lib)
 	
 	function fallback:GetCursoredItemOrNil(pl)
 		local oldDraw = pl:GetInfoNum("d3bot_navmeshing_smartdraw", 1) == 0
+		local maxDrawingDistanceSqr = math.pow(pl:GetInfoNum("d3bot_navmeshing_drawdistance", 0), 2)
 		local relAngMin = 5
 		local cursoredItemOrNil
 		local eyePos, eyeAngs = pl:EyePos(), pl:EyeAngles()
+		local inViewRange = true
 		for id, item in pairs(self.ItemById) do
-			local angs = (item:GetFocusPos() - eyePos):Angle()
-			local relP = math.AngleDifference(eyeAngs.p, angs.p)
-			local relY = math.AngleDifference(eyeAngs.y, angs.y)
-			local relAng = math.sqrt(relP * relP + relY * relY)
-			if relAng < relAngMin and (oldDraw or item:ShouldDraw(eyePos)) then
-				cursoredItemOrNil = item
-				relAngMin = relAng
+			if maxDrawingDistanceSqr > 0 then
+				inViewRange = item:GetFocusPos():DistToSqr(eyePos) <= maxDrawingDistanceSqr
+			end
+
+			if inViewRange then
+				local angs = (item:GetFocusPos() - eyePos):Angle()
+				local relP = math.AngleDifference(eyeAngs.p, angs.p)
+				local relY = math.AngleDifference(eyeAngs.y, angs.y)
+				local relAng = math.sqrt(relP * relP + relY * relY)
+				if relAng < relAngMin and (oldDraw or item:ShouldDraw(eyePos)) then
+					cursoredItemOrNil = item
+					relAngMin = relAng
+				end
 			end
 		end
 		return cursoredItemOrNil
 	end
-	
+
+	---Returns the node that is closest to the given position.
+	---@param pos GVector
+	---@return any|nil
 	function fallback:GetNearestNodeOrNil(pos)
+		-- Optimization notes:
+		-- - We don't want to use GVectors as they would disallow specific optimizations. Also, creating vectors is slow. LuaJIT can't optimize any calls on them, as they are userdata objects outside of the Lua runtime.
+		-- - Put some math functions into upvalues, as the optimizer then can be sure the function doesn't change between calls.
+		-- - Sieve out nodes before calculating the squared distance (via non squared distance).
+
+		-- Benchmarks:
+		-- Navmesh: zs_infected_square_v1
+		-- CPU: Intel(R) Core(TM) i5-10600K CPU @ 4.10GHz
+		-- 2020-06-23 (bf9e9bd): ~1.60 ms per call.
+		-- 2022-09-23 (5cd7719): ~0.41 ms per call.
+
 		local nearestNodeOrNil
-		local distMin = math.huge
+
+		-- Current search sphere around pos.
+		local distSqrMin = math.huge -- The squared distance to the closest node.
+		local distMin    = math.huge -- The distance to the closest node.
+		local distMinNeg = -distMin -- The negated distance to the closest node.
+
+		local posX, posY, posZ = pos:Unpack()
+
 		for id, node in pairs(self.NodeById) do
-			local nodePos = node.Pos
+			local nodeX, nodeY, nodeZ = node.Pos:Unpack() -- This is unfortunately a point where anything like math.min could be modified. Therefore we need to put such references into upvalues.
+
 			if node.HasArea then
 				local params = node.Params
-				nodePos = Vector(math.Clamp(pos.x, params.AreaXMin, params.AreaXMax), math.Clamp(pos.y, params.AreaYMin, params.AreaYMax), nodePos.z)
+				nodeX = mathMin(mathMax(posX, params.AreaXMin), params.AreaXMax)
+				nodeY = mathMin(mathMax(posY, params.AreaYMin), params.AreaYMax)
 			end
-			local dist = pos:Distance(nodePos)
-			if dist < distMin then
-				nearestNodeOrNil = node
-				distMin = dist
+
+			-- Sieve out nodes that definitely lie outside the search sphere.
+			-- This is the same as checking against bounding boxes of nodes that are extended by the current distMin.
+			local diffX = posX - nodeX
+			if diffX < distMin and diffX > distMinNeg then
+				local diffY = posY - nodeY
+				if diffY < distMin and diffY > distMinNeg then
+					local diffZ = posZ - nodeZ
+					if diffZ < distMin and diffZ > distMinNeg then
+						local distSqr = diffX ^ 2 + diffY ^ 2 + diffZ ^ 2
+						if distSqr < distSqrMin then
+							nearestNodeOrNil = node
+							distSqrMin = distSqr
+							distMin = mathSqrt(distSqr) -- We need the non squared distance to quickly sieve out nodes.
+							distMinNeg = -distMin
+						end
+					end
+				end
 			end
 		end
+
 		return nearestNodeOrNil
 	end
-	
+
 	local isIgnoreParameter = from((" "):Explode("X Y Z AreaXMin AreaYMin AreaXMax AreaYMax")):VsSet().R
 	
 	function nodeFallback:MergeWithNode(node)
@@ -448,20 +499,27 @@ return function(lib)
 			return nil, name .. lib.NavMeshItemParamNameNumPairSeparator .. numOrStr
 		end, function(a,b) return tostring(a)<tostring(b) end):Join(lib.NavMeshItemsSeparator).R
 	end
+	
 	function lib.DeserializeNavMesh(serialized)
 		serialized = serialized:gsub("\r\n", "\n")
 		serialized = serialized:gsub("\r", "\n")
 		serialized = serialized:gsub(lib.NavMeshItemsSeparatorOld, lib.NavMeshItemsSeparator)
+
 		local navMesh = lib.NewNavMesh()
+
 		for idx, serializedItem in ipairs(lib.GetSplitStr(serialized, lib.NavMeshItemsSeparator)) do
 			local serializedId, serializedParams = unpack(serializedItem:Split(lib.NavMeshItemIdParamsPairSeparator))
+
 			local item = navMesh:ForceGetItem(lib.DeserializeNavMeshItemId(serializedId))
+
 			for idx, serializedParam in ipairs(lib.GetSplitStr(serializedParams, lib.NavMeshItemParamsSeparator)) do
 				item:SetParam(unpack(serializedParam:Split(lib.NavMeshItemParamNameNumPairSeparator)))
 			end
 		end
+
 		return navMesh
 	end
+
 	function fallback:DeserializeNavMeshParams(serialized)
 		for idx, serializedItem in ipairs(lib.GetSplitStr(serialized, lib.NavMeshItemsSeparator)) do
 			local serializedName, serializedNumOrStr = unpack(serializedItem:Split(lib.NavMeshItemParamNameNumPairSeparator))

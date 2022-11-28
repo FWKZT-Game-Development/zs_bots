@@ -8,8 +8,6 @@
 		- PlayerFactorByTeam[team]: From nil to 1. Slowly generating player population value stored per team. Higher survivor team values inside of cades. Higher undead team values in zombie spawns and nodes zombies cross a lot.
 --]]
 
-local math_Clamp = math_Clamp
-
 D3bot.NodeMetadata = D3bot.NodeMetadata or {}
 D3bot.LinkMetadata = D3bot.LinkMetadata or {}
 
@@ -48,7 +46,7 @@ hook.Add("Think", D3bot.BotHooksId.."NodeMetadataThink", function()
 		end
 	end
 	
-	-- Increase counts over time TODO: Check if that is a ressource hog
+	-- Increase counts over time -- TODO: Check if that is a ressource hog
 	local mapNavMesh = D3bot.MapNavMesh
 	if nextNodeMetadataIncrease < CurTime() then
 		nextNodeMetadataIncrease = CurTime() + 1
@@ -61,7 +59,7 @@ hook.Add("Think", D3bot.BotHooksId.."NodeMetadataThink", function()
 					if not nodeMetadata[node] then nodeMetadata[node] = {} end
 					local metadata = nodeMetadata[node]
 					if not metadata.PlayerFactorByTeam then metadata.PlayerFactorByTeam = {} end
-					metadata.PlayerFactorByTeam[team] = math_Clamp((metadata.PlayerFactorByTeam[team] or 0) + 1/15 * (player.D3bot_Mem and 0.25 or 1), 0, 1)
+					metadata.PlayerFactorByTeam[team] = math.Clamp((metadata.PlayerFactorByTeam[team] or 0) + 1/15 * (player.D3bot_Mem and 0.25 or 1), 0, 1)
 				end
 			end
 		end
@@ -79,10 +77,10 @@ end
 function D3bot.NodeMetadata_ZombieDeath(node) -- TODO: Call it from the death handler
 	if not nodeMetadata[node] then nodeMetadata[node] = {} end
 	local metadata = nodeMetadata[node]
-	metadata.ZombieDeathFactor = math_Clamp((metadata.ZombieDeathFactor or 0) + 0.1, 0, 1)
+	metadata.ZombieDeathFactor = math.Clamp((metadata.ZombieDeathFactor or 0) + 0.1, 0, 1)
 end
 
-if not D3bot.UsingValveNav then return end
+if not D3bot.UsingSourceNav then return end
 
 function D3bot.LinkMetadata_ZombieDeath( link, raiseCost ) -- TODO: Combine it with the ZombieDeathFactor and make it node based, not link based
 	local metadata = link:GetMetaData()
@@ -91,5 +89,5 @@ end
 
 function D3bot.NodeMetadata_ZombieDeath( node ) -- TODO: Call it from the death handler
 	local metadata = node:GetMetaData()
-	metadata.ZombieDeathFactor = math_Clamp( ( metadata.ZombieDeathFactor or 0 ) + 0.1, 0, 1 )
+	metadata.ZombieDeathFactor = math.Clamp( ( metadata.ZombieDeathFactor or 0 ) + 0.1, 0, 1 )
 end
