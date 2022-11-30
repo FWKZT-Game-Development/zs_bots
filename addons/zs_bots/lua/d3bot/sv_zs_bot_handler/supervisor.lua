@@ -19,16 +19,6 @@ local math_ceil = math.ceil
 local table_insert = table.insert
 local table_sort = table.sort
 local WaveZombieMultiplier = 0.13
-local WaveOneBotZombies = 0.20
-
-function D3bot.GetDesiredStartingBotZombies()
-	local numplayers = #player_GetAllActive()
-	if numplayers == 1 then
-		return 1
-	else
-		return math_Clamp(math_ceil(numplayers * WaveOneBotZombies), 1, numplayers - 1)
-	end
-end
 
 local humans_dead = 0
 hook.Add("DoPlayerDeath","D3Bot.AddHumansDied.Supervisor", function(pl, attacker, dmginfo)
@@ -49,7 +39,7 @@ end)
 
 function D3bot.GetDesiredBotCount()
 	local allowedTotal = game_MaxPlayers() - 2 --50
-	local volunteers = D3bot.GetDesiredStartingBotZombies()
+	local volunteers = math.Round(#GAMEMODE.ZombieVolunteers * 1.5)
 	local botmod = D3bot.ZombiesCountAddition
 
 	--Override if wanted for events or extreme lag.
