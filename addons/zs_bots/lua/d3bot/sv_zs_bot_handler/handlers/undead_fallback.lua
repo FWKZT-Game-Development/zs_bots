@@ -13,26 +13,26 @@ HANDLER.BotClasses = {
 		"Headcrab"
 	},
 	[3] = {
-		"Fast Zombie", "Wraith", "Zombie", "Bloated Zombie"
+		"Fast Zombie", "Wraith", "Zombie", "Poison Zombie"
 	},
 	[4] = {
-		"Fast Zombie", "Poison Zombie", "Poison Zombie", "Bloated Zombie", "Wraith"
+		"Fast Zombie", "Poison Zombie", "Wild Poison Zombie", "Wraith"
 	},
 	[5] = {
-		"Lacerator", "Poison Zombie", "Bloated Zombie",
-		"Lacerator", "Poison Zombie", "Wraith"
+		"Lacerator", "Wild Poison Zombie",
+		"Lacerator", "Wild Poison Zombie", "Wraith"
 	},
 	[6] = {
-		"Zombine", "Zombine", "Zombine", "Poison Zombie", "Lacerator"
+		"Zombine", "Zombine", "Zombine", "Wild Poison Zombie", "Lacerator"
 	},
 	[7] = {
-		"Zombine", "Zombine", "Zombine", "Poison Zombie", "Lacerator"
+		"Zombine", "Zombine", "Zombine", "Wild Poison Zombie", "Lacerator"
 	},
 	[8] = {
-		"Zombine", "Zombine", "Zombine", "Poison Zombie", "Lacerator"
+		"Zombine", "Zombine", "Zombine", "Wild Poison Zombie", "Lacerator"
 	},
 	[9] = {
-		"Zombine", "Zombine", "Zombine", "Poison Zombie", "Lacerator"
+		"Zombine", "Zombine", "Zombine", "Wild Poison Zombie", "Lacerator"
 	}
 }
 
@@ -47,7 +47,8 @@ HANDLER.HvH_BotClasses = {
 HANDLER.RandomSecondaryAttack = {
 	["Zombine"] = {MinTime = 5, MaxTime = 30}, 
 	["Ghoul"] = {MinTime = 5, MaxTime = 10},
-	["Poison Zombie"] = {MinTime = 10, MaxTime = 30}
+	["Poison Zombie"] = {MinTime = 10, MaxTime = 30},
+	["Wild Poison Zombie"] = {MinTime = 10, MaxTime = 30}
 }
 
 HANDLER.Fallback = true
