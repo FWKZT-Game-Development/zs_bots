@@ -18,17 +18,16 @@ local math_min = math.min
 local math_ceil = math.ceil
 local table_insert = table.insert
 local table_sort = table.sort
-local WaveZombieMultiplier = 0.13
 
 local humans_dead = 0
 hook.Add("DoPlayerDeath","D3Bot.AddHumansDied.Supervisor", function(pl, attacker, dmginfo)
-	if pl:Team() ~= TEAM_HUMAN or pl:IsBot() or GAMEMODE.RoundEnded then return end
+	if pl:Team() ~= TEAM_HUMAN or pl:IsBot() or GAMEMODE.RoundEnded or player.GetCount() <= GAMEMODE.LowPopulationLimit then return end
 
 	humans_dead = humans_dead + 1
 end)
 
 hook.Add("PostPlayerRedeemed","D3Bot.PostPlayerRedeemed.Supervisor", function(pl, silent, noequip)
-	if GAMEMODE.RoundEnded then return end
+	if GAMEMODE.RoundEnded or player.GetCount() <= GAMEMODE.LowPopulationLimit then return end
 
 	humans_dead = humans_dead - 1
 end)
