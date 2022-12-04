@@ -38,7 +38,7 @@ end)
 
 function D3bot.GetDesiredBotCount()
 	local allowedTotal = game_MaxPlayers() - 2 --50
-	local volunteers = #GAMEMODE.ZombieVolunteers * 1.11
+	local volunteers = #GAMEMODE.ZombieVolunteers --* 1.11
 	local botmod = D3bot.ZombiesCountAddition
 
 	--Override if wanted for events or extreme lag.
