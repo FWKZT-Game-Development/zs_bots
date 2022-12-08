@@ -46,12 +46,8 @@ function D3bot.GetDesiredBotCount()
 		return botmod, allowedTotal
 	end
 
-	if GAMEMODE:GetWave() <= 0 then
-		return math.max(GAMEMODE:GetWave(), volunteers - humans_dead) + botmod, allowedTotal
-	end
-
 	-- One bot per wave unless volunteers is higher (for low pop)
-	return math.max(GAMEMODE:GetWave(), volunteers + humans_dead) + botmod, allowedTotal
+	return math.max(GAMEMODE:GetWave(), volunteers + humans_dead - GAMEMODE.AFK_ZombieCount) + botmod, allowedTotal
 end
 
 local spawnAsTeam
