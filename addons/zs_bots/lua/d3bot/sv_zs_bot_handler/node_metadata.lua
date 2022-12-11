@@ -14,7 +14,7 @@ D3bot.LinkMetadata = D3bot.LinkMetadata or {}
 local nodeMetadata = D3bot.NodeMetadata
 local linkMetadata = D3bot.LinkMetadata
 
-hook.Add("PreRestartRound", D3bot.BotHooksId.."MetadataReset", function()
+hook.Add("PreRestartRound", D3bot.BotHooksId .. "MetadataReset", function()
 	D3bot.NodeMetadata = {}
 	D3bot.LinkMetadata = {}
 	nodeMetadata = D3bot.NodeMetadata
@@ -23,7 +23,7 @@ end)
 
 local nextNodeMetadataReduce = CurTime()
 local nextNodeMetadataIncrease = CurTime()
-hook.Add("Think", D3bot.BotHooksId.."NodeMetadataThink", function()
+hook.Add("Think", D3bot.BotHooksId .. "NodeMetadataThink", function()
 	-- If survivor bots are disabled, ignore capturing team metadata
 	if not D3bot.SurvivorsEnabled then return end
 

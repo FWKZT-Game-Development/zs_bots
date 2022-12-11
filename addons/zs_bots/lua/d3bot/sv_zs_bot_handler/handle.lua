@@ -24,7 +24,7 @@ function findHandler(zombieClass, team)
 end
 local findHandler = findHandler
 
-hook.Add("StartCommand", D3bot.BotHooksId, function(pl, cmd)
+hook.Add("StartCommand", D3bot.BotHooksId .. "StartCommand", function(pl, cmd)
 	if D3bot.IsEnabledCached and pl.D3bot_Mem then
 		
 		local handler = findHandler(pl:GetZombieClass(), pl:Team())
@@ -33,9 +33,9 @@ hook.Add("StartCommand", D3bot.BotHooksId, function(pl, cmd)
 	end
 end)
 
-local NextSupervisor🤔 = CurTime()
+local NextSupervisorThink = CurTime()
 local NextStorePos = CurTime()
-hook.Add("Think", D3bot.BotHooksId.."🤔", function()
+hook.Add("Think", D3bot.BotHooksId .. "Think", function()
 	if not D3bot.IsEnabledCached then return end
 	
 	-- General bot handler think function
@@ -61,8 +61,8 @@ hook.Add("Think", D3bot.BotHooksId.."🤔", function()
 	end
 	
 	-- Supervisor think function
-	if NextSupervisor🤔 < CurTime() then
-		NextSupervisor🤔 = CurTime() + 0.05 + math.random() * 0.1
+	if NextSupervisorThink < CurTime() then
+		NextSupervisorThink = CurTime() + 0.05 + math.random() * 0.1
 		D3bot.SupervisorThinkFunction()
 	end
 	
@@ -75,7 +75,7 @@ hook.Add("Think", D3bot.BotHooksId.."🤔", function()
 	end
 end)
 
-hook.Add("EntityTakeDamage", D3bot.BotHooksId.."TakeDamage", function(ent, dmg)
+hook.Add("EntityTakeDamage", D3bot.BotHooksId .. "TakeDamage", function(ent, dmg)
 	if D3bot.IsEnabledCached then
 		if ent:IsPlayer() and ent.D3bot_Mem then
 			-- Bot got damaged or damaged itself
@@ -92,7 +92,7 @@ hook.Add("EntityTakeDamage", D3bot.BotHooksId.."TakeDamage", function(ent, dmg)
 	end
 end)
 
-hook.Add("PlayerDeath", D3bot.BotHooksId.."PlayerDeath", function(pl)
+hook.Add("PlayerDeath", D3bot.BotHooksId .. "PlayerDeath", function(pl)
 	if D3bot.IsEnabledCached and pl.D3bot_Mem then
 		local handler = findHandler(pl:GetZombieClass(), pl:Team())
 		handler.OnDeathFunction(pl)
@@ -113,7 +113,7 @@ hook.Add("PlayerDeath", D3bot.BotHooksId.."PlayerDeath", function(pl)
 end)
 
 local hadBonusByPl = {}
-hook.Add("PlayerSpawn", D3bot.BotHooksId.."PlayerSpawn", function(pl)
+hook.Add("PlayerSpawn", D3bot.BotHooksId .. "PlayerSpawn", function(pl)
 	if not D3bot.IsEnabledCached then return end
 	if pl.D3bot_Mem then pl:D3bot_InitializeOrReset() end
 	if D3bot.IsEnabledCached and D3bot.StartBonus and D3bot.StartBonus > 0 and pl:Team() == TEAM_SURVIVOR then
@@ -122,4 +122,4 @@ hook.Add("PlayerSpawn", D3bot.BotHooksId.."PlayerSpawn", function(pl)
 		pl:SetPoints(hadBonus and 0 or D3bot.StartBonus)
 	end
 end)
-hook.Add("PreRestartRound", D3bot.BotHooksId.."PreRestartRound", function() hadBonusByPl = {} end)
+hook.Add("PreRestartRound", D3bot.BotHooksId .. "PreRestartRound", function() hadBonusByPl = {} end)
