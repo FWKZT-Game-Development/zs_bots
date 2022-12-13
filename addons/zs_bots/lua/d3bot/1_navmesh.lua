@@ -1,6 +1,7 @@
 local mathMin = math.min
 local mathMax = math.max
 local mathSqrt = math.sqrt
+local mathAbs = math.abs
 
 return function(lib)
 	local from = lib.From
@@ -284,18 +285,27 @@ return function(lib)
 
 		for id, node in pairs(self.NodeById) do
 			local nodeX, nodeY, nodeZ = node.Pos:Unpack() -- This is unfortunately a point where anything like math.min could be modified. Therefore we need to put such references into upvalues.
-
+			
 			if node.HasArea then
+				local oldX = nodeX
+				local oldY = nodeY
+
 				local params = node.Params
 				nodeX = mathMin(mathMax(posX, params.AreaXMin), params.AreaXMax)
 				nodeY = mathMin(mathMax(posY, params.AreaYMin), params.AreaYMax)
+
+				if not (mathAbs(posX - nodeX) < 1 and mathAbs(posY - nodeY) < 1) then
+					nodeX = oldX
+					nodeY = oldY
+				end
 			end
 
-			-- Sieve out nodes that definitely lie outside the search sphere.
-			-- This is the same as checking against bounding boxes of nodes that are extended by the current distMin.
 			local diffX = posX - nodeX
+			local diffY = posY - nodeY
+
+			-- Sieve out nodes that definitely lie outside the search sphere.
+			-- This is the same as checking against bounding boxes of nodes that are extended by the current distMin.			
 			if diffX < distMin and diffX > distMinNeg then
-				local diffY = posY - nodeY
 				if diffY < distMin and diffY > distMinNeg then
 					local diffZ = posZ - nodeZ
 					if diffZ < distMin and diffZ > distMinNeg then
