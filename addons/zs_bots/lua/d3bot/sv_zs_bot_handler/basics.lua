@@ -318,7 +318,7 @@ function D3bot.Basics.PounceAuto(bot)
 	if not bot:IsOnGround() or bot:GetMoveType() == MOVETYPE_LADDER then return end
 	
 	local weapon = bot:GetActiveWeapon()
-	if not weapon and not weapon.PounceVelocity then return end
+	if not weapon or not weapon.PounceVelocity or not weapon.PounceStartDelay then return end
 	
 	-- Fill table with possible pounce target positions, ordered with increasing priority
 	local tempPos = bot:GetPos()
