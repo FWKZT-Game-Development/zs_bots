@@ -371,7 +371,7 @@ function D3bot.Basics.PounceAuto(bot)
 	for _, pounceTargetPos in ipairs(table.Reverse(pounceTargetPositions)) do
 		local trajectories = bot:D3bot_CanPounceToPos(pounceTargetPos.Pos)
 		local timeToTarget = pounceTargetPos.Dist / bot:GetMaxSpeed()
-		if trajectories and (pounceTargetPos.ForcePounce or (pounceTargetPos.HeightDiff and pounceTargetPos.Pos.z - bot:GetPos().z > pounceTargetPos.HeightDiff) or timeToTarget > (trajectories[1].t1 + weapon.PounceStartDelay)*pounceTargetPos.TimeFactor) then
+		if trajectories and (pounceTargetPos.ForcePounce or (pounceTargetPos.HeightDiff and pounceTargetPos.Pos.z - bot:GetPos().z > pounceTargetPos.HeightDiff) or timeToTarget > (trajectories[1].t1 + (weapon.PounceStartDelay or 0))*pounceTargetPos.TimeFactor) then
 			trajectory = trajectories[1]
 			break
 		end
