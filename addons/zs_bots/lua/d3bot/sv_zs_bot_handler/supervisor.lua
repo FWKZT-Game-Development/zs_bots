@@ -21,15 +21,15 @@ local table_sort = table.sort
 
 local humans_dead = 0
 hook.Add("DoPlayerDeath","D3Bot.AddHumansDied.Supervisor", function(pl, attacker, dmginfo)
-	if pl:Team() ~= TEAM_HUMAN or pl:IsBot() or GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 0 --[[or player.GetCount() <= GAMEMODE.LowPopulationLimit]] then return end
+	if pl:Team() ~= TEAM_HUMAN or pl:IsBot() or GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 1 --[[or player.GetCount() <= GAMEMODE.LowPopulationLimit]] then return end
 
 	humans_dead = humans_dead + 1
 end)
 
 hook.Add("PostPlayerRedeemed","D3Bot.PostPlayerRedeemed.Supervisor", function(pl, silent, noequip)
-	if GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 0 --[[or player.GetCount() <= GAMEMODE.LowPopulationLimit]] then return end
+	if GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 1 --[[or player.GetCount() <= GAMEMODE.LowPopulationLimit]] then return end
 
-	humans_dead = humans_dead - 1
+	humans_dead = math.max(humans_dead - 1, 0)
 end)
 
 hook.Add("PostEndRound", "D3Bot.ResetHumansDead.Supervisor", function(winnerteam)
