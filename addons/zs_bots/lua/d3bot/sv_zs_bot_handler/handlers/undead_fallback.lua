@@ -5,34 +5,31 @@ HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 250
 HANDLER.BotClasses = {
 	[1] = {
-		"Zombie", "Ghoul", "Headcrab"
+		"Zombie", "Headcrab", "Poison Zombie", "Stalker"
 	},
 	[2] = {
-		"Stalker", "Wraith", "Zombie", "Ghoul",
-		"Stalker", "Wraith", "Zombie", "Ghoul",
-		"Headcrab"
+		"Zombie", "Headcrab", "Rebel Poison Zombie", "Wraith"
 	},
 	[3] = {
-		"Fast Zombie", "Wraith", "Zombie", "Poison Zombie"
+		"Zombie", "Headcrab", "Poison Zombine", "Fast Zombie", "Wraith"
 	},
 	[4] = {
-		"Fast Zombie", "Poison Zombie", "Wild Poison Zombie", "Wraith"
+		"Zombie", "Headcrab", "Poison Zombine", "Fast Zombie", "Wraith"
 	},
 	[5] = {
-		"Lacerator", "Wild Poison Zombie",
-		"Lacerator", "Wild Poison Zombie", "Wraith"
+		"Zombie", "Headcrab", "Volatile Poison Zombie", "Lacerator", "Wraith"
 	},
 	[6] = {
-		"Zombine", "Zombine", "Zombine", "Wild Poison Zombie", "Lacerator"
+		"Zombine", "Headcrab", "Volatile Poison Zombie", "Lacerator", "Wraith"
 	},
 	[7] = {
-		"Zombine", "Zombine", "Zombine", "Wild Poison Zombie", "Lacerator"
+		"Zombine", "Headcrab", "Volatile Poison Zombie", "Lacerator", "Wraith"
 	},
 	[8] = {
-		"Zombine", "Zombine", "Zombine", "Wild Poison Zombie", "Lacerator"
+		"Zombine", "Headcrab", "Volatile Poison Zombie", "Lacerator", "Wraith"
 	},
 	[9] = {
-		"Zombine", "Zombine", "Zombine", "Wild Poison Zombie", "Lacerator"
+		"Zombine", "Headcrab", "Volatile Poison Zombie", "Lacerator", "Wraith"
 	}
 }
 
