@@ -20,7 +20,7 @@ HANDLER.BotClasses = {
 		"Zombie", "Headcrab", "Volatile Poison Zombie", "Lacerator", "Wraith"
 	},
 	[6] = {
-		"Zombine", "Headcrab", "Volatile Poison Zombie", "Lacerator", "Wraith"
+		"Zombine", "Armored Headcrab", "Volatile Poison Zombie", "Lacerator", "Wraith"
 	},
 	[7] = {
 		"Zombine", "Headcrab", "Volatile Poison Zombie", "Lacerator", "Wraith"
