@@ -8,7 +8,7 @@ HANDLER.PounceIntervalPlusRandom = 5 -- Additional random delay.
 
 HANDLER.Fallback = false
 function HANDLER.SelectorFunction(zombieClassName, team)
-	return team == TEAM_UNDEAD and zombieClassName == "Headcrab"
+	return team == TEAM_UNDEAD and zombieClassName == "Headcrab" or zombieClassName == "Armored Headcrab"
 end
 
 function HANDLER.UpdateBotCmdFunction(bot, cmd)
