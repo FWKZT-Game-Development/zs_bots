@@ -65,15 +65,21 @@ function D3bot.MaintainBotRoles()
 
 	if team.NumPlayers(TEAM_UNDEAD) < D3bot.GetDesiredBotCount() then
 		local bot = player.CreateNextBot(D3bot.GetUsername() or "BOT")
+		
 		spawnAsTeam = TEAM_UNDEAD
+
 		if IsValid(bot) then
 			bot:D3bot_InitializeOrReset()
-			table_insert(D3bot.BotZombies,bot)
+
+			table_insert(D3bot.BotZombies, bot)
+
+			if GAMEMODE:GetWave() <= 1 then
+				bot:Kill()
+			end
 		end
-		if GAMEMODE:GetWave() <= 1 then
-			bot:Kill()
-		end
+
 		spawnAsTeam = nil
+		
 		return
 	end
 	if team.NumPlayers(TEAM_UNDEAD) > D3bot.GetDesiredBotCount() then
