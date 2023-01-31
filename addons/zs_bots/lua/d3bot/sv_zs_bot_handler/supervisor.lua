@@ -102,11 +102,11 @@ function D3bot.SupervisorThinkFunction()
 		NextMaintainBotRoles = CurTime() + 1
 		D3bot.MaintainBotRoles()
 	end
-	if game.GetMap() == "gm_construct" then return end
+	--[[if game.GetMap() == "gm_construct" then return end
 	if (NextNodeDamage or 0) < CurTime() then
 		NextNodeDamage = CurTime() + 2
 		D3bot.DoNodeTrigger()
-	end
+	end]]
 end
 
 function D3bot.DoNodeTrigger()
