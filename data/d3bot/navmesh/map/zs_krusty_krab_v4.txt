@@ -207,6 +207,8 @@
 218-216:
 219:See=Disabled,X=303,Y=1182.2,Z=151.5
 219-218:
+220:AreaXMax=2037,AreaXMin=1133.4,AreaYMax=704,AreaYMin=-448,X=1589.5,Y=129,Z=623.2
+220-192:
 31:AreaXMax=2043,AreaXMin=1939,AreaYMax=-406,AreaYMin=-448,See=Disabled,X=1979,Y=-436.3,Z=256
 32:Aim=Straight,AreaXMax=1939,AreaXMin=1920,AreaYMax=-406,AreaYMin=-448,See=Disabled,X=1923.2,Y=-429.4,Z=256
 32-31:
@@ -216,6 +218,7 @@
 34:Aim=Straight,AreaXMax=2029.5,AreaXMin=1920,AreaYMax=-207.5,AreaYMin=-302,See=Disabled,X=1938.3,Y=-246.6,Z=256
 34-53:
 36:Aim=Straight,AreaXMax=1966,AreaXMin=1920,AreaYMax=704,AreaYMin=658,See=Disabled,X=1943.5,Y=685.4,Z=256
+36-145:
 36-37:
 37:AreaXMax=2016,AreaXMin=1966,AreaYMax=704,AreaYMin=658,See=Disabled,X=1997.1,Y=690.5,Z=256
 37-94:
