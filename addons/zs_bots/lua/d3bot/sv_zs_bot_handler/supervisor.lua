@@ -89,7 +89,7 @@ function D3bot.MaintainBotRoles()
 				if IsValid(randomBot) then
 					randomBot:StripWeapons()
 				end
-				return randomBot and randomBot:Kick(D3bot.BotKickReason)
+				return randomBot and ( randomBot:IsValid() and randomBot:Kick(D3bot.BotKickReason) )
 			end
 		end
 	end
