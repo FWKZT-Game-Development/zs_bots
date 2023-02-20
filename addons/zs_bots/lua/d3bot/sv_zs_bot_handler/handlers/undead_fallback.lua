@@ -33,13 +33,13 @@ HANDLER.BotClasses = {
 	}
 }
 
-HANDLER.HvH_BotClasses = {
+--[[HANDLER.HvH_BotClasses = {
 	"Nightmare", "Nightmare", 
 	"The Reaper", "The Reaper", "The Reaper",
 	"The Reaper", "The Reaper", "The Reaper",
 	"Angry Hobo", "Angry Hobo", "Angry Hobo",
 	"The Butcher", "The Butcher", "The Butcher", "Tank"
-}
+}]]
 
 HANDLER.RandomSecondaryAttack = {
 	["Zombine"] = {MinTime = 5, MaxTime = 30}, 
@@ -192,7 +192,7 @@ end
 
 function HANDLER.OnDeathFunction(bot)
 	--bot:Say("rip me!")
-	bot:D3bot_RerollClass( HANDLER.BotClasses[ GAMEMODE:GetWave() ] ) -- TODO: Situation depending reroll of the zombie class
+	bot:D3bot_RerollClass( HANDLER.BotClasses[ GAMEMODE:GetWave() ] or HANDLER.BotClasses[ 1 ] ) -- TODO: Situation depending reroll of the zombie class
 	HANDLER.RerollTarget(bot)
 end
 
