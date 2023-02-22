@@ -19,7 +19,7 @@ local function GetRandomSteamID()
 end
 
 function D3bot.RegisterRandomName()
-	local frmat = string.format( "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=0A50351F1710D5B8363B1F7D3B156613&steamids=%s", GetRandomSteamID() )
+	local frmat = string.format( "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=0C93094A163B186A1D6ADAB1C0BFD61E&steamids=%s", GetRandomSteamID() )
 	http.Fetch( frmat,
 		function( body, length, headers, code )
 			local tab = util.JSONToTable(body)
