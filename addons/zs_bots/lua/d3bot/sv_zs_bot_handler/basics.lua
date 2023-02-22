@@ -48,9 +48,10 @@ function D3bot.Basics.Walk(bot, pos, slowdown, proximity) -- 'pos' should be ins
 		if nodeOrNil and not nodeOrNil:GetContains(origin, nil) then aimStraight = true end
 	end
 	if shouldClimb then
-		if bot:GetActiveWeapon() and bot:GetActiveWeapon().GetClimbing and bot:GetActiveWeapon():GetClimbing() and bot:GetActiveWeapon().GetClimbSurface then
-			local tr = bot:GetActiveWeapon():GetClimbSurface()
-			if tr.Hit then
+		local wep = bot:GetActiveWeapon()
+		if wep and wep:IsValid() and ( wep.GetClimbing and wep:GetClimbing() ) and wep.GetClimbSurface then
+			local tr = wep:GetClimbSurface()
+			if tr and tr.Hit then
 				bot:D3bot_FaceTo(origin - tr.HitNormal, origin, D3bot.BotAngLerpFactor, 0)
 			end
 		else
