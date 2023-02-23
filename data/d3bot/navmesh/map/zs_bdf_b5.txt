@@ -187,6 +187,7 @@
 49-50:
 5:AreaXMax=622.4,AreaXMin=456.7,AreaYMax=174.8,AreaYMin=57.4,X=539.7,Y=119.5,Z=0
 5-6:
+5-93:
 50:AreaXMax=439.3,AreaXMin=377.1,AreaYMax=431,AreaYMin=273,X=411.9,Y=352.9,Z=136
 51:AimTo=Straight,AreaXMax=376.3,AreaXMin=366,AreaYMax=244,AreaYMin=196,X=372.3,Y=221.9,Z=136
 51-73:
@@ -222,7 +223,6 @@
 67-18:
 67-66:
 68:AreaXMax=455.8,AreaXMin=223.2,AreaYMax=119.5,AreaYMin=56.9,X=308.7,Y=89.3,Z=0
-68-5:
 68-58:
 69:AreaXMax=222,AreaXMin=184.7,AreaYMax=119.2,AreaYMin=57.4,X=196,Y=89.9,Z=0
 69-66:
@@ -277,6 +277,8 @@
 91-81:
 92:AimTo=Straight,AreaXMax=454.7,AreaXMin=409.1,AreaYMax=175.4,AreaYMin=124,X=429.9,Y=149.7,Z=16
 92-5:
+93:X=456.6,Y=85.6,Z=0
+93-68:
 95:AreaXMax=-551.8,AreaXMin=-1630.1,AreaYMax=-336,AreaYMin=-824.1,X=-1112.6,Y=-580,Z=-1.7
 95-108:
 95-170:

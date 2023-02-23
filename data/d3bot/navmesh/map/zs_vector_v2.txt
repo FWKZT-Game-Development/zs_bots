@@ -834,7 +834,6 @@
 1374-828:
 1375:AreaXMax=-5536,AreaXMin=-5716,AreaYMax=536,AreaYMin=436,X=-5626,Y=486,Z=76
 1375-828:
-1375-862:
 1376:AreaXMax=-6656,AreaXMin=-7184,AreaYMax=-852,AreaYMin=-868,JumpTo=Always,X=-6920,Y=-860,Z=148
 1376-100:
 138:AreaXMax=-6432,AreaXMin=-6641.8,AreaYMax=-1977.6,AreaYMin=-2088,X=-6536.9,Y=-2032.8,Z=76
@@ -2402,18 +2401,6 @@
 860-861:
 861:AreaXMax=-5484.5,AreaXMin=-5536,AreaYMax=434.5,AreaYMin=232,X=-5510.2,Y=333.3,Z=76
 861-870:
-862:AimTo=Straight,AreaXMax=-5506.4,AreaXMin=-5536,AreaYMax=536,AreaYMin=434.5,X=-5521.2,Y=485.3,Z=88.7
-862-863:
-863:AimTo=Straight,AreaXMax=-5484.5,AreaXMin=-5506.4,AreaYMax=536,AreaYMin=434.5,X=-5495.4,Y=485.3,Z=98.4
-863-864:
-864:AimTo=Straight,AreaXMax=-5480.9,AreaXMin=-5484.5,AreaYMax=536,AreaYMin=434.5,JumpTo=Always,X=-5482.7,Y=485.3,Z=160.4
-866:AimTo=Straight,AreaXMax=-5367.7,AreaXMin=-5480.9,AreaYMax=520.2,AreaYMin=439.9,X=-5424.3,Y=480.1,Z=133.7
-866-864:
-866-867:
-867:AimTo=Straight,AreaXMax=-5328,AreaXMin=-5367.7,AreaYMax=520.2,AreaYMin=439.9,X=-5347.8,Y=480.1,Z=133.7
-867-868:
-868:AimTo=Straight,AreaXMax=-5324,AreaXMin=-5328,AreaYMax=520.2,AreaYMin=439.9,X=-5326,Y=480.1,Z=192
-868-1363:
 869:AreaXMax=-5273.9,AreaXMin=-5324,AreaYMax=536,AreaYMin=439.9,X=-5295.8,Y=508.3,Z=280
 869-1363:
 87:AreaXMax=-5616,AreaXMin=-5672,AreaYMax=-3024,AreaYMin=-3071.8,X=-5644,Y=-3047.9,Z=368
