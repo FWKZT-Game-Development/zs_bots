@@ -7,14 +7,6 @@ hook.Add("PreRestartRound", D3bot.BotHooksId.."PreRestartRoundSupervisor", funct
 	GAMEMODE.ShouldPopBlock = false
 end)
 
-local pairs = pairs
-local team = team
-local player = player
-local math = math
-local table = table
-local GAMEMODE = GAMEMODE
-local game = game
-
 local game_GetWorld = game.GetWorld
 local game_MaxPlayers = game.MaxPlayers
 local player_CreateNextBot = player.CreateNextBot
@@ -37,8 +29,6 @@ local table_sort = table.sort
 local table_remove = table.remove
 local table_add = table.Add
 
-local allowedTotal = game_MaxPlayers()
-
 local TEAM_UNDEAD = TEAM_UNDEAD
 local TEAM_HUMAN = TEAM_HUMAN
 
@@ -60,6 +50,7 @@ hook.Add("PostEndRound", "D3Bot.ResetHumansDead.Supervisor", function(winnerteam
 end)]]
 
 function D3bot.GetDesiredBotCount()
+	local allowedTotal = game_MaxPlayers() -2
 	local volunteers = GAMEMODE:GetDesiredStartingZombies() --* 1.11
 	local botmod = D3bot.ZombiesCountAddition
 
