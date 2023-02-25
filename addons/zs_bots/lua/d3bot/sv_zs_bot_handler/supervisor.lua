@@ -59,7 +59,7 @@ hook.Add("PostEndRound", "D3Bot.ResetHumansDead.Supervisor", function(winnerteam
 	humans_dead = 0
 end)]]
 
-function D3bot.GetDesiredBotCount() - 2 --50
+function D3bot.GetDesiredBotCount()
 	local volunteers = GAMEMODE:GetDesiredStartingZombies() --* 1.11
 	local botmod = D3bot.ZombiesCountAddition
 
