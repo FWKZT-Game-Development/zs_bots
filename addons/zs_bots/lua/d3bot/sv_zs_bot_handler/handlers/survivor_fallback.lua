@@ -1,5 +1,5 @@
-D3bot.Handlers.Survivor_Fallback = D3bot.Handlers.Survivor_Fallback or {}
-local HANDLER = D3bot.Handlers.Survivor_Fallback
+-- D3bot.Handlers.Survivor_Fallback = D3bot.Handlers.Survivor_Fallback or {}
+local HANDLER = {} -- D3bot.Handlers.Survivor_Fallback
 
 HANDLER.angOffshoot = 20
 
