@@ -692,7 +692,7 @@
 67-68:
 68:AimTo=Straight,X=260.3,Y=-1013.7,Z=104.3
 68-69:
-69:AimTo=Straight,AreaXMax=379.8,AreaXMin=256.1,AreaYMax=-968,AreaYMin=-1008,Jump=Always,X=316.6,Y=-979.4,Z=104.2
+69:AimTo=Straight,AreaXMax=379.8,AreaXMin=256.1,AreaYMax=-1000,AreaYMin=-1018.7,Jump=Always,X=311.7,Y=-1002.5,Z=104.2
 69-70:
 69-73:
 7:AreaXMax=-1600,AreaXMin=-1688,AreaYMax=-684,AreaYMin=-904,X=-1648.1,Y=-805.1,Z=0

@@ -160,6 +160,7 @@
 167-159:
 167-162:
 168:AreaXMax=1096,AreaXMin=1088,AreaYMax=-1988,AreaYMin=-2044,X=1091.8,Y=-2017.2,Z=12
+168-158:
 168-159:
 168-284:
 169:AreaXMax=1096,AreaXMin=1088,AreaYMax=-1924,AreaYMin=-1980,X=1092.7,Y=-1958,Z=12
@@ -497,7 +498,6 @@
 298-292:
 298-299:
 299:JumpTo=Always,See=Disabled,X=1028.4,Y=-1390.9,Z=81.1
-299-288:
 3:AreaXMax=1728,AreaXMin=1600,AreaYMax=-2432,AreaYMin=-2816,X=1663.4,Y=-2648.2,Z=0
 30:AreaXMax=312,AreaXMin=192,AreaYMax=-1792,AreaYMin=-1920,X=238.7,Y=-1858.5,Z=64
 30-31:
@@ -681,12 +681,6 @@
 37:AreaXMax=-108,AreaXMin=-156,AreaYMax=-1528,AreaYMin=-1536,X=-134.5,Y=-1533.1,Z=64
 37-36:
 370:AreaXMax=-1296,AreaXMin=-1392,AreaYMax=-1311,AreaYMin=-1408,See=Disabled,X=-1338.3,Y=-1352.3,Z=129.1
-371:JumpTo=Always,See=Disabled,X=1823,Y=-2018.1,Z=60
-371-372:
-371-6:
-372:AreaXMax=1769.9,AreaXMin=1728,AreaYMax=-1952.4,AreaYMin=-2083.8,JumpTo=Always,See=Disabled,X=1750.6,Y=-2016.7,Z=105.2
-373:AreaXMax=1822.6,AreaXMin=1729.9,AreaYMax=-1962,AreaYMin=-2075.9,JumpTo=Always,See=Disabled,X=1775.6,Y=-2016.3,Z=16
-373-371:
 374:AreaXMax=-1528,AreaXMin=-1560,AreaYMax=-1688,AreaYMin=-1784,JumpTo=Always,X=-1545.6,Y=-1744.9,Z=42
 374-139:
 374-145:
