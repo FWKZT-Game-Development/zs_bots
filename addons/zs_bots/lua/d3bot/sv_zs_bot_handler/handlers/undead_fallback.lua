@@ -172,7 +172,7 @@ function HANDLER.ThinkFunction(bot)
 		end
 	
 		mem.nextUpdatePath = CurTime() + 0.9 + math.random() * 0.2
-		bot:D3bot_UpdatePath( pathCostFunction, nil )
+		bot:D3bot_UpdatePath(nil, nil)
 	end
 end
 

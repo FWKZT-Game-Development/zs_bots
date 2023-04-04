@@ -121,7 +121,7 @@ function HANDLER.ThinkFunction(bot)
 	end
 	if mem.nextUpdatePath and mem.nextUpdatePath < CurTime() or not mem.nextUpdatePath then
 		mem.nextUpdatePath = CurTime() + 0.9 + math.random() * 0.2
-		bot:D3bot_UpdatePath(pathCostFunction, nil) -- This will not do anything as long as there is no target set (TgtOrNil, PosTgtOrNil, NodeTgtOrNil), the real magic happens in this handlers think function.
+		bot:D3bot_UpdatePath(nil, nil) -- This will not do anything as long as there is no target set (TgtOrNil, PosTgtOrNil, NodeTgtOrNil), the real magic happens in this handlers think function.
 	end
 	
 	-- Change held weapon based on target distance
