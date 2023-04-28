@@ -39,7 +39,7 @@ function D3bot.RegisterRandomName()
 	)
 end
 
-function D3bot.GenerateFakeNames()
+--[[function D3bot.GenerateFakeNames()
 	for i=1, 50 do
 		D3bot.RegisterRandomName()
 	end
@@ -48,7 +48,7 @@ hook.Add("PlayerConnect", "D3Bot.Init.RNGNames", function()
     D3bot.GenerateFakeNames()
     
     hook.Remove("PlayerConnect", "D3Bot.Init.RNGNames")
-end)
+end)]]
 
 local names = {}
 function D3bot.GetUsername()
