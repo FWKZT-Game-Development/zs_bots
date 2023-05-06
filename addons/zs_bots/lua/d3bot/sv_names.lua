@@ -1,54 +1,17 @@
-D3bot.Names = { [1] = "Bot" }
+D3bot.Names = {"Bot"}
 
---[[if D3bot.BotNameFile then
+-- TODO: Make search path relative
+if D3bot.BotNameFile then
 	include("names/"..D3bot.BotNameFile..".lua")
-end]]
+end
 
 local function getUsernames()
 	local usernames = {}
 	for k, v in pairs(player.GetAll()) do
-		if v and v:IsValid() and v:IsPlayer() then
-			usernames[v:Nick()] = v
-		end
+		usernames[v:Nick()] = v
 	end
 	return usernames
 end
-
-local function GetRandomSteamID()
-	return "7656119"..tostring(7960265728+math.random(1, 200000000))
-end
-
-function D3bot.RegisterRandomName()
-	local frmat = string.format( "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=0C93094A163B186A1D6ADAB1C0BFD61E&steamids=%s", GetRandomSteamID() )
-	http.Fetch( frmat,
-		function( body, length, headers, code )
-			local tab = util.JSONToTable(body)
-			if tab and #tab['response']['players'] > 0 then
-				D3bot.Names[#D3bot.Names+1] = tab['response']['players'][1].personaname
-			else
-				print("error, invalid name, retrying!")
-				D3bot.RegisterRandomName()
-			end
-		end,
-		function( message )
-			print(message)
-			print('Unable to find alias, try again or contact developer!')
-		end,
-
-		{}
-	)
-end
-
---[[function D3bot.GenerateFakeNames()
-	for i=1, 50 do
-		D3bot.RegisterRandomName()
-	end
-end
-hook.Add("PlayerConnect", "D3Bot.Init.RNGNames", function()
-    D3bot.GenerateFakeNames()
-    
-    hook.Remove("PlayerConnect", "D3Bot.Init.RNGNames")
-end)]]
 
 local names = {}
 function D3bot.GetUsername()
@@ -58,7 +21,11 @@ function D3bot.GetUsername()
 	local name = table.remove(names, math.random(#names))
 	
 	if usernames[name] then
-		name = table.Random(names)
+		local number = 2
+		while usernames[name.."("..number..")"] do
+			number = number + 1
+		end
+		return name.."("..number..")"
 	end
 	return name
 end

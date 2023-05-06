@@ -44,9 +44,7 @@ D3bot.StartBonus = nil					-- Number of additional points, that players get at t
 D3bot.DisableBotCrows = false			-- Disable crows from being controlled by the bot
 
 -- Uncomment the name file you want to use. If you comment out all of the name files, standard names will be used (Bot, Bot(2), Bot(3), ...)
-D3bot.BotNameFile = nil -- "fng_usernames"
---D3bot.BotNameFile = "bottish"
-
+D3bot.BotNameFile = "fakeplayers"
 D3bot.UseConsoleBots = false			-- If true, bots will be spawned "the old way". But this will disable custom names.
 										-- This may help if the gamemode doesn't fully support the new bot spawning.
 										-- Also, this will prevent the use of other custom bots alongside D3bot.
