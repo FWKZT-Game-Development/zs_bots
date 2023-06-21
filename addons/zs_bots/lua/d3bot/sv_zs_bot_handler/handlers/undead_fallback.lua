@@ -42,7 +42,7 @@ HANDLER.BotClasses = {
 }]]
 
 HANDLER.RandomSecondaryAttack = {
-	["Zombine"] = {MinTime = 5, MaxTime = 30}, 
+	--["Zombine"] = {MinTime = 5, MaxTime = 30}, --Useless to do since there isn't a distance check, zombines just kill themselves too early.
 	["Ghoul"] = {MinTime = 5, MaxTime = 10},
 	["Poison Zombie"] = {MinTime = 10, MaxTime = 30},
 	["Wild Poison Zombie"] = {MinTime = 10, MaxTime = 30}
