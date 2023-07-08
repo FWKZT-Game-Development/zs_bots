@@ -8,7 +8,7 @@ HANDLER.BotClasses = {
 		"Zombie", "Ghoul", "Stalker"
 	},
 	[2] = {
-		"Zombie", "Ghoul", "Wraith", "Stalker"
+		"Zombie", "Ghoul", "Wraith", "Stalker", "Bloated Zombie"
 	},
 	[3] = {
 		"Zombie", "Poison Zombie", "Fast Zombie"
