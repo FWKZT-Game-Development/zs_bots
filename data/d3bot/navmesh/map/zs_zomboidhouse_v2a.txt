@@ -6,7 +6,7 @@
 100-97:
 102:AimTo=Straight,AreaXMax=256,AreaXMin=252,AreaYMax=939,AreaYMin=915.1,DuckTo=Always,X=253.6,Y=928,Z=188
 102-205:
-102-71:
+102-71:Direction=Forward
 105:AreaXMax=512,AreaXMin=256,AreaYMax=1088,AreaYMin=832,X=370.7,Y=952.7,Z=0
 105-22:
 105-24:
