@@ -212,15 +212,15 @@ end
 
 function HANDLER.RerollTarget(bot)
 	-- Get humans or non zombie players or any players in this order
-	local players = D3bot.RemoveObsDeadTgts(GAMEMODE.HumanPlayers)
-	if #players == 0 and TEAM_UNDEAD then
+	--local players = D3bot.RemoveObsDeadTgts(GAMEMODE.HumanPlayers)
+	--if #players == 0 and TEAM_UNDEAD then
+		--players = D3bot.RemoveObsDeadTgts(player.GetAll())
+		--players = D3bot.From(players):Where(function(k, v) return v:Team() ~= TEAM_UNDEAD end).R
+	--end
+	--[[if #players == 0 then
 		players = D3bot.RemoveObsDeadTgts(player.GetAll())
-		players = D3bot.From(players):Where(function(k, v) return v:Team() ~= TEAM_UNDEAD end).R
-	end
-	if #players == 0 then
-		players = D3bot.RemoveObsDeadTgts(player.GetAll())
-	end
+	end]]
 	potEntTargets = D3bot.GetEntsOfClss(potTargetEntClasses)
-	local potTargets = table.Add(players, potEntTargets)
-	bot:D3bot_SetTgtOrNil(table.Random(potTargets), false, nil)
+	--local potTargets = table.Add(players, potEntTargets)
+	bot:D3bot_SetTgtOrNil(table.Random(potEntTargets), false, nil)
 end
