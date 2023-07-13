@@ -7,7 +7,6 @@ end)
 
 local player_GetAll = player.GetAll
 local player_GetCount = player.GetCount
-local player_GetAllActive = player.GetAllActive
 local player_GetHumans = player.GetHumans
 local game_MaxPlayers = game.MaxPlayers
 local M_Player = FindMetaTable("Player")
@@ -37,6 +36,9 @@ hook.Add("PostEndRound", "D3Bot.ResetHumansDead.Supervisor", function(winnerteam
 end)
 
 function D3bot.GetDesiredBotCount()
+	--If no active players then don't add any bots.
+	if #player.GetHumans() == 0 then return 0 end
+
 	local allowedTotal = game_MaxPlayers() - 2 --50
 	local volunteers = GAMEMODE:GetDesiredStartingZombies() --* 1.11
 	local botmod = D3bot.ZombiesCountAddition
