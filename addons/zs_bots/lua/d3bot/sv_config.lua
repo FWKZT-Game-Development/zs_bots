@@ -51,4 +51,6 @@ D3bot.UseConsoleBots = false			-- If true, bots will be spawned "the old way". B
 
 D3bot.DisableNodeDamage = true			-- Prevents players taking damage from any "DMGPerSecond" parameter.
 
+D3bot.BotUpdateDelay = 1 
+
 D3bot.BotKickReason = "Team Balance"

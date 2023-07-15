@@ -101,7 +101,7 @@ local NextNodeDamage = CurTime()
 local NextMaintainBotRoles = CurTime()
 function D3bot.SupervisorThinkFunction()
 	if NextMaintainBotRoles < CurTime() then
-		NextMaintainBotRoles = CurTime() + 1
+		NextMaintainBotRoles = CurTime() + D3bot.BotUpdateDelay
 		D3bot.MaintainBotRoles()
 	end
 	--[[if game.GetMap() == "gm_construct" then return end

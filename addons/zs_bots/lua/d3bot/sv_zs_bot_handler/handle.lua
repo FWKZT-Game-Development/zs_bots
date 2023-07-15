@@ -95,7 +95,9 @@ end)
 hook.Add("PlayerDeath", D3bot.BotHooksId .. "PlayerDeath", function(pl)
 	if D3bot.IsEnabledCached and pl.D3bot_Mem then
 		local handler = findHandler(pl:GetZombieClass(), pl:Team())
-		handler.OnDeathFunction(pl)
+		if handler then
+			handler.OnDeathFunction(pl)
+		end
 		-- Add death cost to the current link
 		--[[local mem = pl.D3bot_Mem
 		local nodeOrNil = mem.NodeOrNil

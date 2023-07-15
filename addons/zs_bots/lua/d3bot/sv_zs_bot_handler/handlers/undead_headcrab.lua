@@ -12,6 +12,8 @@ function HANDLER.SelectorFunction(zombieClassName, team)
 end
 
 function HANDLER.UpdateBotCmdFunction(bot, cmd)
+	if GAMEMODE.RoundEnded then return end
+	
 	cmd:ClearButtons()
 	cmd:ClearMovement()
 
