@@ -5,7 +5,6 @@
 100:AreaXMax=256,AreaXMin=64,AreaYMax=1088,AreaYMin=512,X=127.9,Y=959.8,Z=384
 100-97:
 102:AimTo=Straight,AreaXMax=256,AreaXMin=252,AreaYMax=939,AreaYMin=915.1,DuckTo=Always,X=253.6,Y=928,Z=188
-102-205:
 102-71:Direction=Forward
 105:AreaXMax=512,AreaXMin=256,AreaYMax=1088,AreaYMin=832,X=370.7,Y=952.7,Z=0
 105-22:
@@ -173,6 +172,9 @@
 204-34:
 205:X=268.1,Y=928.4,Z=0
 205-105:
+205-206:
+206:AimTo=Straight,See=Disabled,X=260.5,Y=928.5,Z=133.7
+206-102:
 21:AreaXMax=864,AreaXMin=768,AreaYMax=1088,AreaYMin=832,X=816,Y=965,Z=0
 21-22:
 21-42:
