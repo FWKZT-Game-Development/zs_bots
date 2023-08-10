@@ -647,8 +647,6 @@
 409-408:
 410:AreaXMax=-265.2,AreaXMin=-430.8,AreaYMax=-1370.1,AreaYMin=-1402.4,X=-360.3,Y=-1388.7,Z=0
 410-408:
-412:AreaXMax=8,AreaXMin=0,AreaYMax=-1308,AreaYMin=-1356,X=4,Y=-1332,Z=8
-412-413:
 413:AreaXMax=160,AreaXMin=8,AreaYMax=-1308,AreaYMin=-1376,X=84,Y=-1342,Z=8
 413-414:
 413-714:
@@ -1291,9 +1289,8 @@
 706-704:
 707:AreaXMax=0,AreaXMin=-160,AreaYMax=-1280,AreaYMin=-1370.1,X=-80,Y=-1325,Z=0
 707-401:
-707-412:
 707-708:
-708:AreaXMax=0,AreaXMin=-160,AreaYMax=-1024,AreaYMin=-1280,X=-80,Y=-1152,Z=0
+708:AreaXMax=0,AreaXMin=-160,AreaYMax=-1024,AreaYMin=-1280,X=-78.8,Y=-1134.7,Z=0
 709:AreaXMax=-92,AreaXMin=-304,AreaYMax=-791.4,AreaYMin=-1024,X=-198,Y=-907.7,Z=0
 709-711:
 709-768:
@@ -1309,7 +1306,7 @@
 714-715:
 714-716:
 715:AreaXMax=160,AreaXMin=119.7,AreaYMax=-1180,AreaYMin=-1308,X=139.9,Y=-1244,Z=72
-716:AreaXMax=119.7,AreaXMin=8,AreaYMax=-1032,AreaYMin=-1180,X=63.9,Y=-1106,Z=8
+716:AreaXMax=119.7,AreaXMin=8,AreaYMax=-1032,AreaYMin=-1180,X=63.1,Y=-1134.4,Z=8
 716-717:
 716-718:
 717:AreaXMax=92,AreaXMin=8,AreaYMax=-952,AreaYMin=-1032,X=50,Y=-992,Z=8
@@ -1896,3 +1893,6 @@
 995:AreaXMax=4088,AreaXMin=3900,AreaYMax=-1688,AreaYMin=-1960,X=3999.2,Y=-1881.9,Z=368
 995-238:
 995-994:
+996:AreaXMax=8,AreaXMin=0,AreaYMax=-1108,AreaYMin=-1156,X=4.1,Y=-1133.5,Z=8
+996-708:
+996-716:
