@@ -1616,9 +1616,16 @@
 733:AreaXMax=-138.5,AreaXMin=-418.4,AreaYMax=-306.7,AreaYMin=-673.2,X=-290.1,Y=-373.7,Z=284
 733-734:
 734:X=-342.3,Y=-274.5,Z=272.3
-734-231:
+734-231:Direction=Forward
 735:AreaXMax=-1079.6,AreaXMin=-1429.6,AreaYMax=-1208,AreaYMin=-1624,X=-1176.6,Y=-1350.9,Z=408
 735-540:Direction=Forward
+736:AreaXMax=616,AreaXMin=216,AreaYMax=1128,AreaYMin=800,X=407.5,Y=964,Z=400
+736-737:
+736-738:
+737:AreaXMax=616,AreaXMin=216,AreaYMax=1312,AreaYMin=1128,X=407.5,Y=1220,Z=400
+737-687:Direction=Forward
+738:AreaXMax=216,AreaXMin=-48,AreaYMax=1128,AreaYMin=800,X=84,Y=964,Z=400
+738-701:Direction=Forward
 74:AreaXMax=956,AreaXMin=798.6,AreaYMax=-1176,AreaYMin=-1290,X=863.8,Y=-1203.7,Z=-236
 74-73:
 74-84:
