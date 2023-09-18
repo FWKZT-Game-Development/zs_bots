@@ -58,7 +58,9 @@ hook.Add("Think", D3bot.BotHooksId .. "Think", function()
 		end
 		
 		local handler = findHandler(bot:GetZombieClass(), bot:Team())
-		handler.ThinkFunction(bot)
+		if handler then
+			handler.ThinkFunction(bot)
+		end
 	end
 	
 	-- Supervisor think function
@@ -81,14 +83,18 @@ hook.Add("EntityTakeDamage", D3bot.BotHooksId .. "TakeDamage", function(ent, dmg
 		if ent:IsPlayer() and ent.D3bot_Mem then
 			-- Bot got damaged or damaged itself
 			local handler = findHandler(ent:GetZombieClass(), ent:Team())
-			handler.OnTakeDamageFunction(ent, dmg)
+			if handler then
+				handler.OnTakeDamageFunction(ent, dmg)
+			end
 		end
 		local attacker = dmg:GetAttacker()
 		if attacker ~= ent and attacker:IsPlayer() and attacker.D3bot_Mem then
 			-- A Bot did damage something
 			local handler = findHandler(attacker:GetZombieClass(), attacker:Team())
-			handler.OnDoDamageFunction(attacker, dmg)
-			attacker.D3bot_LastDamage = CurTime()
+			if handler then
+				handler.OnDoDamageFunction(attacker, dmg)
+				attacker.D3bot_LastDamage = CurTime()
+			end
 		end
 	end
 end)
