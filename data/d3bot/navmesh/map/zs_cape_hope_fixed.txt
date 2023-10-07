@@ -351,6 +351,7 @@
 268:AreaXMax=1408,AreaXMin=1282,AreaYMax=-764,AreaYMin=-1020,X=1345,Y=-892,Z=8
 269:AreaXMax=23.5,AreaXMin=-104,AreaYMax=881.4,AreaYMin=401.2,X=-47.5,Y=641.3,Z=0
 269-12:
+269-302:
 269-96:
 27:AimTo=Straight,AreaXMax=704,AreaXMin=576,AreaYMax=-384,AreaYMin=-400,X=642.6,Y=-387.9,Z=168
 27-222:
@@ -442,6 +443,12 @@
 301-108:
 301-11:
 301-294:
+302:Climbing=Needed,X=36.6,Y=649.4,Z=43.2
+302-303:
+303:Climbing=Needed,X=36.5,Y=650.1,Z=111.5
+303-304:
+304:AreaXMax=134.6,AreaXMin=39.6,AreaYMax=876.8,AreaYMin=406,X=78.6,Y=646.3,Z=130.3
+304-269:Direction=Forward
 31:AreaXMax=1976,AreaXMin=1928,AreaYMax=-128,AreaYMin=-132,X=1952.1,Y=-129.7,Z=8
 32:AreaXMax=1792,AreaXMin=1788,AreaYMax=-225,AreaYMin=-273,X=1790.4,Y=-246.7,Z=8
 32-30:
