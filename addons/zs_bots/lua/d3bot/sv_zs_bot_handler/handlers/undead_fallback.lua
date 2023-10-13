@@ -204,6 +204,7 @@ end
 
 local potTargetEntClasses = {"prop_*turret", "prop_arsenalcrate", "prop_manhack*", "prop_obj_sigil"}
 local potEntTargets = nil
+local potTargets = nil
 function HANDLER.CanBeTgt(bot, target)
 	if not target or not IsValid(target) then return end
 	if SAM_LOADED and target:IsPlayer() and target:sam_get_nwvar("cloaked",false) then return end -- Ignore cloaked admins.
@@ -223,6 +224,6 @@ function HANDLER.RerollTarget(bot)
 		players = D3bot.RemoveObsDeadTgts(player.GetAll())
 	end]]
 	potEntTargets = D3bot.GetEntsOfClss(potTargetEntClasses)
-	--local potTargets = table.Add(players, potEntTargets)
-	bot:D3bot_SetTgtOrNil(table.Random(potEntTargets), false, nil)
+	potTargets = table.Add(D3bot.RemoveObsDeadTgts(GAMEMODE.HumanPlayers), potEntTargets)
+	bot:D3bot_SetTgtOrNil(table.Random(potTargets), false, nil)
 end
