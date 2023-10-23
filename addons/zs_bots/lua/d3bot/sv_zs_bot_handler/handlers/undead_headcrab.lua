@@ -155,5 +155,5 @@ function HANDLER.RerollTarget(bot)
 	--[[if #players == 0 then
 		players = D3bot.RemoveObsDeadTgts(player.GetAll())
 	end]]
-	bot:D3bot_SetTgtOrNil(table.Random(D3bot.RemoveObsDeadTgts(GAMEMODE.HumanPlayers)), false, nil)
+	bot:D3bot_SetTgtOrNil(table.Random(D3bot.RemoveObsDeadTgts( team.GetPlayers(TEAM_HUMAN) )), false, nil)
 end
