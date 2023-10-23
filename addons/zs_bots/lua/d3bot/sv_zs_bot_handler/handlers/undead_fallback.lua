@@ -131,7 +131,7 @@ function HANDLER.ThinkFunction(bot)
 	if mem.nextUpdateSurroundingPlayers and mem.nextUpdateSurroundingPlayers < CurTime() or not mem.nextUpdateSurroundingPlayers then
 		if not mem.TgtOrNil or IsValid(mem.TgtOrNil) and mem.TgtOrNil:GetPos():Distance(botPos) > HANDLER.BotTgtFixationDistMin then
 			mem.nextUpdateSurroundingPlayers = CurTime() + 0.9 + math.random() * 0.2
-			local targets = GAMEMODE.HumanPlayers -- TODO: Filter targets before sorting
+			local targets = team.GetPlayers(TEAM_HUMAN) -- TODO: Filter targets before sorting
 			table.sort(targets, function(a, b) return botPos:DistToSqr(a:GetPos()) < botPos:DistToSqr(b:GetPos()) end)
 			for k, v in ipairs(targets) do
 				if IsValid(v) and botPos:DistToSqr(v:GetPos()) < 500*500 and HANDLER.CanBeTgt(bot, v) and bot:D3bot_CanSeeTarget(nil, v) then
@@ -224,6 +224,6 @@ function HANDLER.RerollTarget(bot)
 		players = D3bot.RemoveObsDeadTgts(player.GetAll())
 	end]]
 	potEntTargets = D3bot.GetEntsOfClss(potTargetEntClasses)
-	potTargets = table.Add(D3bot.RemoveObsDeadTgts(GAMEMODE.HumanPlayers), potEntTargets)
+	potTargets = table.Add(D3bot.RemoveObsDeadTgts(team.GetPlayers(TEAM_HUMAN)), potEntTargets)
 	bot:D3bot_SetTgtOrNil(table.Random(potTargets), false, nil)
 end
