@@ -224,6 +224,6 @@ function HANDLER.RerollTarget(bot)
 		players = D3bot.RemoveObsDeadTgts(player.GetAll())
 	end]]
 	potEntTargets = D3bot.GetEntsOfClss(potTargetEntClasses)
-	potTargets = table.Add(D3bot.RemoveObsDeadTgts( team.GetPlayers(TEAM_HUMAN) ), potEntTargets)
+	potTargets = table.Add(D3bot.RemoveObsDeadTgts(GAMEMODE.HumanPlayers), potEntTargets)
 	bot:D3bot_SetTgtOrNil(table.Random(potTargets), false, nil)
 end
