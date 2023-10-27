@@ -190,7 +190,7 @@ function D3bot.Basics.WalkAttackAuto(bot)
 		else
 			return D3bot.Basics.Walk(bot, nextNodeOrNil.Pos)
 		end
-	elseif mem.TgtOrNil and not mem.DontAttackTgt and (bot:D3bot_CanSeeTargetCached() or not nextNodeOrNil) then
+	elseif mem.TgtOrNil and not mem.DontAttackTgt and (not nextNodeOrNil or (bot:GetPos():DistToSqr(mem.TgtOrNil:GetPos()) < 500 * 500 and bot:D3bot_CanSeeTargetCached())) then
 		aimPos = bot:D3bot_GetAttackPosOrNilFuture(nil, math.Rand(0, D3bot.BotAimPosVelocityOffshoot))
 		origin = bot:D3bot_GetViewCenter()
 		if aimPos and aimPos:DistToSqr(origin) < math.pow(D3bot.BotAttackDistMin, 2) then
