@@ -429,7 +429,7 @@ function D3bot.Basics.AimAndShoot(bot, target, maxDistance)
 	local tr = util.TraceLine({
 		start = origin,
 		endpos = targetPos,
-		filter = player.GetAll(),
+		filter = player.GetAllNoCopy(),
 		mask = MASK_SHOT_HULL
 	})
 	local canShootTarget = not tr.Hit

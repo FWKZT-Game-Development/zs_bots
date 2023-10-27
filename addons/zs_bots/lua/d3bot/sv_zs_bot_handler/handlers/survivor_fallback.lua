@@ -282,7 +282,7 @@ function HANDLER.CanShootTarget(bot, target)
 	local tr = util.TraceLine({
 		start = origin,
 		endpos = targetPos,
-		filter = player.GetAll(),
+		filter = player.GetAllNoCopy(),
 		mask = MASK_SHOT_HULL
 	})
 	return not tr.Hit

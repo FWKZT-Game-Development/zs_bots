@@ -86,7 +86,7 @@ function meta:D3bot_CanSeeTarget(fraction, target)
 	local tr = D3bot.BotSeeTr
 	tr.start = self:D3bot_GetViewCenter()
 	tr.endpos = attackPos
-	tr.filter = player.GetAll()
+	tr.filter = player.GetAllNoCopy()
 	return attackPos and not util.TraceHull(tr).Hit
 end
 
@@ -286,7 +286,7 @@ function meta:D3bot_CanSeeTarget( fraction, target )
 	local tr = D3bot.BotSeeTr
 	tr.start = self:D3bot_GetViewCenter()
 	tr.endpos = attackPos
-	tr.filter = player.GetAll()
+	tr.filter = player.GetAllNoCopy()
 	return attackPos and not util.TraceHull( tr ).Hit
 end
 
