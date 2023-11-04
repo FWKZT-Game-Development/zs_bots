@@ -97,7 +97,8 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 		buttons = bit.bor(actions.MoveForward and IN_FORWARD or 0, actions.MoveBackward and IN_BACK or 0, actions.MoveLeft and IN_MOVELEFT or 0, actions.MoveRight and IN_MOVERIGHT or 0, actions.Attack and IN_ATTACK or 0, actions.Attack2 and IN_ATTACK2 or 0, actions.Duck and IN_DUCK or 0, actions.Jump and IN_JUMP or 0, actions.Use and IN_USE or 0)
 	end
 
-	if not actions.Attack and not actions.Attack2 and not bot:IsMoaning() and bit.band(buttons, IN_RELOAD) == 0 and (bot:GetZombieClassTable().RunSpeed or bot:GetActiveWeapon().StartMoaning) then
+	local wep = bot:GetActiveWeapon()
+	if not actions.Attack and not actions.Attack2 and wep.IsMoaning and not wep:IsMoaning() and wep.StartMoaning then
 		buttons = bit.bor(buttons, IN_RELOAD)
 	end
 	
