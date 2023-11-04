@@ -183,6 +183,10 @@ function D3bot.Basics.WalkAttackAuto(bot)
 		shouldClimb = ( nodeOrNil and nodeOrNil.Params.Climbing == "Needed" ) or ( nextNodeOrNil and nextNodeOrNil.Params.Climbing == "Needed" )
 	end
 
+	if not IsValid(mem.TgtOrNil) then
+		mem.TgtOrNil = nil
+	end
+
 	-- TODO: Reduce can see target calls
 	if shouldClimb and nextNodeOrNil then
 		if D3bot.UsingSourceNav then
