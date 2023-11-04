@@ -5,31 +5,31 @@ HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 250
 HANDLER.BotClasses = {
 	[1] = {
-		"Zombie", "Ghoul", "Stalker"
+		"Zombie", "Zombie", "Ghoul", "Stalker"
 	},
 	[2] = {
-		"Zombie", "Ghoul", "Wraith", "Stalker", "Bloated Zombie"
+		"Zombie", "Zombie", "Ghoul", "Wraith", "Stalker", "Bloated Zombie"
 	},
 	[3] = {
-		"Zombie", "Poison Zombie", "Fast Zombie"
+		"Zombie", "Zombie", "Poison Zombie", "Fast Zombie"
 	},
 	[4] = {
-		"Zombie", "Rebel Poison Zombie", "Fast Zombie", "Charger"
+		"Zombie", "Zombie", "Zombie", "Rebel Poison Zombie", "Fast Zombie", "Charger"
 	},
 	[5] = {
-		"Zombie", "Volatile Poison Zombie", "Lacerator"
+		"Zombie", "Zombie", "Volatile Poison Zombie", "Lacerator"
 	},
 	[6] = {
-		"Zombine", "Elite Poison Zombine", "Lacerator"
+		"Zombine", "Zombine", "Elite Poison Zombine", "Lacerator"
 	},
 	[7] = {
-		"Zombine", "Elite Poison Zombine", "Lacerator"
+		"Zombine", "Zombine", "Elite Poison Zombine", "Lacerator"
 	},
 	[8] = {
-		"Zombine", "Elite Poison Zombine", "Lacerator"
+		"Zombine", "Zombine", "Elite Poison Zombine", "Lacerator"
 	},
 	[9] = {
-		"Zombine", "Elite Poison Zombine", "Lacerator"
+		"Zombine", "Zombine", "Elite Poison Zombine", "Lacerator"
 	}
 }
 
@@ -95,6 +95,10 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 	local buttons
 	if actions then
 		buttons = bit.bor(actions.MoveForward and IN_FORWARD or 0, actions.MoveBackward and IN_BACK or 0, actions.MoveLeft and IN_MOVELEFT or 0, actions.MoveRight and IN_MOVERIGHT or 0, actions.Attack and IN_ATTACK or 0, actions.Attack2 and IN_ATTACK2 or 0, actions.Duck and IN_DUCK or 0, actions.Jump and IN_JUMP or 0, actions.Use and IN_USE or 0)
+	end
+
+	if not actions.Attack and not actions.Attack2 and not bot:IsMoaning() and bit.band(buttons, IN_RELOAD) == 0 and (bot:GetZombieClassTable().RunSpeed or bot:GetActiveWeapon().StartMoaning) then
+		buttons = bit.bor(buttons, IN_RELOAD)
 	end
 	
 	if majorStuck and GAMEMODE:GetWaveActive() then bot:Kill() end
