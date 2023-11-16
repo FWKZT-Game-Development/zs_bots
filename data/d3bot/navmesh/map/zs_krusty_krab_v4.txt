@@ -107,6 +107,8 @@
 144:AreaXMax=1920,AreaXMin=1856,AreaYMax=-316,AreaYMin=-372,X=1888,Y=-344,Z=0
 144-74:
 144-75:
+145:AreaXMax=2162,AreaXMin=1168.9,AreaYMax=752,AreaYMin=-496,X=1610.1,Y=191.7,Z=624
+145-1:Direction=Forward
 15:AreaXMax=2350.4,AreaXMin=2264,AreaYMax=-104.6,AreaYMin=-227.5,X=2327.4,Y=-181.4,Z=0
 15-14:
 16:AreaXMax=3328,AreaXMin=2349.5,AreaYMax=-227.6,AreaYMin=-368.2,X=2412,Y=-287.1,Z=0
