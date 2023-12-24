@@ -49,7 +49,7 @@ function D3bot.GetDesiredBotCount()
 	end
 
 	-- One bot per wave unless volunteers is higher (for low pop)
-	return math.max(GAMEMODE:GetWave(), 1) - 1 + volunteers + humans_dead + botmod, allowedTotal
+	return math.max(GAMEMODE:GetWave(), 1) - 1 + volunteers --[[+ humans_dead]] + botmod, allowedTotal
 end
 
 local spawnAsTeam
