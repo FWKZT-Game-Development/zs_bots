@@ -112,6 +112,8 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 	cmd:SetButtons(buttons)
 end
 
+local dist = 500 * 500
+
 function HANDLER.ThinkFunction(bot)
 	local mem = bot.D3bot_Mem
 	
@@ -139,7 +141,7 @@ function HANDLER.ThinkFunction(bot)
 			local targets = team.GetPlayers(TEAM_HUMAN) -- TODO: Filter targets before sorting
 			table.sort(targets, function(a, b) return botPos:DistToSqr(a:GetPos()) < botPos:DistToSqr(b:GetPos()) end)
 			for k, v in ipairs(targets) do
-				if IsValid(v) and botPos:DistToSqr(v:GetPos()) < 500*500 and HANDLER.CanBeTgt(bot, v) and bot:D3bot_CanSeeTarget(nil, v) then
+				if IsValid(v) and botPos:DistToSqr(v:GetPos()) < dist and HANDLER.CanBeTgt(bot, v) and bot:D3bot_CanSeeTarget(nil, v) then
 					bot:D3bot_SetTgtOrNil(v, false, nil)
 					mem.nextUpdateSurroundingPlayers = CurTime() + 5
 					break
