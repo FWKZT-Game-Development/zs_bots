@@ -370,7 +370,7 @@
 275:AreaXMax=-1817,AreaXMin=-2118,AreaYMax=-606,AreaYMin=-797,X=-1967.5,Y=-701.5,Z=-348
 276:AreaXMax=-1605,AreaXMin=-1817,AreaYMax=-495,AreaYMin=-606,X=-1711,Y=-550.5,Z=-348
 277:AimTo=Straight,AreaXMax=-729.6,AreaXMin=-800.3,AreaYMax=-402,AreaYMin=-448.7,JumpTo=Always,See=Disabled,X=-778.9,Y=-425.3,Z=-156.9
-277-279:
+277-279:Direction=Forward
 277-283:
 278:AreaXMax=-1817,AreaXMin=-2117,AreaYMax=-495,AreaYMin=-588,X=-1967,Y=-541.5,Z=-348
 278-276:
