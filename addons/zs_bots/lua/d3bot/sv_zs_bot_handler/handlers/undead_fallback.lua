@@ -2,7 +2,7 @@ D3bot.Handlers.Undead_Fallback = D3bot.Handlers.Undead_Fallback or {}
 local HANDLER = D3bot.Handlers.Undead_Fallback
 
 HANDLER.AngOffshoot = 45
-HANDLER.BotTgtFixationDistMin = 250
+HANDLER.BotTgtFixationDistMin = 125
 HANDLER.BotClasses = {
 	[1] = {
 		"Zombie", "Zombie", "Ghoul", "Stalker"
