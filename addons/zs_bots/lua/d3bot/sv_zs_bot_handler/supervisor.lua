@@ -86,7 +86,7 @@ function D3bot.MaintainBotRoles()
 	end
 	if team.NumPlayers(TEAM_UNDEAD) > D3bot.GetDesiredBotCount() then
 		for i=1, team.NumPlayers(TEAM_UNDEAD)-D3bot.GetDesiredBotCount() do
-			if #D3bot.BotZombies > 0 then
+			if #D3bot.BotZombies > (GAMEMODE:GetWave() <= 1 and 0 or 3) then
 				local randomBot = table.remove(D3bot.BotZombies, 1)
 				if IsValid(randomBot) then
 					randomBot:StripWeapons()
