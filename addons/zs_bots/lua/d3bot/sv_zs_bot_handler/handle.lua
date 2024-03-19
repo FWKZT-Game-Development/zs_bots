@@ -36,42 +36,57 @@ end)
 
 local NextSupervisorThink = CurTime()
 local NextStorePos = CurTime()
+local NextSpawnInterval = 0
+local SpawnTarget = NULL 
+D3bot.Generation = 1 
+D3bot.GenerationTargets = { NULL }
+local MaxGeneration = 500
 hook.Add("Think", D3bot.BotHooksId .. "Think", function()
 	if not D3bot.IsEnabledCached then return end
 	
+	local time = CurTime()
+
 	-- General bot handler think function
-	for _, bot in ipairs(D3bot.GetBots()) do
-		
-		if not D3bot.UseConsoleBots then
-			-- Hackish method to get bots back into game. (player.CreateNextBot created bots do not trigger the StartCommand hook while they are dead)
+	if NextSpawnInterval < time then
+		NextSpawnInterval = time + 2 + math.random(0, 1)
+
+		for _, bot in ipairs(D3bot.GetBots()) do
 			if not bot:OldAlive() then
-				gamemode.Call("PlayerDeathThink", bot)
-				if (not bot.StartSpectating or bot.StartSpectating <= CurTime()) and not (GAMEMODE.RoundEnded or bot.Revive or bot.NextSpawnTime) and bot:GetObserverMode() ~= OBS_MODE_NONE then
-					if GAMEMODE:GetWaveActive() then
-						bot:RefreshDynamicSpawnPoint()
-						bot:UnSpectateAndSpawn()
-					else
-						bot:ChangeToSpectator()
+				bot.BotGeneration = D3bot.Generation 
+
+				if not D3bot.UseConsoleBots then
+				-- Hackish method to get bots back into game. (player.CreateNextBot created bots do not trigger the StartCommand hook while they are dead)
+					gamemode.Call("PlayerDeathThink", bot)
+					if (not bot.StartSpectating or bot.StartSpectating <= time) and not (GAMEMODE.RoundEnded or bot.Revive or bot.NextSpawnTime) and bot:GetObserverMode() ~= OBS_MODE_NONE then
+						if GAMEMODE:GetWaveActive() then
+							bot:RefreshDynamicSpawnPoint()
+							bot:UnSpectateAndSpawn()
+						else
+							bot:ChangeToSpectator()
+						end
 					end
 				end
 			end
+			
+			local handler = findHandler(bot:GetZombieClass(), bot:Team())
+			if handler then
+				handler.ThinkFunction(bot)
+			end
 		end
-		
-		local handler = findHandler(bot:GetZombieClass(), bot:Team())
-		if handler then
-			handler.ThinkFunction(bot)
-		end
+
+		D3bot.Generation = (D3bot.Generation + 1) % MaxGeneration 
+		D3bot.GenerationTargets[D3bot.Generation] = NULL 
 	end
 	
 	-- Supervisor think function
-	if NextSupervisorThink < CurTime() then
-		NextSupervisorThink = CurTime() + 0.05 + math.random() * 0.1
+	if NextSupervisorThink < time then
+		NextSupervisorThink = time + 0.05 + math.random() * 0.1
 		D3bot.SupervisorThinkFunction()
 	end
 	
 	-- Store history of all players (For behaviour classification, stuck checking)
-	if NextStorePos < CurTime() then
-		NextStorePos = CurTime() + 0.9 + math.random() * 0.2
+	if NextStorePos < time then
+		NextStorePos = time + 0.9 + math.random() * 0.2
 		for _, ply in ipairs(player.GetAll()) do
 			ply:D3bot_StorePos()
 		end
@@ -95,6 +110,15 @@ hook.Add("EntityTakeDamage", D3bot.BotHooksId .. "TakeDamage", function(ent, dmg
 				handler.OnDoDamageFunction(attacker, dmg)
 				attacker.D3bot_LastDamage = CurTime()
 			end
+		end
+	end
+end)
+
+hook.Add("PlayerSpawn", D3bot.BotHooksId .. "PlayerSpawn", function(pl)
+	if D3bot.IsEnabledCached and pl.D3bot_Mem and GAMEMODE:GetWaveActive() then
+		local handler = findHandler(pl:GetZombieClass(), pl:Team())
+		if handler then
+			handler.OnRespawnFunction(pl)
 		end
 	end
 end)

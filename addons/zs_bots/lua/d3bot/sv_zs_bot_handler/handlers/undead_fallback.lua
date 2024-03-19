@@ -41,6 +41,7 @@ HANDLER.BotClasses = {
 	"The Butcher", "The Butcher", "The Butcher", "Tank"
 }]]
 
+
 HANDLER.RandomSecondaryAttack = {
 	--["Zombine"] = {MinTime = 5, MaxTime = 30}, --Useless to do since there isn't a distance check, zombines just kill themselves too early.
 	["Ghoul"] = {MinTime = 5, MaxTime = 10},
@@ -200,16 +201,64 @@ end
 function HANDLER.OnDeathFunction(bot)
 	--bot:Say("rip me!")
 	bot:D3bot_RerollClass( HANDLER.BotClasses[ GAMEMODE:GetWave() ] or HANDLER.BotClasses[ 1 ] ) -- TODO: Situation depending reroll of the zombie class
-	HANDLER.RerollTarget(bot)
 end
-
------------------------------------
--- Custom functions and settings --
------------------------------------
 
 local potTargetEntClasses = {"prop_*turret", "prop_arsenalcrate", "prop_manhack*", "prop_obj_sigil"}
 local potEntTargets = nil
 local potTargets = nil
+
+local function GetClosestTarget(bot) --Allows bots to determine the closest gen or human 
+	local potEntTargets = D3bot.GetEntsOfClss(potTargetEntClasses)
+	local potTargets = table.Add(D3bot.RemoveObsDeadTgts(team.GetPlayers(TEAM_HUMAN)), potEntTargets)
+	local closestTarget = NULL 
+	local shortestDistance = math.huge
+	local botPos = bot:GetPos()
+	local mem = bot.D3bot_Mem
+	local mapNavMesh = D3bot.MapNavMesh
+	local node = mapNavMesh:GetNearestNodeOrNil(botPos)
+
+	for _, ent in ipairs(potTargets) do
+		if not HANDLER.CanBeTgt(bot, ent) then continue end
+		local path = D3bot.GetBestMeshPathOrNil(node, mapNavMesh:GetNearestNodeOrNil(ent:GetPos()), nil, nil, abilities)
+		if path then 
+			local prevPos = botPos
+			local nextPos = path[1].Pos
+			local totalDistance = 0
+			local i = 1
+
+			for i = 1, #path - 1 do 
+				totalDistance = totalDistance + prevPos:Distance(nextPos)
+				prevPos = path[i].Pos
+				nextPos = path[i + 1].Pos
+			end
+
+			if totalDistance < shortestDistance then
+				shortestDistance = totalDistance
+				closestTarget = ent 
+			end 
+		end
+	end
+	
+	return closestTarget
+end
+
+function HANDLER.OnRespawnFunction(bot)
+	bot.D3bot_Mem.nextCheckTarget = CurTime() + 4
+
+	local generation = bot.BotGeneration
+	local target = D3bot.GenerationTargets[generation]
+	
+	if not target:IsValid() then
+		target = GetClosestTarget(bot)
+		D3bot.GenerationTargets[generation] = target
+	end
+
+	bot:D3bot_SetTgtOrNil(target, false, nil)
+end
+-----------------------------------
+-- Custom functions and settings --
+-----------------------------------
+
 function HANDLER.CanBeTgt(bot, target)
 	if not target or not IsValid(target) then return end
 	if SAM_LOADED and target:IsPlayer() and target:sam_get_nwvar("cloaked",false) then return end -- Ignore cloaked admins.
@@ -222,12 +271,12 @@ function HANDLER.RerollTarget(bot)
 	-- Get humans or non zombie players or any players in this order
 	--local players = D3bot.RemoveObsDeadTgts(GAMEMODE.HumanPlayers)
 	--if #players == 0 and TEAM_UNDEAD then
-		--players = D3bot.RemoveObsDeadTgts(player.GetAll())
-		--players = D3bot.From(players):Where(function(k, v) return v:Team() ~= TEAM_UNDEAD end).R
+	--players = D3bot.RemoveObsDeadTgts(player.GetAll())
+	--players = D3bot.From(players):Where(function(k, v) return v:Team() ~= TEAM_UNDEAD end).R
 	--end
 	--[[if #players == 0 then
-		players = D3bot.RemoveObsDeadTgts(player.GetAll())
-	end]]
+	players = D3bot.RemoveObsDeadTgts(player.GetAll())
+end]]
 	potEntTargets = D3bot.GetEntsOfClss(potTargetEntClasses)
 	potTargets = table.Add(D3bot.RemoveObsDeadTgts(team.GetPlayers(TEAM_HUMAN)), potEntTargets)
 	bot:D3bot_SetTgtOrNil(table.Random(potTargets), false, nil)
