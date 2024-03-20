@@ -34,14 +34,8 @@ hook.Add("StartCommand", D3bot.BotHooksId .. "StartCommand", function(pl, cmd)
 	end
 end)
 
-D3bot.Generation = 0
+D3bot.Generation = 1
 D3bot.GenerationTargets = {}
-
-local MaxGenerations = 500
-
-for i = 1, MaxGenerations do
-	D3bot.GenerationTargets[i] = NULL
-end
 
 local NextSupervisorThink = CurTime()
 local NextStorePos = CurTime()
@@ -55,9 +49,11 @@ hook.Add("Think", D3bot.BotHooksId .. "Think", function()
 	if NextSpawnInterval < time then
 		NextSpawnInterval = time + 2 + math.random(0, 1)
 
+		local generation = D3bot.Generation
+
 		for _, bot in ipairs(D3bot.GetBots()) do
 			if not bot:OldAlive() then
-				bot.BotGeneration = D3bot.Generation + 1
+				bot.BotGeneration = generation
 
 				if not D3bot.UseConsoleBots then
 				-- Hackish method to get bots back into game. (player.CreateNextBot created bots do not trigger the StartCommand hook while they are dead)
@@ -79,8 +75,10 @@ hook.Add("Think", D3bot.BotHooksId .. "Think", function()
 			end
 		end
 
-		D3bot.Generation = (D3bot.Generation + 1) % MaxGenerations
-		D3bot.GenerationTargets[D3bot.Generation + 1] = NULL
+		generation = generation + 1
+		
+		D3bot.GenerationTargets[generation] = NULL
+		D3bot.Generation = generation
 	end
 	
 	-- Supervisor think function
