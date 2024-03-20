@@ -130,6 +130,10 @@ end
 function HANDLER.OnDeathFunction(bot)
 	--bot:Say("rip me!")
 	bot:D3bot_RerollClass(D3bot.Handlers.Undead_Fallback.BotClasses) -- Reuse list of available classes.
+	
+end
+
+function HANDLER.OnRespawnFunction(bot)
 	HANDLER.RerollTarget(bot)
 end
 
