@@ -35,7 +35,13 @@ hook.Add("StartCommand", D3bot.BotHooksId .. "StartCommand", function(pl, cmd)
 end)
 
 D3bot.Generation = 0
-D3bot.GenerationTargets = { NULL, NULL }
+D3bot.GenerationTargets = {}
+
+local MaxGenerations = 500
+
+for i = 1, MaxGenerations do
+	D3bot.GenerationTargets[i] = NULL
+end
 
 local NextSupervisorThink = CurTime()
 local NextStorePos = CurTime()
@@ -73,7 +79,7 @@ hook.Add("Think", D3bot.BotHooksId .. "Think", function()
 			end
 		end
 
-		D3bot.Generation = (D3bot.Generation + 1) % 2
+		D3bot.Generation = (D3bot.Generation + 1) % MaxGenerations
 		D3bot.GenerationTargets[D3bot.Generation + 1] = NULL
 	end
 	
