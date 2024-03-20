@@ -79,7 +79,7 @@ hook.Add("Think", D3bot.BotHooksId .. "Think", function()
 			end
 		end
 
-		D3bot.Generation = (D3bot.Generation + 1) % MaxGenerations
+		D3bot.Generation = (D3bot.Generation + 1) % (MaxGenerations - 1)
 		D3bot.GenerationTargets[D3bot.Generation + 1] = NULL
 	end
 	
