@@ -96,3 +96,6 @@ function HANDLER.RerollTarget(bot)
 	local players = D3bot.RemoveObsDeadTgts(player.GetHumans())
 	bot:D3bot_SetTgtOrNil(table.Random(players), false, nil)
 end
+
+function HANDLER.OnRespawnFunction(bot)
+end
