@@ -248,7 +248,7 @@ function HANDLER.OnRespawnFunction(bot)
 	local generation = bot.BotGeneration
 	local target = D3bot.GenerationTargets[generation]
 	
-	if not target:IsValid() then
+	if not target or not target:IsValid() then
 		target = GetClosestTarget(bot)
 		D3bot.GenerationTargets[generation] = target
 	end
