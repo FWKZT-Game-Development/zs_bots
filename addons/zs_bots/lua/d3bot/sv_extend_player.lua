@@ -151,6 +151,8 @@ function meta:D3bot_InitializeOrReset()
 	if not self:IsBot() then
 		self:SetNWBool( "AFKControlled", true )
 	end
+
+	self.BotGeneration = D3bot.Generation
 	
 	local considerPathLethality = math.random(1, D3bot.BotConsideringDeathCostAntichance) == 1
 	
