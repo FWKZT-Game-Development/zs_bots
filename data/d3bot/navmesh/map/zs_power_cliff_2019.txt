@@ -169,8 +169,13 @@
 167:AreaXMax=-1455.1,AreaXMin=-1534.2,AreaYMax=864,AreaYMin=791.8,X=-1473.1,Y=829.5,Z=0
 167-165:
 167-166:
+168:AimTo=Straight,AreaXMax=-3592,AreaXMin=-3632,AreaYMax=-417.9,AreaYMin=-440,JumpTo=Always,X=-3612.4,Y=-428.9,Z=56
+169:X=-3619.1,Y=-468.2,Z=0
+169-168:
 17:AreaXMax=-3731,AreaXMin=-3775.5,AreaYMax=327.7,AreaYMin=269.9,X=-3747,Y=291.8,Z=0
 17-14:
+170:AreaXMax=-3324,AreaXMin=-3582.9,AreaYMax=-440,AreaYMin=-832,X=-3453.4,Y=-656.1,Z=0
+170-64:
 18:AreaXMax=-3731.3,AreaXMin=-3765.7,AreaYMax=63.7,AreaYMin=6.7,X=-3747.2,Y=27,Z=0
 18-8:
 19:AimTo=Straight,AreaXMax=-3432,AreaXMin=-3472,AreaYMax=-160,AreaYMin=-176,JumpTo=Always,X=-3453.6,Y=-167.5,Z=48
@@ -187,10 +192,8 @@
 24:AimTo=Straight,AreaXMax=-3432,AreaXMin=-3472,AreaYMax=-200.4,AreaYMin=-312,DuckTo=Always,X=-3453.1,Y=-276.5,Z=56
 24-20:
 25:AimTo=Straight,AreaXMax=-3592,AreaXMin=-3632,AreaYMax=-352,AreaYMin=-417.9,DuckTo=Always,X=-3612.4,Y=-384.6,Z=56
+25-168:
 25-23:
-26:AimTo=Straight,AreaXMax=-3592,AreaXMin=-3632,AreaYMax=-417.9,AreaYMin=-440,DuckTo=Always,JumpTo=Always,X=-3610.1,Y=-434.1,Z=56
-26-25:
-26-66:
 27:AreaXMax=-3152,AreaXMin=-3328,AreaYMax=368,AreaYMin=215.8,X=-3246.9,Y=308.6,Z=0
 27-4:
 28:AreaXMax=-3220,AreaXMin=-3268,AreaYMax=384,AreaYMin=368,X=-3245.8,Y=374.1,Z=0
@@ -227,7 +230,7 @@
 4:AreaXMax=-3152,AreaXMin=-3328,AreaYMax=215.8,AreaYMin=119.6,X=-3237.3,Y=159.8,Z=0
 4-3:
 4-5:
-40:AreaXMax=-2576,AreaXMin=-3136,AreaYMax=215.8,AreaYMin=119.6,X=-2869.2,Y=132,Z=0
+40:AreaXMax=-2576,AreaXMin=-3136,AreaYMax=215.8,AreaYMin=119.6,X=-2872.1,Y=172.8,Z=0
 40-39:
 41:AreaXMax=-2576,AreaXMin=-3136,AreaYMax=384,AreaYMin=215.8,X=-2875.7,Y=307.7,Z=0
 41-40:
@@ -282,8 +285,9 @@
 64:AreaXMax=-3204,AreaXMin=-3324,AreaYMax=-440,AreaYMin=-832,X=-3261,Y=-648.2,Z=0
 64-65:
 65:AreaXMax=-3157.3,AreaXMin=-3204,AreaYMax=-440,AreaYMin=-832,X=-3172.1,Y=-653,Z=0
-66:AreaXMax=-3324,AreaXMin=-3712,AreaYMax=-440,AreaYMin=-832,X=-3523.9,Y=-656.1,Z=0
-66-64:
+66:AreaXMax=-3582.9,AreaXMin=-3712,AreaYMax=-440,AreaYMin=-832,X=-3643.6,Y=-681,Z=0
+66-169:
+66-170:
 66-67:
 67:AreaXMax=-3712,AreaXMin=-3728,AreaYMax=-652,AreaYMin=-700,X=-3717.2,Y=-677,Z=0
 68:AreaXMax=-3204,AreaXMin=-3324,AreaYMax=-832,AreaYMin=-848,X=-3257.5,Y=-840.5,Z=0
