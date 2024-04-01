@@ -133,4 +133,10 @@ D3bot.Names = {
 	"HTEAM COOKED",
 	"ZTEAM COOKED",
 	"Wave 1 Wipe"
+	"ArthurofHex",
+	"Z0mbiefryd",
+	"BUY ARMOR",
+	"Batman",
+	"Add Bots",
+	"REPAIR"
 }
