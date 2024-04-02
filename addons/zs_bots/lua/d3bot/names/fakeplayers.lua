@@ -132,7 +132,7 @@ D3bot.Names = {
 	"UNSTUCK ME",
 	"HTEAM COOKED",
 	"ZTEAM COOKED",
-	"Wave 1 Wipe"
+	"Wave 1 Wipe",
 	"ArthurofHex",
 	"Z0mbiefryd",
 	"BUY ARMOR",
