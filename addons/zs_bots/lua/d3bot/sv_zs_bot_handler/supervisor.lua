@@ -45,11 +45,11 @@ function D3bot.GetDesiredBotCount()
 
 	--Override if wanted for events or extreme lag.
 	if GAMEMODE.ShouldPopBlock then
-		return botmod, allowedTotal
+		return humans_dead + botmod, allowedTotal
 	end
 
 	-- One bot per wave unless volunteers is higher (for low pop)
-	return math.max(GAMEMODE:GetWave(), 1) - 1 + volunteers --[[+ humans_dead]] + botmod, allowedTotal
+	return math.max(GAMEMODE:GetWave(), 1) - 1 + volunteers + humans_dead + botmod, allowedTotal
 end
 
 local spawnAsTeam
