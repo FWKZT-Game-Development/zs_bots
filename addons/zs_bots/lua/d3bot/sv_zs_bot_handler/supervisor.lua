@@ -28,7 +28,7 @@ end)
 hook.Add("PostPlayerRedeemed","D3Bot.PostPlayerRedeemed.Supervisor", function(pl, silent, noequip)
 	if GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 1 --[[or player.GetCount() <= GAMEMODE.LowPopulationLimit]] then return end
 
-	humans_dead = math.max(humans_dead - 1, 0)
+	humans_dead = math_max(humans_dead - 1, 0)
 end)
 
 hook.Add("PostEndRound", "D3Bot.ResetHumansDead.Supervisor", function(winnerteam)
@@ -37,7 +37,7 @@ end)
 
 function D3bot.GetDesiredBotCount()
 	--If no active players then don't add any bots.
-	if #player.GetHumans() == 0 then return 0 end
+	if #player_GetHumans() == 0 then return 0 end
 
 	local allowedTotal = game_MaxPlayers() - 2 --50
 	local volunteers = GAMEMODE:GetDesiredStartingZombies() --* 1.11
@@ -49,7 +49,7 @@ function D3bot.GetDesiredBotCount()
 	end
 
 	-- One bot per wave unless volunteers is higher (for low pop)
-	return math.max(GAMEMODE:GetWave(), 1) - 1 + volunteers + humans_dead + botmod, allowedTotal
+	return math_max(GAMEMODE:GetWave(), 1) - 1 + volunteers + humans_dead + botmod, allowedTotal
 end
 
 local spawnAsTeam
