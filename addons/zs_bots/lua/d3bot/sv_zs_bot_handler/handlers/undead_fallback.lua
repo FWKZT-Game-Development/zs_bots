@@ -217,9 +217,16 @@ local function GetClosestTarget(bot) --Allows bots to determine the closest gen 
 	local mapNavMesh = D3bot.MapNavMesh
 	local node = mapNavMesh:GetNearestNodeOrNil(botPos)
 
+	local pathFunc
+	if D3bot.UsingSourceNav then
+		pathFunc = D3bot.GetBestValveMeshPathOrNil
+	else
+		pathFunc = D3bot.GetBestMeshPathOrNil
+	end
+
 	for _, ent in ipairs(potTargets) do
 		if not HANDLER.CanBeTgt(bot, ent) then continue end
-		local path = D3bot.GetBestMeshPathOrNil(node, mapNavMesh:GetNearestNodeOrNil(ent:GetPos()), nil, nil, abilities)
+		local path = pathFunc(node, mapNavMesh:GetNearestNodeOrNil(ent:GetPos()), nil, nil, abilities)
 		if path then 
 			local prevPos = botPos
 			local nextPos = path[1].Pos
