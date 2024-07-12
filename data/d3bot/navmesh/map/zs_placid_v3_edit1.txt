@@ -203,7 +203,6 @@
 177:Aim=Straight,See=Disabled,X=-3910.9,Y=423.4,Z=118.9
 177-149:
 177-150:
-177-175:
 178:AreaXMax=-3792,AreaXMin=-4098,AreaYMax=128,AreaYMin=-15.9,See=Disabled,X=-3908.3,Y=72.6,Z=362.8
 178-175:
 178-181:
