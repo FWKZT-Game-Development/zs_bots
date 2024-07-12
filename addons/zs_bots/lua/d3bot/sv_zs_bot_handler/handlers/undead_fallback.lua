@@ -14,7 +14,7 @@ HANDLER.BotClasses = {
 		"Zombie", "Zombie", "Poison Zombie", "Fast Zombie"
 	},
 	[4] = {
-		"Zombie", "Zombie", "Zombie", "Rebel Poison Zombie", "Fast Zombie", "Charger"
+		"Zombie", "Zombie", "Zombie", "Rebel Poison Zombie", "Fast Zombie"
 	},
 	[5] = {
 		"Zombie", "Zombie", "Volatile Poison Zombie", "Lacerator"
@@ -216,12 +216,17 @@ local function GetClosestTarget(bot) --Allows bots to determine the closest gen 
 	local mapNavMesh = D3bot.MapNavMesh
 	local node = mapNavMesh:GetNearestNodeOrNil(botPos)
 
+	local pathFunc
+	if D3bot.UsingSourceNav then
+		pathFunc = D3bot.GetBestValveMeshPathOrNil
+	else
+		pathFunc = D3bot.GetBestMeshPathOrNil
+	end
+
 	for _, ent in ipairs(potTargets) do
 		if not HANDLER.CanBeTgt(bot, ent) then continue end
-		
-		local path = D3bot.GetBestMeshPathOrNil(node, mapNavMesh:GetNearestNodeOrNil(ent:GetPos()), nil, nil, abilities)
-		
-		if path and path[1] then
+		local path = pathFunc(node, mapNavMesh:GetNearestNodeOrNil(ent:GetPos()), nil, nil, abilities)
+		if path and path[1] then 
 			local prevPos = botPos
 			local nextPos = path[1].Pos
 			local totalDistance = prevPos:Distance(nextPos)
