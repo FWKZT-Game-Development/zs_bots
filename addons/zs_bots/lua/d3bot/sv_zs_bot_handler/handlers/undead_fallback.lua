@@ -194,7 +194,7 @@ function HANDLER.OnTakeDamageFunction(bot, dmg)
 end
 
 function HANDLER.OnDoDamageFunction(bot, dmg)
-	local mem = bot.D3bot_Mem
+	--local mem = bot.D3bot_Mem
 	--bot:Say("Gotcha!")
 end
 
@@ -208,29 +208,36 @@ local potEntTargets = nil
 local potTargets = nil
 
 local function GetClosestTarget(bot) --Allows bots to determine the closest gen or human 
-	local potEntTargets = D3bot.GetEntsOfClss(potTargetEntClasses)
-	local potTargets = table.Add(D3bot.RemoveObsDeadTgts(team.GetPlayers(TEAM_HUMAN)), potEntTargets)
+	potEntTargets = D3bot.GetEntsOfClss(potTargetEntClasses)
+	potTargets = table.Add(D3bot.RemoveObsDeadTgts(team.GetPlayers(TEAM_HUMAN)), potEntTargets)
 	local closestTarget = NULL 
 	local shortestDistance = math.huge
 	local botPos = bot:GetPos()
-	local mem = bot.D3bot_Mem
 	local mapNavMesh = D3bot.MapNavMesh
 	local node = mapNavMesh:GetNearestNodeOrNil(botPos)
 
+	local pathFunc
+	if D3bot.UsingSourceNav then
+		pathFunc = D3bot.GetBestValveMeshPathOrNil
+	else
+		pathFunc = D3bot.GetBestMeshPathOrNil
+	end
+
 	for _, ent in ipairs(potTargets) do
 		if not HANDLER.CanBeTgt(bot, ent) then continue end
-		local path = D3bot.GetBestMeshPathOrNil(node, mapNavMesh:GetNearestNodeOrNil(ent:GetPos()), nil, nil, abilities)
-		if path then 
+		local path = pathFunc(node, mapNavMesh:GetNearestNodeOrNil(ent:GetPos()), nil, nil, abilities)
+		if path and path[1] then 
 			local prevPos = botPos
 			local nextPos = path[1].Pos
-			local totalDistance = 0
-			local i = 1
+			local totalDistance = prevPos:Distance(nextPos)
 
 			for i = 1, #path - 1 do 
-				totalDistance = totalDistance + prevPos:Distance(nextPos)
 				prevPos = path[i].Pos
 				nextPos = path[i + 1].Pos
+				totalDistance = totalDistance + prevPos:Distance(nextPos)
 			end
+
+			totalDistance = totalDistance + nextPos:Distance(ent:GetPos())
 
 			if totalDistance < shortestDistance then
 				shortestDistance = totalDistance
