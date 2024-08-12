@@ -218,9 +218,9 @@ local function GetClosestTarget(bot) --Allows bots to determine the closest gen 
 
 	local pathFunc
 	if D3bot.UsingSourceNav then
-		pathFunc = D3bot.GetBestValveMeshPathOrNil
+		pathFunc = memoize5(D3bot.GetBestValveMeshPathOrNil)
 	else
-		pathFunc = D3bot.GetBestMeshPathOrNil
+		pathFunc = memoize5(D3bot.GetBestMeshPathOrNil)
 	end
 
 	for _, ent in ipairs(potTargets) do
