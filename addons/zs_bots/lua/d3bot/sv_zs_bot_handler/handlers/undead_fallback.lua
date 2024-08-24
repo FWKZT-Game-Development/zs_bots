@@ -208,11 +208,11 @@ local potEntTargets = nil
 local potTargets = nil
 
 local function pathFuncAlias(node1, node2, abilities)
-	D3bot.GetBestMeshPathOrNil(node1, node2, nil, nil, abilities)
+	return D3bot.GetBestMeshPathOrNil(node1, node2, nil, nil, abilities)
 end
 
 local function pathFuncAliasValve(node1, node2, abilities)
-	D3bot.GetBestValveMeshPathOrNil(node1, node2, nil, nil, abilities)
+	return D3bot.GetBestValveMeshPathOrNil(node1, node2, nil, nil, abilities)
 end
 
 local empty_path_func = function() return {} end
