@@ -215,12 +215,17 @@ local function pathFuncAliasValve(node1, node2, abilities)
 	D3bot.GetBestValveMeshPathOrNil(node1, node2, nil, nil, abilities)
 end
 
-local memo_GetBestMeshPathOrNil = memoize3_no_nil(pathFuncAlias)
-local memo_GetBestValveMeshPathOrNil = memoize3_no_nil(pathFuncAliasValve)
+local empty_path_func = function() return {} end
 
-local closest_pathFunc = function() return {} end
+local memo_GetBestMeshPathOrNil = empty_path_func
+local memo_GetBestValveMeshPathOrNil = empty_path_func
+
+local closest_pathFunc = empty_path_func
 
 hook.Add("Initialize", "D3bot.Cache_ClosestTarget_PathFunc", function()
+	memo_GetBestMeshPathOrNil = memoize3_no_nil(pathFuncAlias)
+	memo_GetBestValveMeshPathOrNil = memoize3_no_nil(pathFuncAliasValve)
+
 	if D3bot.UsingSourceNav then
 		closest_pathFunc = memo_GetBestMeshPathOrNil
 	else
@@ -228,6 +233,7 @@ hook.Add("Initialize", "D3bot.Cache_ClosestTarget_PathFunc", function()
 	end
 end)
 
+local abilities = { Walk = true }
 local function GetClosestTarget(bot) --Allows bots to determine the closest gen or human 
 	potEntTargets = D3bot.GetEntsOfClss(potTargetEntClasses)
 	potTargets = table.Add(D3bot.RemoveObsDeadTgts(team.GetPlayers(TEAM_HUMAN)), potEntTargets)
