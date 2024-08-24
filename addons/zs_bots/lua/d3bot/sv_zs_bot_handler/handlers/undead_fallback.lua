@@ -239,7 +239,7 @@ local function GetClosestTarget(bot) --Allows bots to determine the closest gen 
 
 	for _, ent in ipairs(potTargets) do
 		if not HANDLER.CanBeTgt(bot, ent) then continue end
-		local path = closest_pathFunc(node, mapNavMesh:GetNearestNodeOrNil(ent:GetPos()), nil, nil, abilities)
+		local path = closest_pathFunc(node, mapNavMesh:GetNearestNodeOrNil(ent:GetPos()), abilities)
 		if path and path[1] then 
 			local prevPos = botPos
 			local nextPos = path[1].Pos
