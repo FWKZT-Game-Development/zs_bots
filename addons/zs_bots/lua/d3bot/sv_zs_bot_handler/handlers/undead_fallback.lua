@@ -226,7 +226,7 @@ hook.Add("Initialize", "D3bot.Cache_ClosestTarget_PathFunc", function()
 	memo_GetBestMeshPathOrNil = memoize3_no_nil(pathFuncAlias)
 	memo_GetBestValveMeshPathOrNil = memoize3_no_nil(pathFuncAliasValve)
 
-	if D3bot.UsingSourceNav then
+	if not D3bot.UsingSourceNav then
 		closest_pathFunc = memo_GetBestMeshPathOrNil
 	else
 		closest_pathFunc = memo_GetBestValveMeshPathOrNil
