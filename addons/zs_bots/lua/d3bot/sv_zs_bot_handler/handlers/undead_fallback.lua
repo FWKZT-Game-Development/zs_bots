@@ -207,6 +207,27 @@ local potTargetEntClasses = {"prop_*turret", "prop_arsenalcrate", "prop_manhack*
 local potEntTargets = nil
 local potTargets = nil
 
+local function pathFuncAlias(node1, node2, abilities)
+	D3bot.GetBestMeshPathOrNil(node1, node2, nil, nil, abilities)
+end
+
+local function pathFuncAliasValve(node1, node2, abilities)
+	D3bot.GetBestValveMeshPathOrNil(node1, node2, nil, nil, abilities)
+end
+
+local memo_GetBestMeshPathOrNil = memoize3_no_nil(pathFuncAlias)
+local memo_GetBestValveMeshPathOrNil = memoize3_no_nil(pathFuncAliasValve)
+
+local closest_pathFunc = function() return {} end
+
+hook.Add("Initialize", "D3bot.Cache_ClosestTarget_PathFunc", function()
+	if D3bot.UsingSourceNav then
+		closest_pathFunc = memo_GetBestMeshPathOrNil
+	else
+		closest_pathFunc = memo_GetBestValveMeshPathOrNil
+	end
+end)
+
 local function GetClosestTarget(bot) --Allows bots to determine the closest gen or human 
 	potEntTargets = D3bot.GetEntsOfClss(potTargetEntClasses)
 	potTargets = table.Add(D3bot.RemoveObsDeadTgts(team.GetPlayers(TEAM_HUMAN)), potEntTargets)
@@ -216,16 +237,9 @@ local function GetClosestTarget(bot) --Allows bots to determine the closest gen 
 	local mapNavMesh = D3bot.MapNavMesh
 	local node = mapNavMesh:GetNearestNodeOrNil(botPos)
 
-	local pathFunc
-	if D3bot.UsingSourceNav then
-		pathFunc = memoize5(D3bot.GetBestValveMeshPathOrNil)
-	else
-		pathFunc = memoize5(D3bot.GetBestMeshPathOrNil)
-	end
-
 	for _, ent in ipairs(potTargets) do
 		if not HANDLER.CanBeTgt(bot, ent) then continue end
-		local path = pathFunc(node, mapNavMesh:GetNearestNodeOrNil(ent:GetPos()), nil, nil, abilities)
+		local path = closest_pathFunc(node, mapNavMesh:GetNearestNodeOrNil(ent:GetPos()), nil, nil, abilities)
 		if path and path[1] then 
 			local prevPos = botPos
 			local nextPos = path[1].Pos
