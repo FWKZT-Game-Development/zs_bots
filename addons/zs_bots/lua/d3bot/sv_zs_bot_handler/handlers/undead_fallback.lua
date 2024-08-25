@@ -1,7 +1,7 @@
 D3bot.Handlers.Undead_Fallback = D3bot.Handlers.Undead_Fallback or {}
 local HANDLER = D3bot.Handlers.Undead_Fallback
 
-HANDLER.AngOffshoot = 45 * math.random() * 0.3
+HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 125
 HANDLER.BotClasses = {
 	[1] = {
@@ -158,7 +158,7 @@ function HANDLER.ThinkFunction(bot)
 	end
 	
 	if mem.nextUpdateOffshoot and mem.nextUpdateOffshoot < CurTime() or not mem.nextUpdateOffshoot then
-		mem.nextUpdateOffshoot = CurTime() + 4 + math.random() * 0.2
+		mem.nextUpdateOffshoot = CurTime() + 0.4 + math.random() * 0.2
 		bot:D3bot_UpdateAngsOffshoot(HANDLER.AngOffshoot)
 	end
 
