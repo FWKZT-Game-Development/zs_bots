@@ -3,7 +3,7 @@ local HANDLER = D3bot.Handlers.Undead_Fallback
 
 HANDLER.AngOffshoot = 45
 HANDLER.BotTgtFixationDistMin = 125
-HANDLER.BotClasses = {
+local BotClasses = {
 	[1] = {
 		"Zombie", "Zombie", "Ghoul", "Stalker"
 	},
@@ -22,16 +22,12 @@ HANDLER.BotClasses = {
 	[6] = {
 		"Zombine", "Zombine", "Elite Poison Zombine", "Lacerator"
 	},
-	[7] = {
-		"Zombine", "Zombine", "Elite Poison Zombine", "Lacerator"
-	},
-	[8] = {
-		"Zombine", "Zombine", "Elite Poison Zombine", "Lacerator"
-	},
-	[9] = {
-		"Zombine", "Zombine", "Elite Poison Zombine", "Lacerator"
-	}
 }
+
+BotClasses[7] = BotClasses[6]
+BotClasses[8] = BotClasses[6]
+BotClasses[9] = BotClasses[6]
+HANDLER.BotClasses = BotClasses
 
 --[[HANDLER.HvH_BotClasses = {
 	"Nightmare", "Nightmare", 
