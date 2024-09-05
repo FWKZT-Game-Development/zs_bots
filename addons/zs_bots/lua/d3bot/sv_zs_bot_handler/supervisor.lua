@@ -22,7 +22,8 @@ local humans_dead = 0
 hook.Add("DoPlayerDeath","D3Bot.AddHumansDied.Supervisor", function(pl, attacker, dmginfo)
 	if pl:Team() ~= TEAM_HUMAN or pl:IsBot() or GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 1 --[[or player.GetCount() <= GAMEMODE.LowPopulationLimit]] then return end
 
-	humans_dead = humans_dead + 1
+	humans_dead = ( GAMEMODE:GetWave() == 0 and humans_dead or GAMEMODE:GetWave() == 1 and math_min(humans_dead + 1, 3) or humans_dead + 1) 
+	--humans_dead = humans_dead + 1
 end)
 
 hook.Add("PostPlayerRedeemed","D3Bot.PostPlayerRedeemed.Supervisor", function(pl, silent, noequip)
@@ -86,7 +87,9 @@ function D3bot.MaintainBotRoles()
 	end
 	if team.NumPlayers(TEAM_UNDEAD) > D3bot.GetDesiredBotCount() then
 		for i=1, team.NumPlayers(TEAM_UNDEAD)-D3bot.GetDesiredBotCount() do
-			if #D3bot.BotZombies > (GAMEMODE:GetWave() <= 1 and 0 or 3) then
+			--if #D3bot.BotZombies > (GAMEMODE:GetWave() <= 1 and 0 or 3) then
+			--Keep a minimum of 3 bots if they are there are wave 1, or 5 if its past wave 1, consider botmod for admins
+			if #D3bot.BotZombies > ( (GAMEMODE:GetWave() == 1 and 3 or GAMEMODE:GetWave() > 1 and 5 or 0) + (D3bot.ZombiesCountAddition or 0) ) then
 				local randomBot = table.remove(D3bot.BotZombies, 1)
 				if IsValid(randomBot) then
 					randomBot:StripWeapons()
