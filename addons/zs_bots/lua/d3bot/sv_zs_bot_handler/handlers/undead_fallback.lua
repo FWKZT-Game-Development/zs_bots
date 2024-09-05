@@ -45,14 +45,6 @@ HANDLER.RandomSecondaryAttack = {
 	["Wild Poison Zombie"] = {MinTime = 10, MaxTime = 30}
 }
 
-// Disable using IN_Reload (Poison Zombies Detach 24/7)
-HANDLER.NoReloadZombie = {
-	["Rebel Poison Zombie"] = {MinTime = 5, MaxTime = 10},
-	["Poison Zombie"] = {MinTime = 10, MaxTime = 30},
-	["Wild Poison Zombie"] = {MinTime = 10, MaxTime = 30}
-	["Elite Poison Zombine"] = {MinTime = 10, MaxTime = 30}
-}
-
 HANDLER.Fallback = true
 function HANDLER.SelectorFunction(zombieClassName, team)
 	return team == TEAM_UNDEAD
@@ -103,8 +95,7 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 	end
 
 	local wep = bot:GetActiveWeapon()
-	local noReloadZombie = HANDLER.NoReloadZombie[GAMEMODE.ZombieClasses[bot:GetZombieClass()].Name]
-	if not actions.Attack and not actions.Attack2 and wep.IsMoaning and not wep:IsMoaning() and wep.StartMoaning and not noReloadZombie then
+	if not actions.Attack and not actions.Attack2 and wep.IsMoaning and not wep:IsMoaning() and wep.StartMoaning then
 		buttons = bit.bor(buttons, IN_RELOAD)
 	end
 	
