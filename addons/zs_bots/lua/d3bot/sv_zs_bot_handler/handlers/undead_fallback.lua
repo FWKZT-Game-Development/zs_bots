@@ -138,10 +138,10 @@ function HANDLER.ThinkFunction(bot)
 			for k, v in ipairs(targets) do
 				if IsValid(v) and botPos:DistToSqr(v:GetPos()) < 500*500 and HANDLER.CanBeTgt(bot, v) and bot:D3bot_CanSeeTarget(nil, v) then
 					bot:D3bot_SetTgtOrNil(v, false, nil)
-					mem.nextUpdateSurroundingPlayers = CurTime() + 5
+					mem.nextUpdateSurroundingPlayers = CurTime() + 3
 					break
 				end
-				if k > 3 then break end
+				if k > 5 then break end
 			end
 		end
 	end
