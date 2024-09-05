@@ -45,6 +45,10 @@ HANDLER.RandomSecondaryAttack = {
 	["Wild Poison Zombie"] = {MinTime = 10, MaxTime = 30}
 }
 
+HANDLER.NoReloadZombie = {
+	"Poison Zombie", "Wild Poison Zombie", "Elite Poison Zombine"
+}
+
 HANDLER.Fallback = true
 function HANDLER.SelectorFunction(zombieClassName, team)
 	return team == TEAM_UNDEAD
@@ -95,8 +99,11 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 	end
 
 	local wep = bot:GetActiveWeapon()
-	if not actions.Attack and not actions.Attack2 and wep.IsMoaning and not wep:IsMoaning() and wep.StartMoaning then
-		buttons = bit.bor(buttons, IN_RELOAD)
+	local noReload = HANDLER.NoReloadZombie[GAMEMODE.ZombieClasses[bot:GetZombieClass()].Name]
+	if not noReload then
+		if not actions.Attack and not actions.Attack2 and wep.IsMoaning and not wep:IsMoaning() and wep.StartMoaning then
+			buttons = bit.bor(buttons, IN_RELOAD)
+		end
 	end
 	
 	if majorStuck and GAMEMODE:GetWaveActive() then bot:Kill() end
@@ -285,6 +292,7 @@ end
 function HANDLER.CanBeTgt(bot, target)
 	if not target or not IsValid(target) then return end
 	if SAM_LOADED and target:IsPlayer() and target:sam_get_nwvar("cloaked",false) then return end -- Ignore cloaked admins.
+	if target:IsPlayer() and target:GetStatus("hidden") then return end -- Ignore player who is hidden.
 	if target:IsPlayer() and target ~= bot and target:Team() ~= TEAM_UNDEAD and target:GetObserverMode() == OBS_MODE_NONE and not target:IsFlagSet(FL_NOTARGET) and target:Alive() then return true end
 	if target:GetClass() == "prop_obj_sigil" and target:GetSigilCorrupted() then return end -- Special case to ignore corrupted sigils.
 	if potEntTargets and table.HasValue(potEntTargets, target) then return true end
