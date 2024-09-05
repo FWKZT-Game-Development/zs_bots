@@ -1,7 +1,8 @@
 D3bot.Handlers.Undead_Fallback = D3bot.Handlers.Undead_Fallback or {}
 local HANDLER = D3bot.Handlers.Undead_Fallback
 
-HANDLER.AngOffshoot = 45
+HANDLER.AngOffshoot = 5 --how close to the navmesh lines/links bots will follow. 0 = no straying from lines/links. 45 = vanilla/'realistic' zombies
+HANDLER.RateOfViewmodelChange = 0.01 --0.4 = 9/5/2024 bots(roughly 2-3 times per second)
 HANDLER.BotTgtFixationDistMin = 125
 local BotClasses = {
 	[1] = {
@@ -154,7 +155,7 @@ function HANDLER.ThinkFunction(bot)
 	end
 	
 	if mem.nextUpdateOffshoot and mem.nextUpdateOffshoot < CurTime() or not mem.nextUpdateOffshoot then
-		mem.nextUpdateOffshoot = CurTime() + 0.4 + math.random() * 0.2
+		mem.nextUpdateOffshoot = CurTime() + HANDLER.RateOfViewmodelChange + math.random() * 0.2 --math.random() * 0.2 is a way to make all zombies not update at the same time
 		bot:D3bot_UpdateAngsOffshoot(HANDLER.AngOffshoot)
 	end
 
