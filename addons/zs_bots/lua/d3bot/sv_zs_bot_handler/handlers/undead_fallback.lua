@@ -45,10 +45,6 @@ HANDLER.RandomSecondaryAttack = {
 	["Wild Poison Zombie"] = {MinTime = 10, MaxTime = 30}
 }
 
-HANDLER.NoReloadZombie = {
-	"Poison Zombie", "Wild Poison Zombie", "Elite Poison Zombine"
-}
-
 HANDLER.Fallback = true
 function HANDLER.SelectorFunction(zombieClassName, team)
 	return team == TEAM_UNDEAD
@@ -99,11 +95,8 @@ function HANDLER.UpdateBotCmdFunction(bot, cmd)
 	end
 
 	local wep = bot:GetActiveWeapon()
-	local noReload = HANDLER.NoReloadZombie[GAMEMODE.ZombieClasses[bot:GetZombieClass()].Name]
-	if not noReload then
-		if not actions.Attack and not actions.Attack2 and wep.IsMoaning and not wep:IsMoaning() and wep.StartMoaning then
-			buttons = bit.bor(buttons, IN_RELOAD)
-		end
+	if not actions.Attack and not actions.Attack2 and wep.IsMoaning and not wep:IsMoaning() and wep.StartMoaning then
+		buttons = bit.bor(buttons, IN_RELOAD)
 	end
 	
 	if majorStuck and GAMEMODE:GetWaveActive() then bot:Kill() end
@@ -145,10 +138,10 @@ function HANDLER.ThinkFunction(bot)
 			for k, v in ipairs(targets) do
 				if IsValid(v) and botPos:DistToSqr(v:GetPos()) < 500*500 and HANDLER.CanBeTgt(bot, v) and bot:D3bot_CanSeeTarget(nil, v) then
 					bot:D3bot_SetTgtOrNil(v, false, nil)
-					mem.nextUpdateSurroundingPlayers = CurTime() + 3
+					mem.nextUpdateSurroundingPlayers = CurTime() + 5
 					break
 				end
-				if k > 5 then break end
+				if k > 3 then break end
 			end
 		end
 	end
