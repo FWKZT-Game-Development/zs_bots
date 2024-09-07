@@ -14,7 +14,7 @@ D3bot.ValveNavOverride = false					-- Enable overriding the manually created nav
 
 D3bot.NodeDamageEnts = {"prop_*turret", "prop_arsenalcrate", "prop_resupply"}
 
-D3bot.BotAttackDistMin = 75 --100
+D3bot.BotAttackDistMin = 85 --100 and the bots pre-swing like they're Einstein, 75 and you need to hug them to get an attack out of them
 D3bot.LinkDeathCostRaise = 300
 D3bot.BotConsideringDeathCostAntichance = 3
 D3bot.BotAngLerpFactor = 0.105 --0.125					-- Linear interpolation factor between the current viewing angle and target viewing angle.
