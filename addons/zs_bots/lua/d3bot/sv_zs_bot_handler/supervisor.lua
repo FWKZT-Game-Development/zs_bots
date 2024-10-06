@@ -18,9 +18,16 @@ local math_ceil = math.ceil
 local table_insert = table.insert
 local table_sort = table.sort
 
+local forced_player_zombies = 1
+
 local humans_dead = 0
 hook.Add("DoPlayerDeath","D3Bot.AddHumansDied.Supervisor", function(pl, attacker, dmginfo)
-	if pl:Team() ~= TEAM_HUMAN or pl:IsBot() or GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 1 --[[or player.GetCount() <= GAMEMODE.LowPopulationLimit]] then return end
+	local is_human = pl:Team() == TEAM_HUMAN
+	if is_human and (GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 1) and humans_dead < forced_player_zombies then
+		humans_dead = humans_dead + 1
+	end
+
+	if not is_human or pl:IsBot() or GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 1 --[[or player.GetCount() <= GAMEMODE.LowPopulationLimit]] then return end
 
 	humans_dead = ( GAMEMODE:GetWave() == 0 and humans_dead or GAMEMODE:GetWave() == 1 and math_min(humans_dead + 1, 3) or humans_dead + 1) 
 	--humans_dead = humans_dead + 1
@@ -41,8 +48,9 @@ function D3bot.GetDesiredBotCount()
 	if #player_GetHumans() == 0 then return 0 end
 
 	local allowedTotal = game_MaxPlayers() - 2 --50
-	local volunteers = GAMEMODE:GetDesiredStartingZombies() --* 1.11
+	local volunteers = math_max(GAMEMODE:GetDesiredStartingZombies(), 1)
 	local botmod = D3bot.ZombiesCountAddition
+	local force_players = volunteers >= 3 and forced_player_zombies or 0
 
 	--Override if wanted for events or extreme lag.
 	if GAMEMODE.ShouldPopBlock then
@@ -50,7 +58,7 @@ function D3bot.GetDesiredBotCount()
 	end
 
 	-- One bot per wave unless volunteers is higher (for low pop)
-	return math_max(GAMEMODE:GetWave(), 1) - 1 + volunteers + humans_dead + botmod, allowedTotal
+	return math_max(GAMEMODE:GetWave(), 1) - 1 + volunteers + humans_dead + botmod - force_players, allowedTotal
 end
 
 local spawnAsTeam
