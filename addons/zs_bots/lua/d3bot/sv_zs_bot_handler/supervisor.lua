@@ -41,8 +41,9 @@ function D3bot.GetDesiredBotCount()
 	if #player_GetHumans() == 0 then return 0 end
 
 	local allowedTotal = game_MaxPlayers() - 2 --50
-	local volunteers = GAMEMODE:GetDesiredStartingZombies() --* 1.11
+	local volunteers = math_max(GAMEMODE:GetDesiredStartingZombies(), 1)
 	local botmod = D3bot.ZombiesCountAddition
+	local force_players = volunteers >= 3 and 1 or 0
 
 	--Override if wanted for events or extreme lag.
 	if GAMEMODE.ShouldPopBlock then
@@ -50,7 +51,7 @@ function D3bot.GetDesiredBotCount()
 	end
 
 	-- One bot per wave unless volunteers is higher (for low pop)
-	return math_max(GAMEMODE:GetWave(), 1) - 1 + volunteers + humans_dead + botmod, allowedTotal
+	return math_max(GAMEMODE:GetWave(), 1) - 1 + volunteers + humans_dead + botmod - force_players, allowedTotal
 end
 
 local spawnAsTeam
