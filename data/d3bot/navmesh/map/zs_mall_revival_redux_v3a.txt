@@ -2393,7 +2393,7 @@
 812-813:
 813:AreaXMax=-1152,AreaXMin=-1280,AreaYMax=385,AreaYMin=256,X=-1216,Y=320.5,Z=32
 813-410:
-814:AreaXMax=-640,AreaXMin=-981.4,AreaYMax=385,AreaYMin=256,JumpTo=Always,X=-810.7,Y=320.5,Z=32
+814:AreaXMax=-640,AreaXMin=-981.4,AreaYMax=385,AreaYMin=256,X=-810.7,Y=320.5,Z=32
 814-407:
 814-811:
 815:AreaXMax=-1296,AreaXMin=-1376,AreaYMax=505,AreaYMin=450.7,X=-1336.3,Y=483.3,Z=32
