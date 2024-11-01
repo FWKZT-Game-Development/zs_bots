@@ -277,13 +277,6 @@
 272:AreaXMax=8261,AreaXMin=8259.6,AreaYMax=-6607,AreaYMin=-6870,DuckTo=Always,JumpTo=Always,X=8260.2,Y=-6675.4,Z=29.9
 273:AreaXMax=8261,AreaXMin=8259.1,AreaYMax=-6870,AreaYMin=-6946.1,DuckTo=Always,JumpTo=Always,X=8260.3,Y=-6900.9,Z=30
 274:AreaXMax=8259.1,AreaXMin=8169.5,AreaYMax=-6947.1,AreaYMin=-6949,DuckTo=Always,JumpTo=Always,X=8216.5,Y=-6947.8,Z=30
-275:AreaXMax=8080,AreaXMin=7896,AreaYMax=-6632,AreaYMin=-6637,DuckTo=Always,JumpTo=Always,X=7990.5,Y=-6634.1,Z=23
-275-11:Direction=Forward
-275-142:
-275-155:Direction=Forward
-276:AreaXMax=8084.8,AreaXMin=8080,AreaYMax=-6632,AreaYMin=-6768,DuckTo=Always,JumpTo=Always,X=8083.1,Y=-6704.5,Z=23
-276-11:Direction=Forward
-276-151:
 279:AreaXMax=7263.7,AreaXMin=7210.4,AreaYMax=-8397.4,AreaYMin=-8447,DuckTo=Always,JumpTo=Always,X=7254.3,Y=-8410.2,Z=-108.3
 279-281:
 279-74:
