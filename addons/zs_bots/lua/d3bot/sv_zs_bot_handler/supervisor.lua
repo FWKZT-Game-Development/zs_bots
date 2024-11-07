@@ -20,6 +20,13 @@ local table_sort = table.sort
 
 local forced_player_zombies = 1
 
+local count_target = 0
+
+hook.Add("OnWaveStateChanged", "IncreaseWaveBots", function()
+	if GAMEMODE:GetWave() <= 4 and GAMEMODE:GetWaveActive() then
+	end
+end)
+
 local humans_dead = 0
 hook.Add("DoPlayerDeath","D3Bot.AddHumansDied.Supervisor", function(pl, attacker, dmginfo)
 	local is_human = pl:Team() == TEAM_HUMAN
