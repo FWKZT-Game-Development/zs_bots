@@ -40,6 +40,12 @@ hook.Add("DoPlayerDeath","D3Bot.AddHumansDied.Supervisor", function(pl, attacker
 	--humans_dead = humans_dead + 1
 end)
 
+hook.Add("PlayerDisconnected", "D3Bot.PlayerDisconnected.Supervisor", function(pl)
+	if forced_player_zombies > 0 and pl:Team() == TEAM_UNDEAD then
+		forced_player_zombies = forced_player_zombies - 1
+	end
+end)
+
 hook.Add("PostPlayerRedeemed","D3Bot.PostPlayerRedeemed.Supervisor", function(pl, silent, noequip)
 	if GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 1 --[[or player.GetCount() <= GAMEMODE.LowPopulationLimit]] then return end
 
@@ -57,7 +63,7 @@ function D3bot.GetDesiredBotCount()
 	local allowedTotal = game_MaxPlayers() - 2 --50
 	local volunteers = math_max(GAMEMODE:GetDesiredStartingZombies(), 1)
 	local botmod = D3bot.ZombiesCountAddition
-	local force_players = not GAMEMODE.ZombieEscape and volunteers >= 3 and forced_player_zombies or 0
+	local force_players = not GAMEMODE.ZombieEscape and volunteers > 3 and forced_player_zombies or 0
 
 	--Override if wanted for events or extreme lag.
 	if GAMEMODE.ShouldPopBlock then
