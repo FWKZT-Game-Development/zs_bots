@@ -22,11 +22,6 @@ local forced_player_zombies = 1
 
 local count_target = 0
 
-hook.Add("OnWaveStateChanged", "IncreaseWaveBots", function()
-	if GAMEMODE:GetWave() <= 4 and GAMEMODE:GetWaveActive() then
-	end
-end)
-
 local humans_dead = 0
 hook.Add("DoPlayerDeath","D3Bot.AddHumansDied.Supervisor", function(pl, attacker, dmginfo)
 	local is_human = pl:Team() == TEAM_HUMAN
@@ -41,7 +36,7 @@ hook.Add("DoPlayerDeath","D3Bot.AddHumansDied.Supervisor", function(pl, attacker
 end)
 
 hook.Add("PlayerDisconnected", "D3Bot.PlayerDisconnected.Supervisor", function(pl)
-	if forced_player_zombies > 0 and pl:Team() == TEAM_UNDEAD then
+	if forced_player_zombies > 0 and GAMEMODE:GetWave() > 0 and pl:Team() == TEAM_UNDEAD then
 		forced_player_zombies = forced_player_zombies - 1
 	end
 end)
