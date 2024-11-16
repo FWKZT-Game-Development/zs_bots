@@ -108,6 +108,10 @@ function D3bot.MaintainBotRoles()
 			if #D3bot.BotZombies > ( (GAMEMODE:GetWave() == 1 and 3 or GAMEMODE:GetWave() > 1 and 5 or 0) + (D3bot.ZombiesCountAddition or 0) ) then
 				local randomBot = table.remove(D3bot.BotZombies, 1)
 				if IsValid(randomBot) then
+					local zWeapon = randomBot:GetActiveWeapon()
+					if IsValid(zWeapon) and zWeapon.StopMoaning then
+						zWeapon:StopMoaning()
+					end
 					randomBot:StripWeapons()
 				end
 				return randomBot and ( randomBot:IsValid() and randomBot:Kick(D3bot.BotKickReason) )
