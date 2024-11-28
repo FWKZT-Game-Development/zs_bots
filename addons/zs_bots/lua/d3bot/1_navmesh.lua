@@ -287,25 +287,22 @@ return function(lib)
 			local nodeX, nodeY, nodeZ = node.Pos:Unpack() -- This is unfortunately a point where anything like math.min could be modified. Therefore we need to put such references into upvalues.
 			
 			if node.HasArea then
-				local oldX = nodeX
-				local oldY = nodeY
-
 				local params = node.Params
-				nodeX = mathMin(mathMax(posX, params.AreaXMin), params.AreaXMax)
-				nodeY = mathMin(mathMax(posY, params.AreaYMin), params.AreaYMax)
-
-				if not (mathAbs(posX - nodeX) < 1 and mathAbs(posY - nodeY) < 1) then
-					nodeX = oldX
-					nodeY = oldY
-				end
+				local areaXMin = params.AreaXMin
+				local areaXMax = params.AreaXMax
+				local areaYMin = params.AreaYMin
+				local areaYMax = params.AreaYMax
+				
+				nodeX = (posX > areaXMax and areaXMax) or (posX < areaXMin and areaXMin) or posX
+				nodeY = (posY > areaYMax and areaYMax) or (posY < areaYMin and areaYMin) or posY
 			end
 
 			local diffX = posX - nodeX
-			local diffY = posY - nodeY
-
+			
 			-- Sieve out nodes that definitely lie outside the search sphere.
 			-- This is the same as checking against bounding boxes of nodes that are extended by the current distMin.			
 			if diffX < distMin and diffX > distMinNeg then
+				local diffY = posY - nodeY
 				if diffY < distMin and diffY > distMinNeg then
 					local diffZ = posZ - nodeZ
 					if diffZ < distMin and diffZ > distMinNeg then
