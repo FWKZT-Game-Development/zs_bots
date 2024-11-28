@@ -171,7 +171,6 @@ function D3bot.Basics.WalkAttackAuto(bot)
 	local nodeOrNil = mem.NodeOrNil
 	local nextNodeOrNil = mem.NextNodeOrNil
 	
-	local aimPos, origin
 	local actions = {}
 	local facesTgt = false
 	
@@ -188,45 +187,31 @@ function D3bot.Basics.WalkAttackAuto(bot)
 	end
 
 	-- TODO: Reduce can see target calls
-	if shouldClimb and nextNodeOrNil then
+	if (shouldClimb or not bot:D3bot_CanSeeTargetCached()) and nextNodeOrNil then
 		if D3bot.UsingSourceNav then
 			return D3bot.Basics.Walk(bot, nextNodeOrNil:GetCenter() )
 		else
 			return D3bot.Basics.Walk(bot, nextNodeOrNil.Pos)
 		end
-	elseif mem.TgtOrNil and not mem.DontAttackTgt and (not nextNodeOrNil or (bot:GetPos():DistToSqr(mem.TgtOrNil:GetPos()) < 500 * 500 and bot:D3bot_CanSeeTargetCached())) then
-		aimPos = bot:D3bot_GetAttackPosOrNilFuture(nil, math.Rand(0, D3bot.BotAimPosVelocityOffshoot))
-		origin = bot:D3bot_GetViewCenter()
-		if aimPos and aimPos:DistToSqr(origin) < math.pow(D3bot.BotAttackDistMin, 2) then
-			if weapon and weapon.MeleeReach then
-				local tr = util.TraceLine({
-					start = origin,
-					endpos = origin + bot:EyeAngles():Forward() * weapon.MeleeReach,
-					filter = bot
-				})
-				facesTgt = tr.Entity == mem.TgtOrNil
-			else
-				facesTgt = true
-			end
-			if aimPos.z < bot:GetPos().z + bot:GetViewOffsetDucked().z then
-				actions.Duck = true
-			end
-		end
-	elseif mem.PosTgtOrNil and not nextNodeOrNil then
+	elseif mem.TgtOrNil and mem.DontAttackTgt then
+		return D3bot.Basics.Walk(bot, mem.TgtOrNil:GetPos(), nil, true, mem.TgtProximity)
+	elseif mem.PosTgtOrNil then
 		-- Go straight to position target
-		return D3bot.Basics.Walk(bot, mem.PosTgtOrNil, true, mem.PosTgtProximity)
-	elseif nextNodeOrNil then
-		-- Target not visible, walk towards next node
-		if D3bot.UsingSourceNav then
-			return D3bot.Basics.Walk( bot, nextNodeOrNil:GetCenter() )
-		else
-			return D3bot.Basics.Walk( bot, nextNodeOrNil.Pos )
+		return D3bot.Basics.Walk(bot, mem.PosTgtOrNil, nil, true, mem.PosTgtProximity)
+	end
+
+	local wep = bot:GetActiveWeapon()
+	local range = (wep and wep.MeleeReach or 75) + 25
+
+	local origin = bot:GetShootPos()
+	local aimPos = bot:D3bot_GetAttackPosOrNilFuture(nil, math.Rand(0, D3bot.BotAimPosVelocityOffshoot))
+
+	if aimPos and aimPos:DistToSqr(origin) < range * range then
+		facesTgt = true
+			
+		if aimPos.z < bot:GetPos().z + bot:GetViewOffsetDucked().z then
+			actions.Duck = true
 		end
-	elseif mem.TgtOrNil then
-		-- There is a target entity, but the bot shouldn't attack it
-		return D3bot.Basics.Walk(bot, mem.TgtOrNil:GetPos(), true, mem.TgtProximity)
-	else
-		return
 	end
 	
 	if aimPos then
