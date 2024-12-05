@@ -295,6 +295,10 @@ function meta:D3bot_InitializeOrReset()
 
 	mem.IsOnLadder = false
 
+	if not self:IsBot() then
+		self:SetNWBool( "AFKControlled", true )
+	end
+
 	timer.Simple(0, function()
 		if not IsValid(self) then return end -- also make sure bot still exists
 
