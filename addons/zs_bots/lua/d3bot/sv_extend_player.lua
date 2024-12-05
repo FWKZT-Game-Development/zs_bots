@@ -323,6 +323,9 @@ function meta:D3bot_InitializeOrReset()
 end
 
 function meta:D3bot_Deinitialize()
+	if not self:IsBot() then
+		self:SetNWBool( "AFKControlled", false )
+	end
 	self.D3bot_Mem = nil
 end
 
