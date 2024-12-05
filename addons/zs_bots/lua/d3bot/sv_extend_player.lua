@@ -327,8 +327,13 @@ function meta:D3bot_InitializeOrReset()
 end
 
 function meta:D3bot_Deinitialize()
-	if not self:IsBot() then
-		self:SetNWBool( "AFKControlled", false )
+	if self and self.D3bot_Mem then
+		--remove roll from the player's eyeangles
+		local angles = self:EyeAngles()
+		self:SetEyeAngles(Angle(angles.p,angles.y,0))
+		if not self:IsBot() then
+			self:SetNWBool( "AFKControlled", false )
+		end
 	end
 	self.D3bot_Mem = nil
 end
