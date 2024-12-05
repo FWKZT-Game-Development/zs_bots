@@ -50,7 +50,7 @@ hook.Add("Think", D3bot.BotHooksId.."🤔", function()
 						bot:RefreshDynamicSpawnPoint()
 						bot:UnSpectateAndSpawn()
 					else
-						bot:ChangeToCrow()
+						bot:ChangeToSpectator()
 					end
 				end
 			end
