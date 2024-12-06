@@ -15,11 +15,12 @@ D3bot.NodeBlockingMap = {
 	classes = {func_breakable = true, prop_dynamic = true, prop_door_rotating = true, func_door = true, func_movelinear = true}
 }
 
-D3bot.ValveNav = true							-- Enable the auto-genernated nav-mesh. (Created with "nav_generate")
+D3bot.ValveNav = false							-- Enable the auto-genernated nav-mesh. (Created with "nav_generate")
 D3bot.ValveNavOverride = false					-- Enable overriding the manually created nav-mesh with the auto-generated.
 
 D3bot.NodeDamageEnts = {"prop_*turret", "prop_arsenalcrate", "prop_resupply"}
 
+D3bot.LinkDeathCostEnabled = false
 D3bot.LinkDeathCostRaise = 300
 D3bot.BotConsideringDeathCostAntichance = 3
 D3bot.BotAngLerpFactor = 0.125					-- Linear interpolation factor between the current viewing angle and target viewing angle.

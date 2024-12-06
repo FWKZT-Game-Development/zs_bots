@@ -97,17 +97,19 @@ hook.Add("PlayerDeath", D3bot.BotHooksId.."PlayerDeath", function(pl)
 		local handler = FindHandler(pl:GetZombieClass(), pl:Team())
 		handler.OnDeathFunction(pl)
 		-- Add death cost to the current link
-		local mem = pl.D3bot_Mem
-		local nodeOrNil = mem.NodeOrNil
-		local nextNodeOrNil = mem.NextNodeOrNil
-		if nodeOrNil and nextNodeOrNil then
-			local link
-			if D3bot.UsingSourceNav then
-				link = nodeOrNil:SharesLink( nextNodeOrNil )
-			else
-				link = nodeOrNil.LinkByLinkedNode[nextNodeOrNil]
+		if D3bot.LinkDeathCostEnabled then
+			local mem = pl.D3bot_Mem
+			local nodeOrNil = mem.NodeOrNil
+			local nextNodeOrNil = mem.NextNodeOrNil
+			if nodeOrNil and nextNodeOrNil then
+				local link
+				if D3bot.UsingSourceNav then
+					link = nodeOrNil:SharesLink( nextNodeOrNil )
+				else
+					link = nodeOrNil.LinkByLinkedNode[nextNodeOrNil]
+				end
+				if link then D3bot.LinkMetadata_ZombieDeath(link, D3bot.LinkDeathCostRaise) end
 			end
-			if link then D3bot.LinkMetadata_ZombieDeath(link, D3bot.LinkDeathCostRaise) end
 		end
 	end
 end)
