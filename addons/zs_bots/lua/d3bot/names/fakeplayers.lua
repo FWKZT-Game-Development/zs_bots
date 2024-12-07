@@ -91,7 +91,7 @@ D3bot.Names = {
 	"dudette",
 	"Coach",
 	"TANK",
-	"ρanda♥",
+	"panda♥",
 	"K9 Lady",
 	"Him",
 	"Soo Hungryyy",
