@@ -200,7 +200,7 @@ function HANDLER.OnDeathFunction(bot)
 	bot:D3bot_RerollClass( HANDLER.BotClasses[ GAMEMODE:GetWave() ] or HANDLER.BotClasses[ 1 ] ) -- TODO: Situation depending reroll of the zombie class
 end
 
-local potTargetEntClasses = {"prop_*turret", "prop_arsenalcrate", "prop_manhack*", "prop_obj_sigil"}
+local potTargetEntClasses = {"prop_obj_sigil"} --"prop_*turret", "prop_arsenalcrate", "prop_manhack*", 
 local potEntTargets = nil
 local potTargets = nil
 
