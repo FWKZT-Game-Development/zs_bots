@@ -65,8 +65,10 @@ function D3bot.GetDesiredBotCount()
 		return humans_dead + botmod, allowedTotal
 	end
 
+	//enable this line below when we use force_players again, it was adding an extra bot because we set it to 0 to keep bots out
+	--return math_max(GAMEMODE:GetWave(), 1) - 1 + volunteers + humans_dead + botmod - force_players, allowedTotal
 	-- One bot per wave unless volunteers is higher (for low pop)
-	return math_max(GAMEMODE:GetWave(), 1) - 1 + volunteers + humans_dead + botmod - force_players, allowedTotal
+	return math_max(GAMEMODE:GetWave(), 1) - 1 + volunteers + humans_dead + botmod, allowedTotal
 end
 
 local spawnAsTeam
