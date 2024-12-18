@@ -103,9 +103,7 @@ function D3bot.MaintainBotRoles()
 	end
 	if team.NumPlayers(TEAM_UNDEAD) > D3bot.GetDesiredBotCount() then
 		for i=1, team.NumPlayers(TEAM_UNDEAD)-D3bot.GetDesiredBotCount() do
-			--if #D3bot.BotZombies > (GAMEMODE:GetWave() <= 1 and 0 or 3) then
-			--Keep a minimum of 3 bots if they are there are wave 1, or 5 if its past wave 1, consider botmod for admins
-			if #D3bot.BotZombies > ( (GAMEMODE:GetWave() == 1 and 3 or GAMEMODE:GetWave() > 1 and 5 or 0) + (D3bot.ZombiesCountAddition or 0) ) then
+			if #D3bot.BotZombies > (D3bot.ZombiesCountAddition or 0) then
 				local randomBot = table.remove(D3bot.BotZombies, 1)
 				if IsValid(randomBot) then
 					local zWeapon = randomBot:GetActiveWeapon()
