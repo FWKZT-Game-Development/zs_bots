@@ -25,14 +25,14 @@ local count_target = 0
 local humans_dead = 0
 hook.Add("DoPlayerDeath","D3Bot.AddHumansDied.Supervisor", function(pl, attacker, dmginfo)
 	local is_human = pl:Team() == TEAM_HUMAN
-	if is_human and (GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 1) and humans_dead < forced_player_zombies then
+	--[[if is_human and (GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 1) and humans_dead < forced_player_zombies then
 		humans_dead = humans_dead + 1
-	end
+	end]]
 
-	if not is_human or pl:IsBot() or GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 1 --[[or player.GetCount() <= GAMEMODE.LowPopulationLimit]] then return end
+	if not is_human or pl:IsBot() or GAMEMODE.RoundEnded or GAMEMODE:GetWave() <= 1 then return end
 
-	humans_dead = ( GAMEMODE:GetWave() == 0 and humans_dead or GAMEMODE:GetWave() == 1 and math_min(humans_dead + 1, 3) or humans_dead + 1) 
-	--humans_dead = humans_dead + 1
+	--humans_dead = ( GAMEMODE:GetWave() == 0 and humans_dead or GAMEMODE:GetWave() == 1 and math_min(humans_dead + 1, 3) or humans_dead + 1) 
+	humans_dead = humans_dead + 1
 end)
 
 hook.Add("PlayerDisconnected", "D3Bot.PlayerDisconnected.Supervisor", function(pl)
