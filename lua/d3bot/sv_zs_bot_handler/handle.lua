@@ -63,7 +63,7 @@ hook.Add("Think", D3bot.BotHooksId .. "Think", function()
 							bot:RefreshDynamicSpawnPoint()
 							bot:UnSpectateAndSpawn()
 						else
-							bot:ChangeToSpectator()
+							bot:ChangeToCrow()
 						end
 					end
 				end
@@ -108,11 +108,11 @@ hook.Add("EntityTakeDamage", D3bot.BotHooksId .. "TakeDamage", function(ent, dmg
 		local attacker = dmg:GetAttacker()
 		if attacker ~= ent and attacker:IsPlayer() and attacker.D3bot_Mem then
 			-- A Bot did damage something
-			local handler = findHandler(attacker:GetZombieClass(), attacker:Team())
-			if handler then
-				handler.OnDoDamageFunction(attacker, dmg)
+			-- local handler = findHandler(attacker:GetZombieClass(), attacker:Team())
+			-- if handler then
+				-- handler.OnDoDamageFunction(attacker, dmg)
 				attacker.D3bot_LastDamage = CurTime()
-			end
+			-- end
 		end
 	end
 end)

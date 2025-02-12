@@ -4,6 +4,7 @@ local HANDLER = D3bot.Handlers.Undead_Fallback
 HANDLER.AngOffshoot = 0 --how close to the navmesh lines/links bots will follow. 0 = no straying from lines/links. 45 = vanilla/'realistic' zombies
 HANDLER.RateOfViewmodelChange = 0.01 --0.4 = 9/5/2024 bots(roughly 2-3 times per second)
 HANDLER.BotTgtFixationDistMin = 125
+HANDLER.BotTgtFixationDistMinSqr = HANDLER.BotTgtFixationDistMin ^ 2
 local BotClasses = {
 	[1] = {
 		"Zombie", "Zombie", "Ghoul", "Stalker"
@@ -185,7 +186,7 @@ function HANDLER.OnTakeDamageFunction(bot, dmg)
 	local attacker = dmg:GetAttacker()
 	if not HANDLER.CanBeTgt(bot, attacker) then return end
 	local mem = bot.D3bot_Mem
-	if IsValid(mem.TgtOrNil) and mem.TgtOrNil:GetPos():DistToSqr(bot:GetPos()) <= math.pow(HANDLER.BotTgtFixationDistMin, 2) then return end
+	if IsValid(mem.TgtOrNil) and mem.TgtOrNil:GetPos():DistToSqr(bot:GetPos()) <= HANDLER.BotTgtFixationDistMinSqr then return end
 	mem.TgtOrNil = attacker
 	--bot:Say("Ouch! Fuck you "..attacker:GetName().."! I'm gonna kill you!")
 end
