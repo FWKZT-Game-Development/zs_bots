@@ -55,6 +55,8 @@ function D3bot.GetDesiredBotCount()
 	--If no active players then don't add any bots.
 	if #player_GetHumans() == 0 then return 0 end
 
+	if GAMEMODE.PVB then return 0 end
+
 	local allowedTotal = game_MaxPlayers() - 2 --50
 	local volunteers = math_max(GAMEMODE:GetDesiredStartingZombies(), 1)
 	local botmod = D3bot.ZombiesCountAddition
