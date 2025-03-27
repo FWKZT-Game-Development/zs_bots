@@ -3,7 +3,6 @@
 10:AreaXMax=4700,AreaXMin=3450,AreaYMax=100,AreaYMin=-1150,X=4075,Y=-525,Z=-224
 11:X=-339.1,Y=588.2,Z=272
 11-12:
-11-474:
 1118:AreaXMax=816.5,AreaXMin=472,AreaYMax=-55.7,AreaYMin=-113.5,JumpTo=Always,X=644.3,Y=-86.2,Z=-76
 1118-1281:
 1118-1282:
@@ -32,6 +31,7 @@
 1190-1191:
 1191:AreaXMax=2025,AreaXMin=1975,AreaYMax=500,AreaYMin=475,X=2000,Y=487.5,Z=228.5
 12:X=-312.7,Y=583.7,Z=244.1
+12-13:
 1204:AreaXMax=646.98626708984,AreaXMin=636.98626708984,AreaYMax=650,AreaYMin=400,X=642,Y=525,Z=141
 121:AreaXMax=200,AreaXMin=-16,AreaYMax=528,AreaYMin=376,X=90.7,Y=452,Z=-24
 121-296:
@@ -151,7 +151,7 @@
 1299-1296:
 1299-1301:
 13:X=-312,Y=529.5,Z=244
-13-12:
+13-961:Direction=Forward
 1300:AreaXMax=1375,AreaXMin=1350,AreaYMax=296,AreaYMin=208,X=1362.5,Y=252,Z=-40
 1300-1296:
 1301:AreaXMax=1280,AreaXMin=1210.2,AreaYMax=650,AreaYMin=488,X=1245.1,Y=569,Z=-40
@@ -341,8 +341,8 @@
 43:AreaXMax=-336,AreaXMin=-346,AreaYMax=612,AreaYMin=564,X=-341,Y=589.7,Z=-24
 43-39:
 43-42:
-474:AreaXMax=-350,AreaXMin=-600,AreaYMax=650,AreaYMin=475,X=-474.9,Y=562.5,Z=249.3
-474-8:
+474:AreaXMax=-350,AreaXMin=-600,AreaYMax=650,AreaYMin=475,See=Disabled,X=-474.9,Y=562.5,Z=249.3
+474-11:
 475:AreaXMax=-526,AreaXMin=-640,AreaYMax=510,AreaYMin=464.8,X=-583,Y=488.7,Z=112
 475-23:
 478:AreaXMax=-656,AreaXMin=-848,AreaYMax=464,AreaYMin=275,X=-759.4,Y=350.5,Z=-16
@@ -368,6 +368,7 @@
 5-4:
 5-6:Direction=Forward
 525:AreaXMax=-325,AreaXMin=-350,AreaYMax=425,AreaYMin=150,X=-337.5,Y=287.5,Z=248
+525-8:
 544:AreaXMax=925,AreaXMin=850,AreaYMax=275,AreaYMin=125,X=893,Y=186.7,Z=114.8
 544-498:
 548:AreaXMax=50,AreaXMin=25,AreaYMax=375,AreaYMin=250,X=38.4,Y=299,Z=104
@@ -425,8 +426,8 @@
 767:AreaXMax=-200,AreaXMin=-275,AreaYMax=400,AreaYMin=200,X=-237.5,Y=300,Z=-40
 793:AreaXMax=275,AreaXMin=150,AreaYMax=650,AreaYMin=250,X=212.5,Y=450,Z=261.4
 793-1172:
-8:AreaXMax=-350,AreaXMin=-700,AreaYMax=475,AreaYMin=136,X=-524.5,Y=307.4,Z=248
-8-525:
+8:AreaXMax=-350,AreaXMin=-700,AreaYMax=475,AreaYMin=136,See=Disabled,X=-524.5,Y=307.4,Z=248
+8-474:
 802:AreaXMax=1075,AreaXMin=920,AreaYMax=128,AreaYMin=-48.3,X=997.3,Y=44.4,Z=-40
 802-1291:
 802-292:
@@ -467,7 +468,6 @@
 95-1204:
 95-262:
 961:AreaXMax=-275,AreaXMin=-300,AreaYMax=500,AreaYMin=450,X=-287.5,Y=475,Z=112
-961-13:Direction=Forward
 967:AreaXMax=400,AreaXMin=275,AreaYMax=273.2,AreaYMin=125,X=344.3,Y=199.1,Z=117.5
 967-1:
 967-1161:
