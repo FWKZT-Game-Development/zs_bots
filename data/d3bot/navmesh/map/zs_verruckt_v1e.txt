@@ -188,7 +188,7 @@
 172-173:
 172-289:
 173:AreaXMax=160,AreaXMin=0,AreaYMax=-364,AreaYMin=-492,X=80,Y=-433.8,Z=152
-174:JumpTo=Always,X=-1519.5,Y=-1719.4,Z=104
+174:JumpTo=Always,DuckTo=Always,Jump=Always,Duck=Always,X=-1519.5,Y=-1719.4,Z=104
 174-126:
 175:AreaXMax=-1484,AreaXMin=-1560,AreaYMax=-1607.9,AreaYMin=-1712,X=-1519,Y=-1667.3,Z=64
 175-174:
