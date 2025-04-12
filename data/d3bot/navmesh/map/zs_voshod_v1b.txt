@@ -5406,11 +5406,10 @@
 648-649:
 649:AreaXMax=-1975,AreaXMin=-2000,AreaYMax=-1250,AreaYMin=-1300,X=-1987.5,Y=-1275,Z=-27
 65:AreaXMax=-1300,AreaXMin=-1450,AreaYMax=375,AreaYMin=125,X=-1375,Y=250,Z=110.4
-650:AreaXMax=-1825,AreaXMin=-1850,AreaYMax=-1125,AreaYMin=-1175,X=-1837.5,Y=-1150,Z=-27
+650:AreaXMax=-1825,AreaXMin=-1850,AreaYMax=-1125,AreaYMin=-1175,See=Disabled,X=-1837.5,Y=-1150,Z=-27
 650-1148:
-651:AreaXMax=-1825,AreaXMin=-1850,AreaYMax=-1025,AreaYMin=-1075,X=-1837.5,Y=-1050,Z=-27
+651:AreaXMax=-1825,AreaXMin=-1850,AreaYMax=-1025,AreaYMin=-1075,See=Disabled,X=-1837.5,Y=-1050,Z=-27
 651-1152:
-651-650:
 652:AreaXMax=-1650,AreaXMin=-1675,AreaYMax=-425,AreaYMin=-475,X=-1662.5,Y=-450,Z=-27
 652-783:
 653:AreaXMax=-1625,AreaXMin=-1650,AreaYMax=-500,AreaYMin=-550,X=-1637.5,Y=-525,Z=-27
