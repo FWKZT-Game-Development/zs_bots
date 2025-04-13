@@ -25,7 +25,7 @@ D3bot.Names = {
 	"FLARE MAG",
 	"snooth",
 	"awooomi",
-	"læd"
+	"læd",
 	"Mr.Roflman 65",
 	"Medical Dude",
 	"taco",
