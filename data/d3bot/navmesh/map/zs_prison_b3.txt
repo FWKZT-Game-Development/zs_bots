@@ -442,10 +442,10 @@
 321:AreaXMax=-1817,AreaXMin=-2118,AreaYMax=-701.9,AreaYMin=-748.8,X=-1967.5,Y=-725.3,Z=-348
 321-295:
 321-316:
-322:AreaXMax=-1589.1,AreaXMin=-1632.6,AreaYMax=-606,AreaYMin=-652.6,Wall=Retarget,X=-1610.8,Y=-629.3,Z=-348
+322:AreaXMax=-1589.1,AreaXMin=-1632.6,AreaYMax=-606,AreaYMin=-652.6,See=Disabled,Wall=Retarget,X=-1610.8,Y=-629.3,Z=-348
 322-312:Direction=Forward
 322-314:Direction=Forward
-323:AreaXMax=-1589.1,AreaXMin=-1632.5,AreaYMax=-748.8,AreaYMin=-797,Wall=Retarget,X=-1610.8,Y=-772.9,Z=-348
+323:AreaXMax=-1589.1,AreaXMin=-1632.5,AreaYMax=-748.8,AreaYMin=-797,See=Disabled,Wall=Retarget,X=-1610.8,Y=-772.9,Z=-348
 323-317:Direction=Forward
 33:AreaXMax=20,AreaXMin=-147,AreaYMax=-352,AreaYMin=-566,X=-63.5,Y=-459,Z=-220
 33-34:
