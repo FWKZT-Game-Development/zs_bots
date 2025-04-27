@@ -14,11 +14,11 @@ D3bot.ValveNavOverride = false					-- Enable overriding the manually created nav
 
 D3bot.NodeDamageEnts = {"prop_*turret", "prop_arsenalcrate", "prop_resupply"}
 
-D3bot.BotAttackDistMin = 85 --100 and the bots pre-swing like they're Einstein, 75 and you need to hug them to get an attack out of them
+D3bot.BotAttackDistMin = 80 --100 and the bots pre-swing like they're Einstein, 75 and you need to hug them to get an attack out of them
 D3bot.LinkDeathCostRaise = 300
 D3bot.BotConsideringDeathCostAntichance = 3
 D3bot.BotAngLerpFactor = 0.105 --0.125					-- Linear interpolation factor between the current viewing angle and target viewing angle.
-D3bot.BotAttackAngLerpFactor = 0.275--0.5		-- See above, but for attacking //the higher the number, the more accurate the bots will be with their attacks/tracking on players.
+D3bot.BotAttackAngLerpFactor = 0.165 --0.5		-- See above, but for attacking //the higher the number, the more accurate the bots will be with their attacks/tracking on players.
 D3bot.BotAimAngLerpFactor = 0.5					-- See above, but for aiming with guns
 D3bot.BotAimPosVelocityOffshoot = 0.4			-- Offshoot for position prediction of moving targets in seconds. The target position is extrapolated from the moving target, whereby the target time is within the interval from now until now + the given value.
 D3bot.BotJumpAntichance = 25
