@@ -1,8 +1,8 @@
 D3bot.Handlers.Undead_Fallback = D3bot.Handlers.Undead_Fallback or {}
 local HANDLER = D3bot.Handlers.Undead_Fallback
 
-HANDLER.AngOffshoot = 0 --how close to the navmesh lines/links bots will follow. 0 = no straying from lines/links. 45 = vanilla/'realistic' zombies
-HANDLER.RateOfViewmodelChange = 0.01 --0.4 = 9/5/2024 bots(roughly 2-3 times per second)
+HANDLER.AngOffshoot = 7 --how close to the navmesh lines/links bots will follow. 0 = no straying from lines/links. 45 = vanilla/'realistic' zombies
+HANDLER.RateOfViewmodelChange = 0.1 --0.4 = 9/5/2024 bots(roughly 2-3 times per second)
 HANDLER.BotTgtFixationDistMin = 125
 HANDLER.BotTgtFixationDistMinSqr = HANDLER.BotTgtFixationDistMin ^ 2
 local BotClasses = {
