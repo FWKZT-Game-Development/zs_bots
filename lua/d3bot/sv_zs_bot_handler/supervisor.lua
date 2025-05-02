@@ -14,6 +14,14 @@ hook.Add("Initialize", "D3Bot.LocalizeSomeVariables.Supervisor", function()
 
 	team_equalizer = GAMEMODE.TeamRatiosByWave
 	player_GetHumansActiveCount = player.GetHumansActiveCount
+
+	--prevent errors when testing without fwkzt version of the gamemode.
+	if not GAMEMODE.ZombiePlayers then
+		GAMEMODE.ZombiePlayers = team.GetPlayers(TEAM_UNDEAD)
+	end
+	if not GAMEMODE.HumanPlayers then
+		GAMEMODE.HumanPlayers = team.GetPlayers(TEAM_HUMAN)
+	end
 end)
 
 local player_GetAll = player.GetAll
