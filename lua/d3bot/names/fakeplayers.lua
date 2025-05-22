@@ -60,7 +60,7 @@ D3bot.Names = {
 	"Earthmover",
 	"┌∩┐(◣_◢)┌∩┐",
 	"d(^_^)b",
-	"~Katt~ <3",
+	"Katt <3",
 	"supersecretbotname",
 	"coconut13",
 	"The REAL Jonkler",
