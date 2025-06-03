@@ -1057,7 +1057,7 @@
 493-488:
 494:AreaXMax=1372.6,AreaXMin=1327,AreaYMax=1659.9,AreaYMin=1600,X=1349.8,Y=1630,Z=64
 494-502:
-494-504:AimTo=Straight
+494-965:
 495:AreaXMax=1327,AreaXMin=1086,AreaYMax=1832.4,AreaYMin=1600,X=1206.5,Y=1716.2,Z=64
 495-493:
 495-494:
@@ -1081,10 +1081,6 @@
 502-496:
 502-503:
 503:AreaXMax=1408,AreaXMin=1372.6,AreaYMax=1741.9,AreaYMin=1659.9,X=1390.3,Y=1700.9,Z=64
-504:DuckTo=Always,JumpTo=Always,See=Disabled,X=1374.4,Y=1627.6,Z=125
-504-505:AimTo=Straight
-505:DuckTo=Always,JumpTo=Always,See=Disabled,X=1393.9,Y=1624.8,Z=172.9
-505-506:AimTo=Straight
 506:See=Disabled,X=1397.2,Y=1731.4,Z=173.4
 506-507:AimTo=Straight
 507:JumpTo=Always,See=Disabled,X=1382.1,Y=1820,Z=206.6
@@ -2276,6 +2272,10 @@
 963-961:
 964:JumpTo=Always,X=5852.9,Y=3081.9,Z=128.3
 964-944:
+965:JumpTo=Always,X=1373.8,Y=1624.6,Z=124.8
+965-966:
+966:JumpTo=Always,X=1392.3,Y=1619.4,Z=170.8
+966-506:
 97:AreaXMax=6046,AreaXMin=5998,AreaYMax=3904,AreaYMin=3784,X=6022,Y=3844,Z=288
 97-96:
 97-98:
