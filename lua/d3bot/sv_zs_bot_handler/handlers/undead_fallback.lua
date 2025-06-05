@@ -291,7 +291,7 @@ end
 function HANDLER.CanBeTgt(bot, target)
 	if not target or not IsValid(target) then return end
 	if SAM_LOADED and target:IsPlayer() and target:sam_get_nwvar("cloaked",false) then return end -- Ignore cloaked admins.
-	if target:IsPlayer() and target:GetStatus("hidden") and not GAMEMODE.TheLastHuman == target then return end -- Ignore player who is hidden.
+	if target:IsPlayer() and target:GetStatus("hidden") and not (target:IsPlayer() and target == GAMEMODE.TheLastHuman) then return end -- Ignore player who is hidden.
 	if target:IsPlayer() and target ~= bot and target:Team() ~= TEAM_UNDEAD and target:GetObserverMode() == OBS_MODE_NONE and not target:IsFlagSet(FL_NOTARGET) and target:Alive() then return true end
 	if target:GetClass() == "prop_obj_sigil" and target:GetSigilCorrupted() then return end -- Special case to ignore corrupted sigils.
 	if potEntTargets and table.HasValue(potEntTargets, target) then return true end
