@@ -494,6 +494,7 @@
 281-282:
 282:AreaXMax=3218,AreaXMin=3118.8,AreaYMax=-576,AreaYMin=-834.1,See=Disabled,X=3168.4,Y=-705,Z=-47
 282-283:
+282-504:
 283:AreaXMax=3218,AreaXMin=3118.8,AreaYMax=-834.1,AreaYMin=-868.2,See=Disabled,X=3168.4,Y=-851.1,Z=-47
 283-284:
 284:AreaXMax=3118.8,AreaXMin=3086.4,AreaYMax=-834.1,AreaYMin=-869.7,See=Disabled,X=3102.6,Y=-851.9,Z=-47
@@ -1082,6 +1083,7 @@
 502-499:
 503:AreaXMax=3297.2,AreaXMin=3221.8,AreaYMax=1584.4,AreaYMin=1310.6,X=3265,Y=1447.5,Z=0
 503-502:
+504:AreaXMax=3221.8,AreaXMin=3218,AreaYMax=-576,AreaYMin=-834.1,JumpTo=Always,X=3218.2,Y=-696.3,Z=2
 51:AreaXMax=3640.9,AreaXMin=3578,AreaYMax=665.7,AreaYMin=536.9,X=3609.5,Y=601.3,Z=0
 51-34:
 51-45:
