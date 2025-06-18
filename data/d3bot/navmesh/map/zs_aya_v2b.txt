@@ -37,9 +37,8 @@
 125:AreaXMax=1013.1,AreaXMin=840,AreaYMax=1971.2,AreaYMin=1620.3,X=946.6,Y=1769.4,Z=13.4
 126:AreaXMax=840,AreaXMin=736,AreaYMax=1971.2,AreaYMin=1623.5,X=817.2,Y=1807.4,Z=15.9
 126-125:
-127:AreaXMax=513.5,AreaXMin=158.2,AreaYMax=1971.2,AreaYMin=1619.2,X=318.3,Y=1810.2,Z=77.3
+127:AreaXMax=513.5,AreaXMin=158.2,AreaYMax=1958.6,AreaYMin=1619.2,X=318.3,Y=1788.9,Z=77.3
 127-336:
-127-78:
 128:AreaXMax=972,AreaXMin=916,AreaYMax=1446.8,AreaYMin=1256,X=945.1,Y=1351.4,Z=-0.7
 128-124:
 128-367:
@@ -182,7 +181,6 @@
 19-13:
 19-342:
 192:AreaXMax=158.2,AreaXMin=-337,AreaYMax=2284,AreaYMin=1968,X=-108.9,Y=2105.4,Z=158.7
-192-127:
 192-189:
 192-78:
 194:AreaXMax=158.2,AreaXMin=-246.9,AreaYMax=2654.1,AreaYMin=2556,X=-53.6,Y=2605.2,Z=151.3
@@ -738,9 +736,6 @@
 404:AreaXMax=144.7,AreaXMin=-194,AreaYMax=360,AreaYMin=128,X=-24.7,Y=244,Z=107.6
 404-229:
 404-42:
-405:AreaXMax=160.6,AreaXMin=144.2,AreaYMax=456,AreaYMin=415.2,JumpTo=Always,X=152.4,Y=430.5,Z=142.9
-405-406:
-405-42:
 406:AreaXMax=368.5,AreaXMin=160.6,AreaYMax=456,AreaYMin=402,X=244.5,Y=413.3,Z=74.1
 406-154:
 406-156:
@@ -840,6 +835,13 @@
 435:AreaXMax=-506.3,AreaXMin=-572,AreaYMax=573.4,AreaYMin=523.3,X=-539.1,Y=548.3,Z=120
 435-56:
 435-58:
+436:AreaXMax=-367.7,AreaXMin=-580,AreaYMax=616,AreaYMin=360,X=-473.8,Y=484.7,Z=314.4
+436-210:Direction=Forward
+436-40:Direction=Forward
+436-437:
+437:AreaXMax=-196,AreaXMin=-367.7,AreaYMax=616,AreaYMin=360,X=-281.8,Y=484.7,Z=314.4
+437-146:Direction=Forward
+437-45:Direction=Forward
 45:AreaXMax=-284,AreaXMin=-332,AreaYMax=711.7,AreaYMin=616,X=-308,Y=663.9,Z=107.6
 45-432:
 45-46:
