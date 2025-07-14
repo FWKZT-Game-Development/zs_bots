@@ -160,18 +160,36 @@ gammod.TeamRatiosByWave = {
 	[6] = 1.0
 }
 ]]
+local tempcheck = 0
+local apocalypse_bots = 0
 function D3bot.GetDesiredBotCount()
 	--If no active players then don't add any bots.
 	if #player_GetHumans() == 0 then return 0 end
 
 	if GAMEMODE.PVB then return 0 end
 
-	local allowedTotal = game_MaxPlayers() - 2 --50
+	local maxpl_minus2 = game_MaxPlayers() - 2 --50
+	local allowedTotal = maxpl_minus2
+	
 	local botmod = D3bot.ZombiesCountAddition
 	
 	--Override if wanted for events or extreme lag.
 	if GAMEMODE.ShouldPopBlock then
 		return humans_dead + botmod, allowedTotal
+	end
+	local hteam_count = #GAMEMODE.HumanPlayers
+	local ct = CurTime()
+
+	if tempcheck < ct then
+		tempcheck = ct + 5
+		if GAMEMODE.Apocalypse then
+			apocalypse_bots = math_ceil(hteam_count * 0.25 * (1 - (math_max(1, curwave) / GAMEMODE:GetNumberOfWaves())))
+			local allowed_bots_in_apocalypse = math_min(70, hteam_count * 1.5)
+			allowedTotal = allowed_bots_in_apocalypse
+		else
+			apocalypse_bots = 0
+			allowedTotal = maxpl_minus2
+		end
 	end
 
 	local force_players = 0 --not GAMEMODE.ZombieEscape and volunteers > 3 and forced_player_zombies or 0
@@ -186,7 +204,6 @@ function D3bot.GetDesiredBotCount()
 	local desired_zperc = 0
 	if curwave > 1 then
 		local zteam_count = #GAMEMODE.ZombiePlayers
-		local hteam_count = #GAMEMODE.HumanPlayers
 		desired_zperc = math_ceil(hteam_count * team_equalizer[curwave])
 		
 		if desired_zperc > zteam_count then --if zteam doesnt make up a **wave relative** percent of hteam, request more
