@@ -170,7 +170,7 @@ function D3bot.GetDesiredBotCount()
 
 	local maxpl_minus2 = game_MaxPlayers() - 2 --50
 	local allowedTotal = maxpl_minus2
-	
+
 	local botmod = D3bot.ZombiesCountAddition
 	
 	--Override if wanted for events or extreme lag.
@@ -183,7 +183,7 @@ function D3bot.GetDesiredBotCount()
 	if tempcheck < ct then
 		tempcheck = ct + 5
 		if GAMEMODE.Apocalypse then
-			apocalypse_bots = math_ceil(hteam_count * 0.25 * (1 - (math_max(1, curwave) / GAMEMODE:GetNumberOfWaves())))
+			apocalypse_bots = math_ceil( hteam_count * (0.25 + curwave * 0.05) )
 			local allowed_bots_in_apocalypse = math_min(70, hteam_count * 1.5)
 			allowedTotal = allowed_bots_in_apocalypse
 		else
