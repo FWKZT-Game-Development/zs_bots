@@ -215,7 +215,7 @@ function D3bot.GetDesiredBotCount()
 
 	local desired_zombie_count = (needed + volunteers + humans_dead)
 
-	return math_max(desired_zperc, desired_zombie_count) + botmod + added_bot_per_wave, allowedTotal
+	return math_max(desired_zperc, desired_zombie_count) + botmod + added_bot_per_wave + apocalypse_bots, allowedTotal
 end
 
 local spawnAsTeam
