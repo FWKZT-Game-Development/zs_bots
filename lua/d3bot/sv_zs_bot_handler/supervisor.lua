@@ -58,7 +58,7 @@ local onethird_of_starting_zombies
 local function EvaluateOverstackCount(numofhumans, numofzombies)
 	local target_team_ratio = math_ceil(numofhumans * (team_equalizer[curwave] or 0.20)) + bot_per_wave
 	local overstackcount = 0
-	if numofzombies > target_team_ratio then
+	if numofzombies > target_team_ratio and not GAMEMODE.ObjectiveMap then
 		overstackcount = numofzombies - target_team_ratio
 	end
 	return overstackcount
