@@ -2149,9 +2149,6 @@
 1936:AreaXMax=-5096,AreaXMin=-5136,AreaYMax=296,AreaYMin=232,See=Disabled,X=-5116,Y=263.8,Z=-7040
 1936-1938:
 1936-1942:
-1937:AreaXMax=-5212.8,AreaXMin=-5232,AreaYMax=296,AreaYMin=232,See=Disabled,X=-5222.4,Y=263.8,Z=-7040
-1937-1935:Direction=Forward
-1937-2234:
 1938:AreaXMax=-5096,AreaXMin=-5136,AreaYMax=352,AreaYMin=296,See=Disabled,X=-5116,Y=324,Z=-7040
 1938-1943:
 194:AreaXMax=3936,AreaXMin=3820,AreaYMax=-3624,AreaYMin=-3697.5,See=Disabled,X=3878,Y=-3660.7,Z=-1664
@@ -2859,6 +2856,7 @@
 2233:AreaXMax=-5518.8,AreaXMin=-5600,AreaYMax=-1096,AreaYMin=-1194.8,See=Disabled,X=-5556.3,Y=-1143.5,Z=-4763
 2233-1852:
 2234:AreaXMax=-5136,AreaXMin=-5212.8,AreaYMax=296,AreaYMin=232,See=Disabled,X=-5174.4,Y=263.8,Z=-7040
+2234-1935:
 2234-1936:
 2235:AreaXMax=-4094.2,AreaXMin=-4173.8,AreaYMax=-2258.2,AreaYMin=-2305.6,JumpTo=Always,See=Disabled,X=-4133.3,Y=-2278.5,Z=-4171.1
 2236:AreaXMax=-4046.9,AreaXMin=-4094.2,AreaYMax=-2163.6,AreaYMin=-2206.7,See=Disabled,X=-4070.5,Y=-2185.1,Z=-4179.8
