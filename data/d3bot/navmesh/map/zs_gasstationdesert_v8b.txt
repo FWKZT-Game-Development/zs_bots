@@ -131,7 +131,6 @@
 152-153:
 153:AreaXMax=256,AreaXMin=224,AreaYMax=-332,AreaYMin=-468,X=240,Y=-400,Z=-160
 154:AreaXMax=448,AreaXMin=320,AreaYMax=-338,AreaYMin=-626.1,X=384,Y=-482,Z=-63.9
-154-151:Direction=Foward
 154-155:
 155:AreaXMax=448,AreaXMin=320,AreaYMax=-316,AreaYMin=-338,X=384,Y=-327,Z=32
 155-156:
