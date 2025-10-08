@@ -250,6 +250,7 @@
 213:AreaXMax=-325.4,AreaXMin=-456.5,AreaYMax=-235.4,AreaYMin=-242.2,JumpTo=Always,See=Disabled,X=-392.3,Y=-237,Z=224
 214:AreaXMax=-271.5,AreaXMin=-292.1,AreaYMax=-32,AreaYMin=-146,JumpTo=Always,See=Disabled,X=-284.3,Y=-81.5,Z=193.3
 214-168:
+214-271:Direction=Forward
 215:AreaXMax=-271.5,AreaXMin=-292.1,AreaYMax=-261.2,AreaYMin=-375.2,JumpTo=Always,See=Disabled,X=-284.3,Y=-310.7,Z=193.3
 215-218:Direction=Forward
 216:AreaXMax=-485.1,AreaXMin=-505.7,AreaYMax=-32,AreaYMin=-146,JumpTo=Always,See=Disabled,X=-497.9,Y=-81.5,Z=193.3
@@ -396,9 +397,7 @@
 270-269:
 271:AreaXMax=-452,AreaXMin=-504,AreaYMax=-35.2,AreaYMin=-144,X=-478,Y=-89.2,Z=0
 271-128:
-271-169:
 271-172:
-271-214:
 271-224:
 271-268:
 272:AreaXMax=-166.1,AreaXMin=-504,AreaYMax=-144,AreaYMin=-240,X=-335,Y=-196.1,Z=0
