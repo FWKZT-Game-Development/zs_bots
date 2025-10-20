@@ -183,8 +183,8 @@ function D3bot.GetDesiredBotCount()
 	if tempcheck < ct then
 		tempcheck = ct + 5
 		if GAMEMODE.Apocalypse then
-			apocalypse_bots = math_ceil( hteam_count * (0.35 + math_max(1, curwave) * 0.05) )
-			local allowed_bots_in_apocalypse = math_min(70, hteam_count * 1.5)
+			apocalypse_bots = math_ceil(hteam_count * (0.25 + math_max(1, curwave) * 0.035))
+			local allowed_bots_in_apocalypse = math_min(60, hteam_count * 1.25)
 			allowedTotal = allowed_bots_in_apocalypse
 		else
 			apocalypse_bots = 0

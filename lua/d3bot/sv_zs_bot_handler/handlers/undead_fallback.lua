@@ -197,8 +197,14 @@ function HANDLER.OnDoDamageFunction(bot, dmg)
 end
 
 function HANDLER.OnDeathFunction(bot)
-	--bot:Say("rip me!")
-	bot:D3bot_RerollClass( HANDLER.BotClasses[ GAMEMODE:GetWave() ] or HANDLER.BotClasses[ 1 ] ) -- TODO: Situation depending reroll of the zombie class
+	local wave = GAMEMODE:GetWave()
+
+	if GAMEMODE.Apocalypse and wave == 1 then
+		bot:D3bot_RerollClass({ "Fresh Dead" })
+		return
+	end
+
+	bot:D3bot_RerollClass(HANDLER.BotClasses[wave] or HANDLER.BotClasses[1])
 end
 
 local potTargetEntClasses = {"prop_obj_sigil"} --"prop_*turret", "prop_arsenalcrate", "prop_manhack*", 
