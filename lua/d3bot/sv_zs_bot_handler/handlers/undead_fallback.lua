@@ -16,13 +16,13 @@ local BotClasses = {
 		"Zombie", "Zombie", "Tarnisher", "Poison Zombie", "Fast Zombie", "Bloated Zombie"
 	},
 	[4] = {
-		"Zombie", "Zombie", "Zombie", "Tarnisher", "Vile Bloated Zombie", "Rebel Poison Zombie", "Fast Zombie"
+		"Zombie", "Zombie", "Zombie", "Scrapper", "Tarnisher", "Vile Bloated Zombie", "Rebel Poison Zombie", "Fast Zombie"
 	},
 	[5] = {
-		"Zombie", "Zombie", "Charred Ghoul", "Vile Bloated Zombie", "Volatile Poison Zombie", "Lacerator"
+		"Zombie", "Zombie", "Scrapper", "Charred Ghoul", "Vile Bloated Zombie", "Volatile Poison Zombie", "Lacerator"
 	},
 	[6] = {
-		"Zombine", "Zombine", "Charred Ghoul", "Putrid Bloated Zombie", "Elite Poison Zombine", "Lacerator"
+		"Zombine", "Zombine", "Scrapper", "Charred Ghoul", "Putrid Bloated Zombie", "Elite Poison Zombine", "Lacerator"
 	},
 }
 
