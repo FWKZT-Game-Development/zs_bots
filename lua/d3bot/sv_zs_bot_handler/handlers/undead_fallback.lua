@@ -10,19 +10,19 @@ local BotClasses = {
 		"Zombie", "Zombie", "Ghoul", "Stalker"
 	},
 	[2] = {
-		"Zombie", "Zombie", "Ghoul", "Wraith", "Stalker", "Bloated Zombie"
+		"Zombie", "Zombie", "Rotten Ghoul", "Wraith", "Stalker", "Bloated Zombie"
 	},
 	[3] = {
-		"Zombie", "Zombie", "Poison Zombie", "Fast Zombie"
+		"Zombie", "Zombie", "Tarnisher", "Poison Zombie", "Fast Zombie", "Bloated Zombie"
 	},
 	[4] = {
-		"Zombie", "Zombie", "Zombie", "Rebel Poison Zombie", "Fast Zombie"
+		"Zombie", "Zombie", "Zombie", "Tarnisher", "Vile Bloated Zombie", "Rebel Poison Zombie", "Fast Zombie"
 	},
 	[5] = {
-		"Zombie", "Zombie", "Volatile Poison Zombie", "Lacerator"
+		"Zombie", "Zombie", "Charred Ghoul", "Vile Bloated Zombie", "Volatile Poison Zombie", "Lacerator"
 	},
 	[6] = {
-		"Zombine", "Zombine", "Elite Poison Zombine", "Lacerator"
+		"Zombine", "Zombine", "Charred Ghoul", "Putrid Bloated Zombie", "Elite Poison Zombine", "Lacerator"
 	},
 }
 
@@ -43,7 +43,13 @@ HANDLER.BotClasses = BotClasses
 HANDLER.RandomSecondaryAttack = {
 	--["Zombine"] = {MinTime = 5, MaxTime = 30}, --Useless to do since there isn't a distance check, zombines just kill themselves too early.
 	["Ghoul"] = {MinTime = 5, MaxTime = 10},
+	["Rotten Ghoul"] = {MinTime = 5, MaxTime = 15},
+	["Charred Ghoul"] = {MinTime = 5, MaxTime = 20},
+	["Tarnisher"] = {MinTime = 10, MaxTime = 25},
 	["Poison Zombie"] = {MinTime = 10, MaxTime = 30},
+	["Rebel Poison Zombie"] = {MinTime = 10, MaxTime = 30},
+	["Volatile Poison Zombie"] = {MinTime = 10, MaxTime = 30},
+	["Elite Poison Zombine"] = {MinTime = 10, MaxTime = 30},
 	["Wild Poison Zombie"] = {MinTime = 10, MaxTime = 30}
 }
 
