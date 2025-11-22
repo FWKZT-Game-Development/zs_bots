@@ -307,6 +307,17 @@ end
 
 function HANDLER.CanBeTgt(bot, target)
 	if not target or not IsValid(target) then return end
+	local wep = target:IsPlayer() and target:GetActiveWeapon() or nil
+	local IsMovementwep = wep and wep:IsValid() and wep.MovementWeapon
+	local AltGamemode = GAMEMODE.PVB or GAMEMODE.ZombieEscape
+	local botClassName = ""
+	if GAMEMODE and GAMEMODE.ZombieClasses and IsValid(bot) and bot.GetZombieClass then
+		local idx = bot:GetZombieClass()
+		local info = GAMEMODE.ZombieClasses[idx]
+		if info and info.Name then botClassName = info.Name end
+	end
+
+	if target:IsPlayer() and IsMovementwep and not (botClassName == "Fast Zombie" or botClassName == "Lacerator") and not AltGamemode then return end -- Ignore players with movement weapons unless bot is fast zombie or lacerator.
 	if SAM_LOADED and target:IsPlayer() and target:sam_get_nwvar("cloaked",false) then return end -- Ignore cloaked admins.
 	if target:IsPlayer() and target:GetStatus("hidden") and not (target:IsPlayer() and target == GAMEMODE.TheLastHuman) then return end -- Ignore player who is hidden.
 	if target:IsPlayer() and target ~= bot and target:Team() ~= TEAM_UNDEAD and target:GetObserverMode() == OBS_MODE_NONE and not target:IsFlagSet(FL_NOTARGET) and target:Alive() then return true end
