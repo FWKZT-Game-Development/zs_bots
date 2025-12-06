@@ -902,10 +902,15 @@
 479-256:
 48:AreaXMax=134,AreaXMin=60,AreaYMax=-1028,AreaYMin=-1088,X=97,Y=-1058,Z=-704
 48-46:
+480:AreaXMax=-240,AreaXMin=-272.9,AreaYMax=187.3,AreaYMin=28,X=-256.4,Y=107.7,Z=-576
+480-481:
+480-6:
+481:AreaXMax=-240,AreaXMin=-272.9,AreaYMax=333.1,AreaYMin=187.3,DuckTo=Always,X=-256.4,Y=260.2,Z=-576
 49:AreaXMax=60,AreaXMin=-112,AreaYMax=-900,AreaYMin=-1028,X=-26,Y=-964,Z=-704
 49-47:
 49-50:
-5:AreaXMax=-240,AreaXMin=-372.7,AreaYMax=187.3,AreaYMin=28,X=-306.3,Y=107.7,Z=-576
+5:AreaXMax=-272.9,AreaXMin=-372.7,AreaYMax=187.3,AreaYMin=28,X=-322.8,Y=107.7,Z=-576
+5-480:
 50:AreaXMax=60,AreaXMin=-112,AreaYMax=-1028,AreaYMin=-1088,X=-26,Y=-1058,Z=-704
 50-48:
 51:AreaXMax=192,AreaXMin=176,AreaYMax=-900,AreaYMin=-1028,X=184,Y=-964,Z=-704
