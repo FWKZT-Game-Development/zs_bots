@@ -7,7 +7,7 @@ HANDLER.BotTgtFixationDistMin = 125
 HANDLER.BotTgtFixationDistMinSqr = HANDLER.BotTgtFixationDistMin ^ 2
 local BotClasses = {
 	[1] = {
-		"Fresh Infected", "Fresh Infected", "Ghoul", "Stalker"
+		"Zombie", "Ghoul", "Stalker"
 	},
 	[2] = {
 		"Zombie", "Zombie", "Rotten Ghoul", "Wraith", "Stalker", "Bloated Zombie"
