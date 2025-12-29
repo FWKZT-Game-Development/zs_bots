@@ -26,6 +26,9 @@ local BotClasses = {
 	},
 }
 
+local ObjBotClasses = {[1] = {"Zombie", "Ghoul", "Stalker", "Bloated Zombie", "Fast Zombie", "Poison Zombie"}}
+HANDLER.ObjBotClasses = ObjBotClasses
+
 BotClasses[7] = BotClasses[6]
 BotClasses[8] = BotClasses[6]
 BotClasses[9] = BotClasses[6]
@@ -210,7 +213,7 @@ function HANDLER.OnDeathFunction(bot)
 		return
 	end
 
-	bot:D3bot_RerollClass(HANDLER.BotClasses[wave] or HANDLER.BotClasses[1])
+	bot:D3bot_RerollClass((GAMEMODE.ObjectiveMap and HANDLER.ObjBotClasses[1]) or HANDLER.BotClasses[wave] or HANDLER.BotClasses[1])
 end
 
 local potTargetEntClasses = {"prop_obj_sigil"} --"prop_*turret", "prop_arsenalcrate", "prop_manhack*", 
