@@ -47,7 +47,7 @@ hook.Add("Think", D3bot.BotHooksId .. "Think", function()
 
 	-- General bot handler think function
 	if NextSpawnInterval < time then
-		NextSpawnInterval = time + 2 + math.random(0, 1)
+		NextSpawnInterval = time + 1 + math.random(0, 1)
 
 		local generation = D3bot.Generation
 
