@@ -316,10 +316,7 @@
 271-263:
 271-265:
 271-50:
-272:JumpTo=Always,X=-254.5,Y=543.2,Z=48
-272-270:
 273:AreaXMax=-256,AreaXMin=-448,AreaYMax=570,AreaYMin=518,X=-354.1,Y=544,Z=0
-273-272:
 273-274:
 274:AreaXMax=-256,AreaXMin=-448,AreaYMax=654.2,AreaYMin=570,X=-354.1,Y=612.1,Z=0
 274-38:
@@ -367,7 +364,6 @@
 288-287:
 289:AreaXMax=-23.2,AreaXMin=-45.1,AreaYMax=256,AreaYMin=200,X=-34.1,Y=228,Z=0
 289-288:
-289-456:
 290:AreaXMax=258,AreaXMin=64,AreaYMax=320,AreaYMin=256,X=148.7,Y=289.2,Z=193.3
 290-97:
 291:AreaXMax=64,AreaXMin=-256,AreaYMax=512,AreaYMin=318,X=-96.3,Y=415,Z=337.9
@@ -827,8 +823,6 @@
 454-64:
 454-91:
 455:AreaXMax=155.8,AreaXMin=68,AreaYMax=764,AreaYMin=713.5,X=105.8,Y=738.8,Z=0
-456:JumpTo=Always,X=-31.3,Y=257.9,Z=48
-456-457:
 457:AreaXMax=0,AreaXMin=-58,AreaYMax=384,AreaYMin=260,X=-29,Y=332.7,Z=0
 458:AreaXMax=0,AreaXMin=-128,AreaYMax=518,AreaYMin=384,X=-64,Y=451,Z=0
 458-266:
