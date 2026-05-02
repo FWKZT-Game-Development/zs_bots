@@ -211,7 +211,7 @@ function D3bot.GetDesiredBotCount()
 		end
 	end
 	local base_bots = (onethird_of_starting_zombies or math_ceil( 0.33 * starting_zombies )) --keep 33% of the starting zombies as bots
-	bots_to_keep = (base_bots + needed + added_bot_per_wave) --used below to prevent bots from getting kicked out of the match
+	bots_to_keep = (--[[base_bots +]] needed + added_bot_per_wave) --used below to prevent bots from getting kicked out of the match
 
 	local desired_zombie_count = (needed + volunteers + humans_dead)
 
@@ -252,7 +252,7 @@ function D3bot.MaintainBotRoles()
 	end
 	if #GAMEMODE.ZombiePlayers > D3bot.GetDesiredBotCount() then 
 		for i=1, #GAMEMODE.ZombiePlayers-D3bot.GetDesiredBotCount() do
-			if #D3bot.BotZombies > ( (D3bot.ZombiesCountAddition or 0) + bots_to_keep ) then --if num of bots is greater than (botmod + bots to equalize then remove some)
+			if #D3bot.BotZombies > ( (D3bot.ZombiesCountAddition or 0) --[[+ bots_to_keep ]]) then --if num of bots is greater than (botmod + bots to equalize then remove some)
 				local randomBot = table.remove(D3bot.BotZombies, 1)
 				if IsValid(randomBot) then
 					local zWeapon = randomBot:GetActiveWeapon()
