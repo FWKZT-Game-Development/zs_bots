@@ -717,7 +717,6 @@
 345:AreaXMax=766,AreaXMin=718,AreaYMax=794,AreaYMin=776,See=Disabled,X=742,Y=785,Z=16
 345-350:
 346:AreaXMax=816,AreaXMin=766,AreaYMax=842,AreaYMin=794,See=Disabled,X=791,Y=818,Z=16
-346-351:
 347:AreaXMax=816,AreaXMin=766,AreaYMax=1008,AreaYMin=842,See=Disabled,X=791,Y=925,Z=16
 347-346:
 348:AreaXMax=718,AreaXMin=528,AreaYMax=842,AreaYMin=794,See=Disabled,X=623,Y=818,Z=16
@@ -726,8 +725,6 @@
 35:AreaXMax=626,AreaXMin=64,AreaYMax=-1447.1,AreaYMin=-1512.1,X=345,Y=-1479.6,Z=126.7
 35-39:
 350:AreaXMax=766,AreaXMin=718,AreaYMax=776,AreaYMin=768,See=Disabled,X=742,Y=772,Z=16
-351:AreaXMax=824,AreaXMin=816,AreaYMax=842,AreaYMin=794,See=Disabled,X=820,Y=818,Z=16
-351-352:
 352:AreaXMax=888.2,AreaXMin=824,AreaYMax=842,AreaYMin=794,X=856.1,Y=818,Z=16
 352-353:
 352-354:
