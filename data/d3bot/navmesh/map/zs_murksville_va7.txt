@@ -131,10 +131,10 @@
 142:AreaXMax=1048,AreaXMin=1048,AreaYMax=-2496,AreaYMin=-2680,X=1048,Y=-2601.7,Z=-631.7
 143:AreaXMax=1664,AreaXMin=1272,AreaYMax=-2080,AreaYMin=-2344,X=1468,Y=-2212,Z=-560
 143-137:
-143-146:Direction=Foward
+143-146:Direction=Forward
 144:AreaXMax=1088,AreaXMin=1048,AreaYMax=-2552,AreaYMin=-2680,X=1048.5,Y=-2613.6,Z=-625.4
 145:AreaXMax=1251.7,AreaXMin=1175.4,AreaYMax=-2177.1,AreaYMin=-2344,X=1213.6,Y=-2260.5,Z=-560
-145-146:Direction=Foward
+145-146:Direction=Forward
 145-156:
 146:AreaXMax=1272,AreaXMin=1175.4,AreaYMax=-2080,AreaYMin=-2172.6,X=1267.4,Y=-2126.3,Z=-595.5
 147:AreaXMax=1251.7,AreaXMin=1175.4,AreaYMax=-2407.9,AreaYMin=-2500.6,X=1212.3,Y=-2486.3,Z=-528.9
@@ -864,7 +864,7 @@
 472:AreaXMax=1044,AreaXMin=988,AreaYMax=-2152,AreaYMin=-2298,X=1016.5,Y=-2279.8,Z=-452.5
 472-473:
 472-474:
-472-475:Direction=Foward,DuckTo=Always
+472-475:Direction=Forward,DuckTo=Always
 473:AreaXMax=1088,AreaXMin=1044,AreaYMax=-2152,AreaYMin=-2298,X=1066,Y=-2279.8,Z=-452.5
 473-156:Direction=Forward
 474:AreaXMax=988,AreaXMin=688,AreaYMax=-2152,AreaYMin=-2298,X=838,Y=-2279.8,Z=-452.5

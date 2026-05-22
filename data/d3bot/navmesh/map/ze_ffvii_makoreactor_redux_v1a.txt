@@ -1692,7 +1692,7 @@
 1727-1704:
 1727-1726:
 1728:AreaXMax=-4608,AreaXMin=-4720,AreaYMax=-848,AreaYMin=-942.6,Condition=Unblocked,See=Disabled,X=-4664,Y=-894.2,Z=-1376
-1728-1726:Direction=Foward
+1728-1726:Direction=Forward
 1728-1729:
 1729:AreaXMax=-4480,AreaXMin=-4608,AreaYMax=-848,AreaYMin=-942.6,See=Disabled,X=-4544,Y=-894.2,Z=-1376
 1729-1730:
@@ -2635,7 +2635,7 @@
 2147-1699:
 2147-1700:
 2147-2146:
-2147-2149:Direction=Foward
+2147-2149:Direction=Forward
 2148:AreaXMax=-5072,AreaXMin=-5168,AreaYMax=144,AreaYMin=0,See=Disabled,X=-5120,Y=72,Z=-3328
 2148-2144:
 2148-2145:

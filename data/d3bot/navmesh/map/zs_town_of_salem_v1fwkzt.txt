@@ -776,11 +776,11 @@
 127:AreaXMax=-790.6,AreaXMin=-920.2,AreaYMax=1767.3,AreaYMin=1670,X=-855.4,Y=1718.7,Z=128
 127-586:
 1270:AreaXMax=703.3,AreaXMin=669.1,AreaYMax=1007.5,AreaYMin=883.5,X=686.2,Y=931.9,Z=234.2
-1270-522:Direction=foward
+1270-522:Direction=Forward
 1272:AreaXMax=786.2,AreaXMin=703.3,AreaYMax=1007.5,AreaYMin=919,X=742.8,Y=964.2,Z=232.7
 1272-1269:
 1272-1270:
-1272-1273:Direction=foward
+1272-1273:Direction=Forward
 1273:AreaXMax=946.4,AreaXMin=867,AreaYMax=1030.9,AreaYMin=930.6,X=901.9,Y=980.8,Z=128
 1273-397:
 1273-91:
@@ -957,8 +957,8 @@
 1333:AreaXMax=707.3,AreaXMin=620.5,AreaYMax=742.2,AreaYMin=680.4,X=667.4,Y=696.7,Z=176.6
 1333-1334:
 1334:AreaXMax=614.2,AreaXMin=523,AreaYMax=754,AreaYMin=701.2,X=562.7,Y=730.7,Z=214.9
-1334-519:Direction=foward
-1334-524:Direction=foward
+1334-519:Direction=Forward
+1334-524:Direction=Forward
 1336:AreaXMax=-819.1,AreaXMin=-928.4,AreaYMax=244.7,AreaYMin=152.9,X=-874.3,Y=198.4,Z=128
 1336-1337:
 1336-1339:
@@ -1986,7 +1986,7 @@
 1746-1755:
 1747:AreaXMax=-1133.6,AreaXMin=-1180.7,AreaYMax=-1706.7,AreaYMin=-1744.2,X=-1157.1,Y=-1725.4,Z=160.2
 1748:AreaXMax=-1125.8,AreaXMin=-1147.3,AreaYMax=-1881.4,AreaYMin=-1895.3,Duck=Always,JumpTo=Always,X=-1132.8,Y=-1886.2,Z=193
-1748-1746:Direction=foward
+1748-1746:Direction=Forward
 1749:AreaXMax=-1180.7,AreaXMin=-1247.2,AreaYMax=-1744.2,AreaYMin=-1809.2,X=-1213.9,Y=-1776.7,Z=160.2
 1749-1753:
 175:AreaXMax=-1237.5,AreaXMin=-1343.5,AreaYMax=1645.7,AreaYMin=1546.9,X=-1288.9,Y=1605.8,Z=128
@@ -2240,7 +2240,7 @@
 1855-1828:
 1855-1849:
 1856:AreaXMax=552,AreaXMin=504.1,AreaYMax=-2128,AreaYMin=-2136,JumpTo=Always,X=528.1,Y=-2132,Z=194
-1856-1840:Direction=foward
+1856-1840:Direction=Forward
 186:AreaXMax=-171.1,AreaXMin=-268.3,AreaYMax=545.5,AreaYMin=490.5,X=-219.7,Y=518,Z=128
 1860:AreaXMax=-1094,AreaXMin=-1198.6,AreaYMax=-748,AreaYMin=-779.6,X=-1146.3,Y=-763.8,Z=160.2
 1860-1851:
@@ -3633,7 +3633,7 @@
 58-59:
 58-71:
 580:AreaXMax=227.9,AreaXMin=220.3,AreaYMax=1384,AreaYMin=1328,JumpTo=Always,X=224.2,Y=1356.6,Z=203
-580-548:Direction=foward
+580-548:Direction=Forward
 581:AreaXMax=30,AreaXMin=-68,AreaYMax=1611.5,AreaYMin=1554,X=-19,Y=1582.8,Z=128
 581-582:
 581-587:
@@ -3920,7 +3920,7 @@
 686-682:
 687:AreaXMax=-1217.1,AreaXMin=-1233.3,AreaYMax=920.9,AreaYMin=887.1,JumpTo=Always,X=-1223.1,Y=902.2,Z=208
 687-688:JumpTo=Always
-687-691:Direction=foward
+687-691:Direction=Forward
 688:AreaXMax=-1233.3,AreaXMin=-1262.1,AreaYMax=920.9,AreaYMin=887.1,JumpTo=Always,X=-1248.1,Y=901.9,Z=173.2
 689:AreaXMax=-1154.1,AreaXMin=-1198.3,AreaYMax=936.5,AreaYMin=861,X=-1176.2,Y=898.8,Z=160.2
 689-682:
@@ -4121,7 +4121,7 @@
 76-77:
 76-83:
 760:AreaXMax=-170.1,AreaXMin=-201.1,AreaYMax=1028.8,AreaYMin=1012.8,JumpTo=Always,X=-186,Y=1021.9,Z=200
-760-721:Direction=foward
+760-721:Direction=Forward
 761:AreaXMax=1202.6,AreaXMin=1106.9,AreaYMax=882.6,AreaYMin=823,X=1156.4,Y=853.1,Z=150
 761-762:
 762:AreaXMax=1202.6,AreaXMin=1168.5,AreaYMax=946.1,AreaYMin=886.1,X=1186.3,Y=907.4,Z=160.2
@@ -4197,7 +4197,7 @@
 791:AreaXMax=1503.7,AreaXMin=1471.7,AreaYMax=1287,AreaYMin=1227.9,X=1487.7,Y=1257.5,Z=160.2
 791-790:
 792:AreaXMax=1539.5,AreaXMin=1527.2,AreaYMax=1301.4,AreaYMin=1226.5,JumpTo=Always,X=1532.6,Y=1267.2,Z=206
-792-790:Direction=foward
+792-790:Direction=Forward
 793:AreaXMax=1746.1,AreaXMin=1582.2,AreaYMax=1722.5,AreaYMin=1564.5,X=1664.2,Y=1643.5,Z=128
 793-83:
 794:AreaXMax=1624,AreaXMin=1582.2,AreaYMax=1354.5,AreaYMin=1312.9,JumpTo=Always,X=1603.1,Y=1333.7,Z=128

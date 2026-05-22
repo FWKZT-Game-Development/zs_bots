@@ -324,7 +324,7 @@
 220:AreaXMax=-195,AreaXMin=-358,AreaYMax=-1375,AreaYMin=-1537.9,X=-276.9,Y=-1455.1,Z=-321
 220-218:
 221:AreaXMax=396.9,AreaXMin=389.1,AreaYMax=-1356.4,AreaYMin=-1430.9,JumpTo=Always,X=392.9,Y=-1395.2,Z=-273.4
-221-222:Direction=foward
+221-222:Direction=Forward
 222:AreaXMax=389,AreaXMin=246.1,AreaYMax=-1356.8,AreaYMin=-1447.3,X=317.6,Y=-1402,Z=-321
 222-205:
 222-206:
@@ -335,7 +335,7 @@
 224-48:
 224-67:
 225:AreaXMax=-254,AreaXMin=-310,AreaYMax=-1538.2,AreaYMin=-1545.8,JumpTo=Always,X=-281.8,Y=-1542.2,Z=-265
-225-220:Direction=foward
+225-220:Direction=Forward
 226:AreaXMax=494,AreaXMin=397.1,AreaYMax=-1674.1,AreaYMin=-1941.4,X=445.6,Y=-1807.7,Z=-321
 227:AreaXMax=-544,AreaXMin=-592,AreaYMax=-599.1,AreaYMin=-641.7,X=-568,Y=-620.4,Z=-321
 227-228:

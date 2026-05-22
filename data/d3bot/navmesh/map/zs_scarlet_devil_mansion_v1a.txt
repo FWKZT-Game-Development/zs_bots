@@ -600,10 +600,10 @@
 367:AreaXMax=-3741.3,AreaXMin=-3848,AreaYMax=4703.8,AreaYMin=4496,X=-3794.4,Y=4537.2,Z=3096
 367-364:
 368:X=-3902.3,Y=4671.2,Z=2776
-368-369:Aim=Straight,Direction=Foward
+368-369:Aim=Straight,Direction=Forward
 368-490:
 369:X=-3897.1,Y=4674.3,Z=3137.9
-369-471:Aim=Straight,Direction=Foward
+369-471:Aim=Straight,Direction=Forward
 37:AreaXMax=-3424,AreaXMin=-3520,AreaYMax=5887.6,AreaYMin=5872.1,X=-3460.3,Y=5881.2,Z=3096
 37-38:
 370:AreaXMax=-3847.9,AreaXMin=-3951.8,AreaYMax=4592,AreaYMin=4496,X=-3912.4,Y=4543.1,Z=3096
@@ -836,11 +836,11 @@
 470-416:
 470-469:
 471:AreaXMax=-3856,AreaXMin=-3871.8,AreaYMax=4696,AreaYMin=4624,X=-3862,Y=4684.4,Z=3096
-471-472:Direction=Foward
+471-472:Direction=Forward
 472:AreaXMax=-3856,AreaXMin=-3944,AreaYMax=4623.7,AreaYMin=4600,X=-3864.7,Y=4614.1,Z=3096
-472-473:Direction=Foward
+472-473:Direction=Forward
 473:AreaXMax=-3876,AreaXMin=-3924,AreaYMax=4599.9,AreaYMin=4592.1,X=-3898.4,Y=4595.4,Z=3096
-473-368:Aim=Straight,Direction=Foward
+473-368:Aim=Straight,Direction=Forward
 473-370:
 474:AreaXMax=-4256,AreaXMin=-4312,AreaYMax=4960,AreaYMin=4768,X=-4283.8,Y=4864.5,Z=2776
 475:AreaXMax=-4223.9,AreaXMin=-4352,AreaYMax=4764,AreaYMin=4656,X=-4280.6,Y=4745.2,Z=2776

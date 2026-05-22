@@ -176,7 +176,7 @@
 169-173:
 17:AreaXMax=-765,AreaXMin=-781,AreaYMax=1167,AreaYMin=1100.8,X=-773,Y=1133.9,Z=202
 17-18:
-17-2:Direction=Foward
+17-2:Direction=Forward
 17-22:
 170:AreaXMax=91,AreaXMin=-5,AreaYMax=138,AreaYMin=86,X=43,Y=112,Z=202
 170-168:
@@ -309,7 +309,7 @@
 219:AreaXMax=880.3,AreaXMin=813.5,AreaYMax=1894.7,AreaYMin=1750.2,See=Disabled,X=846.9,Y=1822.5,Z=202
 219-214:
 22:AreaXMax=-765,AreaXMin=-781,AreaYMax=1284,AreaYMin=1167,X=-773,Y=1225.5,Z=202
-22-2:Direction=Foward
+22-2:Direction=Forward
 22-21:
 220:AreaXMax=813.5,AreaXMin=748.5,AreaYMax=1894.7,AreaYMin=1750.5,See=Disabled,X=781,Y=1822.6,Z=202
 220-210:

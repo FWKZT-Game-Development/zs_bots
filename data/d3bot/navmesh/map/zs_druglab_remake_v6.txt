@@ -2084,7 +2084,7 @@
 850:AimTo=Straight,X=-2226.6,Y=302.9,Z=229.8
 850-330:
 851:X=-2234.1,Y=304.4,Z=192
-851-830:Direction=Foward
+851-830:Direction=Forward
 852:AreaXMax=-1006.3,AreaXMin=-1088,AreaYMax=0,AreaYMin=-64,X=-1047.1,Y=-32,Z=0
 853:AreaXMax=-896,AreaXMin=-1006.3,AreaYMax=0,AreaYMin=-64,X=-951.1,Y=-32,Z=0
 853-115:
@@ -2174,7 +2174,7 @@
 885-884:
 886:AreaXMax=-1823.1,AreaXMin=-1854.4,AreaYMax=-384,AreaYMin=-510,X=-1838.7,Y=-447,Z=192
 887:AreaXMax=-1784,AreaXMin=-1823.1,AreaYMax=-488.3,AreaYMin=-510,X=-1803.5,Y=-499.1,Z=192
-887-696:Direction=Foward
+887-696:Direction=Forward
 887-889:
 888:AreaXMax=-1745.7,AreaXMin=-1784,AreaYMax=-384,AreaYMin=-512,X=-1764.8,Y=-448,Z=192
 888-881:
@@ -2187,8 +2187,8 @@
 890:AreaXMax=-720,AreaXMin=-896,AreaYMax=608,AreaYMin=592,X=-808,Y=600,Z=156.1
 890-39:
 891:AreaXMax=-720,AreaXMin=-896,AreaYMax=400,AreaYMin=384,X=-808,Y=392,Z=156.2
-891-496:Direction=Foward
-891-499:Direction=Foward
+891-496:Direction=Forward
+891-499:Direction=Forward
 892:AreaXMax=-896,AreaXMin=-1088,AreaYMax=384,AreaYMin=373.6,X=-992,Y=378.8,Z=0
 892-893:Climbing=Needed
 893:Climbing=Needed,X=-992,Y=384,Z=91.2
@@ -2197,9 +2197,9 @@
 894-893:Climbing=Needed
 895:AreaXMax=-291.7,AreaXMin=-450.1,AreaYMax=-605.7,AreaYMin=-1004,X=-381.8,Y=-804.8,Z=128.1
 895-896:
-895-910:Direction=Foward
+895-910:Direction=Forward
 896:AreaXMax=-173.9,AreaXMin=-291.7,AreaYMax=-605.7,AreaYMin=-1004,X=-232.8,Y=-804.8,Z=128.1
-896-909:Direction=Foward
+896-909:Direction=Forward
 897:X=-381.7,Y=-601.9,Z=0
 898:Climbing=Needed,X=-380.9,Y=-605.7,Z=69.9
 898-897:Climbing=Needed
@@ -2211,7 +2211,7 @@
 90:AreaXMax=-1217.7,AreaXMin=-1330,AreaYMax=1017.9,AreaYMin=960,X=-1273.8,Y=989,Z=0
 90-101:
 900:X=-380.1,Y=-622.5,Z=128.1
-900-895:Direction=Foward
+900-895:Direction=Forward
 901:X=-211.4,Y=-603,Z=0
 901-902:Climbing=Needed
 902:Climbing=Needed,X=-213.6,Y=-605.7,Z=68.5
@@ -2219,7 +2219,7 @@
 903:Climbing=Needed,X=-213.6,Y=-605.7,Z=127.1
 903-904:
 904:X=-213.5,Y=-618,Z=128.1
-904-896:Direction=Foward
+904-896:Direction=Forward
 905:X=-170.6,Y=-806.5,Z=0
 905-906:Climbing=Needed
 906:Climbing=Needed,X=-173.9,Y=-806,Z=65.7
@@ -2228,13 +2228,13 @@
 907-908:
 908:X=-184.1,Y=-806.3,Z=128.1
 908-896:
-909:Direction=Foward,X=-179.2,Y=-760.8,Z=128.1
-909-517:Direction=Foward
+909:Direction=Forward,X=-179.2,Y=-760.8,Z=128.1
+909-517:Direction=Forward
 91:AreaXMax=-1330,AreaXMin=-1406,AreaYMax=1017.9,AreaYMin=960,X=-1368,Y=989,Z=0
 91-90:
 91-96:
-910:Direction=Foward,X=-445.3,Y=-769.7,Z=128.1
-910-520:Direction=Foward
+910:Direction=Forward,X=-445.3,Y=-769.7,Z=128.1
+910-520:Direction=Forward
 911:AreaXMax=-2131.7,AreaXMin=-2144.6,AreaYMax=368,AreaYMin=243.5,X=-2138.1,Y=305.4,Z=319.8
 912:AreaXMax=-1888,AreaXMin=-1918.7,AreaYMax=368,AreaYMin=243.5,X=-1903.3,Y=305.4,Z=319.8
 912-337:Direction=Forward

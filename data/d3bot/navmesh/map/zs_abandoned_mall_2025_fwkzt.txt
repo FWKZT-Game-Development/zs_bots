@@ -6418,7 +6418,7 @@
 3529-3531:
 3529-3532:See=Disabled
 353:AreaXMax=1408,AreaXMin=1311.9,AreaYMax=3416.9,AreaYMin=3193,Jump=Always,JumpTo=Always,X=1359.9,Y=3305.2,Z=30
-353-303:Direction=foward
+353-303:Direction=Forward
 3530:AreaXMax=-1262.9,AreaXMin=-1376,AreaYMax=237.8,AreaYMin=200,See=Disabled,X=-1319.4,Y=218.9,Z=0
 3530-3529:
 3531:AreaXMax=-1376,AreaXMin=-1776,AreaYMax=487,AreaYMin=237.8,See=Disabled,X=-1576,Y=362.4,Z=0
