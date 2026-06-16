@@ -322,7 +322,7 @@ function HANDLER.CanBeTgt(bot, target)
 
 	if target:IsPlayer() and IsMovementwep and not (botClassName == "Fast Zombie" or botClassName == "Lacerator") and not AltGamemode then return end -- Ignore players with movement weapons unless bot is fast zombie or lacerator.
 	if SAM_LOADED and target:IsPlayer() and target:sam_get_nwvar("cloaked",false) then return end -- Ignore cloaked admins.
-	if target:IsPlayer() and target:GetStatus("hidden") and not (target:IsPlayer() and target == GAMEMODE.TheLastHuman) then return end -- Ignore player who is hidden.
+	if target:IsPlayer() and target.BotIgnored and not (target:IsPlayer() and target == GAMEMODE.TheLastHuman) then return end -- Ignore player who is hidden.
 	if target:IsPlayer() and target ~= bot and target:Team() ~= TEAM_UNDEAD and target:GetObserverMode() == OBS_MODE_NONE and not target:IsFlagSet(FL_NOTARGET) and target:Alive() then return true end
 	if target:GetClass() == "prop_obj_sigil" and target:GetSigilCorrupted() then return end -- Special case to ignore corrupted sigils.
 	if potEntTargets and table.HasValue(potEntTargets, target) then return true end
