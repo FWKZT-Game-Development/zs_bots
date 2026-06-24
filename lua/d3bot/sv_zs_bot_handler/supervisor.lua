@@ -204,7 +204,7 @@ function D3bot.GetDesiredBotCount()
 	local desired_zperc = 0
 	if curwave > 1 then
 		local zteam_count = #GAMEMODE.ZombiePlayers
-		desired_zperc = math_ceil(hteam_count * team_equalizer[curwave] or 1)
+		desired_zperc = math_ceil(hteam_count * (team_equalizer[curwave] or 1))
 		
 		if desired_zperc > zteam_count then --if zteam doesnt make up a **wave relative** percent of hteam, request more
 			needed = math_max(desired_zperc - zteam_count, 0)
